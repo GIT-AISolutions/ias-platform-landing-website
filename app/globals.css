@@ -1,0 +1,387 @@
+@import "tailwindcss";
+
+:root {
+  --nexra-bg-base: #0f172a;
+  --nexra-bg-panel: #111827;
+  --nexra-bg-elevated: #172238;
+  --nexra-border: #25324a;
+  --nexra-text: #e2e8f0;
+  --nexra-text-muted: #94a3b8;
+  --nexra-primary: #6366f1;
+  --nexra-primary-hover: #4f46e5;
+  --nexra-accent: #22d3ee;
+  --nexra-success: #22c55e;
+  --nexra-warning: #f59e0b;
+  --nexra-danger: #f43f5e;
+  --nexra-font-sans: "Sora", "Manrope", "Inter", "Segoe UI", sans-serif;
+}
+
+@theme inline {
+  --color-background: var(--nexra-bg-base);
+  --color-foreground: var(--nexra-text);
+  --font-sans: var(--nexra-font-sans);
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body {
+  min-height: 100vh;
+  color: var(--nexra-text);
+  font-family: var(--nexra-font-sans);
+  background-color: var(--nexra-bg-base);
+  text-rendering: optimizeLegibility;
+  max-width: 100%;
+  overflow-x: hidden;
+}
+
+p {
+  color: var(--nexra-text-muted);
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  @apply font-semibold tracking-tight text-[var(--nexra-text)];
+}
+
+@layer components {
+  .nexra-container {
+    @apply w-full px-4 md:px-6 xl:px-8;
+  }
+
+  .nexra-section {
+    @apply w-full px-4 py-16 md:px-6 md:py-24 xl:px-8;
+  }
+
+  .nexra-section-heading {
+    @apply max-w-3xl space-y-4;
+  }
+
+  .nexra-page-hero {
+    @apply w-full bg-[var(--nexra-bg-base)] px-4 pb-10 pt-14 md:px-6 md:pb-12 md:pt-20 xl:px-8;
+  }
+
+  .nexra-page-section {
+    @apply w-full bg-[var(--nexra-bg-base)] px-4 pb-10 pt-0 md:px-6 md:pb-12 xl:px-8;
+  }
+
+  .nexra-page-h1 {
+    @apply max-w-3xl text-4xl md:text-6xl;
+  }
+
+  .nexra-page-h2 {
+    @apply text-3xl md:text-4xl;
+  }
+
+  .nexra-page-intro {
+    @apply max-w-2xl text-base md:text-lg;
+  }
+
+  .nexra-btn {
+    @apply inline-flex items-center justify-center rounded-2xl px-5 py-3 text-sm font-semibold tracking-tight focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--nexra-bg-base)] disabled:pointer-events-none disabled:opacity-60;
+    transition:
+      background-color 180ms ease-out,
+      border-color 180ms ease-out,
+      color 180ms ease-out,
+      transform 180ms ease-out,
+      box-shadow 180ms ease-out;
+  }
+
+  .nexra-btn-primary {
+    background-color: var(--nexra-primary);
+    color: var(--nexra-text);
+  }
+
+  .nexra-btn-primary:hover {
+    background-color: var(--nexra-primary-hover);
+  }
+
+  .nexra-btn-secondary {
+    @apply border;
+    border-color: var(--nexra-border);
+    background-color: color-mix(in srgb, var(--nexra-bg-elevated) 75%, transparent);
+    color: var(--nexra-text);
+  }
+
+  .nexra-btn-secondary:hover {
+    background-color: var(--nexra-bg-elevated);
+    border-color: color-mix(in srgb, var(--nexra-accent) 30%, var(--nexra-border));
+  }
+
+  .nexra-panel {
+    @apply rounded-2xl border p-6 md:p-8;
+    border-color: var(--nexra-border);
+    background-color: color-mix(in srgb, var(--nexra-bg-panel) 92%, transparent);
+  }
+
+  .nexra-interactive-card {
+    transition:
+      transform 180ms ease-out,
+      border-color 180ms ease-out,
+      box-shadow 180ms ease-out,
+      background-color 180ms ease-out;
+  }
+
+  .nexra-reveal {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .nexra-inview {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .nexra-badge {
+    @apply inline-flex items-center rounded-full border px-3 py-1 text-xs font-medium;
+    border-color: var(--nexra-border);
+    color: var(--nexra-text-muted);
+    background-color: color-mix(in srgb, var(--nexra-bg-elevated) 80%, transparent);
+  }
+
+  .nexra-badge-info {
+    color: var(--nexra-accent);
+    border-color: color-mix(in srgb, var(--nexra-accent) 45%, var(--nexra-border));
+  }
+
+  .nexra-badge-success {
+    color: var(--nexra-success);
+    border-color: color-mix(in srgb, var(--nexra-success) 45%, var(--nexra-border));
+  }
+
+  .nexra-badge-warning {
+    color: var(--nexra-warning);
+    border-color: color-mix(in srgb, var(--nexra-warning) 45%, var(--nexra-border));
+  }
+
+  .nexra-badge-danger {
+    color: var(--nexra-danger);
+    border-color: color-mix(in srgb, var(--nexra-danger) 45%, var(--nexra-border));
+  }
+}
+
+@media (hover: hover) {
+  .nexra-btn:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 12px 26px rgba(2, 6, 23, 0.36);
+  }
+
+  .nexra-interactive-card:hover {
+    transform: translateY(-3px);
+    border-color: color-mix(in srgb, var(--nexra-accent) 26%, var(--nexra-border));
+    box-shadow: 0 18px 32px rgba(2, 6, 23, 0.42);
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .nexra-motion-ready .nexra-reveal {
+    opacity: 0;
+    transform: translateY(22px) scale(0.985);
+    filter: blur(2px);
+    transition:
+      opacity 200ms ease-out,
+      transform 200ms ease-out,
+      filter 200ms ease-out;
+    will-change: opacity, transform, filter;
+  }
+
+  .nexra-motion-ready .nexra-reveal.nexra-inview {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+    filter: blur(0);
+  }
+
+  .nexra-reveal-delay-1 {
+    transition-delay: 45ms;
+  }
+
+  .nexra-reveal-delay-2 {
+    transition-delay: 90ms;
+  }
+
+  .nexra-reveal-delay-3 {
+    transition-delay: 135ms;
+  }
+
+  .nexra-ambient-drift {
+    animation: nexra-ambient-drift 9s ease-in-out infinite alternate;
+  }
+
+  .nexra-ambient-drift-delay {
+    animation-delay: 1.4s;
+  }
+
+  .nexra-grid-drift {
+    animation: nexra-grid-drift 18s linear infinite;
+  }
+
+  .nexra-glow-pulse {
+    animation: nexra-glow-pulse 2.6s ease-in-out infinite;
+  }
+
+  .nexra-glow-pulse-delay {
+    animation-delay: 0.9s;
+  }
+
+  .nexra-status-pulse {
+    animation: nexra-status-pulse 2.4s ease-in-out infinite;
+  }
+
+  .nexra-bar-active {
+    position: relative;
+    overflow: hidden;
+    contain: paint;
+  }
+
+  .nexra-bar-active::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: -45%;
+    width: 45%;
+    background: linear-gradient(
+      110deg,
+      transparent 20%,
+      rgba(255, 255, 255, 0.32) 50%,
+      transparent 80%
+    );
+    transform: translateX(0);
+    animation: nexra-bar-scan 2.4s ease-in-out infinite;
+    pointer-events: none;
+  }
+
+  .nexra-light-sweep {
+    position: relative;
+    overflow: hidden;
+  }
+
+  .nexra-light-sweep::after {
+    content: "";
+    position: absolute;
+    inset: -20%;
+    background: linear-gradient(
+      110deg,
+      transparent 38%,
+      rgba(34, 211, 238, 0.1) 50%,
+      transparent 62%
+    );
+    transform: translateX(-120%);
+    animation: nexra-light-sweep 6.6s ease-in-out infinite;
+    pointer-events: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .nexra-btn,
+  .nexra-interactive-card,
+  .nexra-reveal,
+  .nexra-inview,
+  .nexra-ambient-drift,
+  .nexra-grid-drift,
+  .nexra-glow-pulse,
+  .nexra-status-pulse,
+  .nexra-bar-active::after,
+  .nexra-light-sweep::after {
+    transition: none;
+    animation: none;
+  }
+
+  .nexra-reveal,
+  .nexra-inview {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes nexra-ambient-drift {
+  from {
+    transform: translate3d(-1.2%, -0.8%, 0) scale(1);
+    opacity: 0.75;
+  }
+
+  to {
+    transform: translate3d(1.2%, 1%, 0) scale(1.03);
+    opacity: 1;
+  }
+}
+
+@keyframes nexra-grid-drift {
+  from {
+    background-position: 0 0, 0 0;
+  }
+
+  to {
+    background-position: 36px 18px, 18px 36px;
+  }
+}
+
+@keyframes nexra-glow-pulse {
+  0%,
+  100% {
+    opacity: 0.9;
+    filter: brightness(1);
+  }
+
+  50% {
+    opacity: 1;
+    filter: brightness(1.12);
+  }
+}
+
+@keyframes nexra-light-sweep {
+  0%,
+  70%,
+  100% {
+    transform: translateX(-120%);
+    opacity: 0;
+  }
+
+  35% {
+    transform: translateX(120%);
+    opacity: 1;
+  }
+}
+
+@keyframes nexra-status-pulse {
+  0%,
+  100% {
+    opacity: 0.8;
+  }
+
+  50% {
+    opacity: 1;
+  }
+}
+
+@keyframes nexra-bar-scan {
+  0% {
+    transform: translateX(0%);
+    opacity: 0.2;
+  }
+
+  25% {
+    opacity: 0.9;
+  }
+
+  50% {
+    transform: translateX(320%);
+    opacity: 0.8;
+  }
+
+  75% {
+    opacity: 0.9;
+  }
+
+  100% {
+    transform: translateX(0%);
+    opacity: 0.2;
+  }
+}

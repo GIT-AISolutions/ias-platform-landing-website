@@ -1,0 +1,71 @@
+import Link from "next/link";
+import { siteConfig } from "@/lib/site-config";
+
+export function SiteFooter() {
+  const year = new Date().getFullYear();
+  const footerNavigation = [{ label: "Home", href: "/" }, ...siteConfig.navigation];
+
+  return (
+    <footer className="bg-[var(--nexra-bg-base)]">
+      <div className="nexra-container py-10 md:py-14">
+        <div className="grid gap-12 md:grid-cols-4">
+          <div className="space-y-4 md:col-span-2">
+            <Link href="/" className="flex items-center gap-3">
+              <span className="inline-flex h-8 w-8 items-center justify-center rounded-xl border border-[var(--nexra-border)] bg-[var(--nexra-bg-elevated)] text-xs font-semibold text-[var(--nexra-accent)]">
+                NX
+              </span>
+              <span className="text-base font-semibold tracking-tight text-[var(--nexra-text)]">
+                {siteConfig.name}
+              </span>
+            </Link>
+            <p className="max-w-2xl text-sm">{siteConfig.shortDescription}</p>
+            <p className="max-w-2xl text-sm">{siteConfig.seoFooterText}</p>
+          </div>
+
+          <div>
+            <h2 className="text-sm">Navigation</h2>
+            <ul className="mt-4 space-y-3">
+              {footerNavigation.map((item) => (
+                <li key={item.label}>
+                  <Link
+                    href={item.href}
+                    className="text-sm text-[var(--nexra-text-muted)] transition-colors hover:text-[var(--nexra-text)]"
+                  >
+                    {item.label}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          <div>
+            <h2 className="text-sm">Legal & Support</h2>
+            <ul className="mt-4 space-y-3 text-sm text-[var(--nexra-text-muted)]">
+              <li>
+                <Link href="/security" className="transition-colors hover:text-[var(--nexra-text)]">
+                  Privacy
+                </Link>
+              </li>
+              <li>
+                <Link href="#" className="transition-colors hover:text-[var(--nexra-text)]">
+                  Terms
+                </Link>
+              </li>
+              <li>
+                <Link href="#" className="transition-colors hover:text-[var(--nexra-text)]">
+                  Support
+                </Link>
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <div className="mt-10 pt-4 text-xs text-[var(--nexra-text-muted)]">
+          <p>
+            {year} {siteConfig.name}. All rights reserved.
+          </p>
+        </div>
+      </div>
+    </footer>
+  );
+}
