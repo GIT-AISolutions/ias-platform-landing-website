@@ -20,6 +20,18 @@ const costItems = [
   "multiple subscriptions",
 ];
 
+const collaborationPillars = [
+  "Shared workspaces",
+  "Environment visibility",
+  "Release alignment",
+  "Single source of truth",
+];
+
+const collaborationStats = [
+  { label: "Project surfaces", value: "Code + Runtime + Deploy" },
+  { label: "Team mode", value: "Shared by default" },
+] as const;
+
 export default function Home() {
   return (
     <>
@@ -92,9 +104,12 @@ export default function Home() {
       <WorkflowSection />
 
       <section className="opencodie-band-dark">
-        <div className="opencodie-section pb-10 pt-0 md:pb-12">
+        <div className="opencodie-section relative overflow-hidden pb-12 pt-2 md:pb-14">
+          <div className="pointer-events-none absolute inset-x-[6%] top-1 -z-10 h-36 bg-[radial-gradient(ellipse_at_center,rgba(52,209,191,0.12)_0%,rgba(52,209,191,0)_72%)]" />
+          <div className="pointer-events-none absolute -bottom-8 left-[16%] -z-10 h-28 w-[34%] bg-[radial-gradient(ellipse_at_center,rgba(255,122,24,0.14)_0%,rgba(255,122,24,0)_72%)]" />
+
           <div className="grid gap-4 lg:grid-cols-[1.1fr_0.9fr]">
-            <Panel className="opencodie-reveal space-y-4 p-5 md:p-6">
+            <Panel className="opencodie-interactive-card opencodie-reveal space-y-5 p-5 md:p-6">
               <p className="text-sm uppercase tracking-[0.16em] text-[var(--opencodie-accent)]">
                 Less Tools. Lower Costs.
               </p>
@@ -111,9 +126,13 @@ export default function Home() {
                   </li>
                 ))}
               </ul>
+
+              <div className="rounded-xl border border-[color-mix(in_srgb,var(--opencodie-accent)_30%,var(--opencodie-border))] bg-[color-mix(in_srgb,var(--opencodie-bg-elevated)_78%,transparent)] px-3 py-2.5 text-xs uppercase tracking-[0.12em] text-[var(--opencodie-text-muted)]">
+                One platform subscription replaces fragmented tooling spend.
+              </div>
             </Panel>
 
-            <Panel className="opencodie-reveal opencodie-reveal-delay-1 space-y-4 p-5 md:p-6">
+            <Panel className="opencodie-interactive-card opencodie-reveal opencodie-reveal-delay-1 flex h-full flex-col gap-5 p-5 md:p-6">
               <p className="text-sm uppercase tracking-[0.16em] text-[var(--opencodie-accent)]">
                 Team Collaboration
               </p>
@@ -126,6 +145,31 @@ export default function Home() {
                 Keep coding, runtime, backend, and deployment in one workspace model
                 for faster alignment across product and engineering teams.
               </p>
+
+              <div className="grid gap-2 sm:grid-cols-2">
+                {collaborationPillars.map((item, index) => (
+                  <div
+                    key={item}
+                    className={`rounded-xl border border-[var(--opencodie-border)] px-3 py-2 text-sm ${index === 1 || index === 2 ? "bg-[color-mix(in_srgb,var(--opencodie-accent)_9%,var(--opencodie-bg-elevated))] text-[var(--opencodie-text)]" : "bg-[color-mix(in_srgb,var(--opencodie-bg-elevated)_72%,transparent)] text-[var(--opencodie-text-muted)]"}`}
+                  >
+                    {item}
+                  </div>
+                ))}
+              </div>
+
+              <div className="mt-auto grid gap-2">
+                {collaborationStats.map((item) => (
+                  <div
+                    key={item.label}
+                    className="flex items-center justify-between gap-3 rounded-xl border border-[var(--opencodie-border)] bg-[color-mix(in_srgb,var(--opencodie-bg-elevated)_70%,transparent)] px-3 py-2.5"
+                  >
+                    <span className="text-[0.67rem] uppercase tracking-[0.13em] text-[var(--opencodie-text-muted)]">
+                      {item.label}
+                    </span>
+                    <span className="text-xs font-medium text-[var(--opencodie-text)]">{item.value}</span>
+                  </div>
+                ))}
+              </div>
             </Panel>
           </div>
         </div>
