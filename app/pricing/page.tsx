@@ -1,45 +1,57 @@
+import type { Metadata } from "next";
 import Link from "next/link";
-import { buttonClasses } from "@/components/ui/button";
 import { MainCtaSection } from "@/components/home/main-cta-section";
+import { buttonClasses } from "@/components/ui/button";
 import { Panel } from "@/components/ui/panel";
 import { siteConfig } from "@/lib/site-config";
-import { cn } from "@/lib/utils";
+
+export const metadata: Metadata = {
+  title: "Pricing | OpenCodie",
+  description:
+    "Simple pricing with full control. You own the infrastructure, OpenCodie handles the operational layer.",
+};
 
 const plans = [
   {
-    name: "Basic",
-    price: "Free",
-    detail: "Start building for free with core platform access.",
+    name: "Starter",
+    price: "$0",
+    period: "/month",
+    copy: "For individual developers validating ideas.",
     points: [
-      "Limited workspaces",
-      "Limited deployments",
-      "Basic usage",
+      "Core deployment workflow",
+      "Basic logs and redeploys",
       "Community support",
     ],
-    cta: "Start for free",
+    cta: "Get started",
+    highlight: false,
   },
   {
     name: "Pro",
-    price: "$29/mo",
-    detail: "For builders who need more power and performance.",
+    price: "$29",
+    period: "/month",
+    copy: "For active products that ship frequently.",
     points: [
-      "More workspaces",
-      "More deployments",
-      "Priority performance",
-      "Advanced features",
-      "Email support",
+      "Advanced deployment controls",
+      "Database and secrets management",
+      "Priority support",
     ],
+    cta: "Start Pro",
     highlight: true,
-    cta: "Upgrade to Pro",
   },
   {
-    name: "Team / Scale",
+    name: "Team",
     price: "Custom",
-    detail: "For teams scaling collaboration and higher usage limits.",
-    points: ["Team features", "Higher limits", "Collaboration tools", "Priority support"],
-    cta: "Contact Sales",
+    period: "",
+    copy: "For teams managing multiple production apps.",
+    points: [
+      "Multi-project workflows",
+      "Team access controls",
+      "Dedicated support",
+    ],
+    cta: "Talk to sales",
+    highlight: false,
   },
-];
+] as const;
 
 export default function PricingPage() {
   return (
@@ -49,38 +61,37 @@ export default function PricingPage() {
           <p className="text-sm uppercase tracking-[0.16em] text-[var(--opencodie-accent)]">
             Pricing
           </p>
-          <h1 className="opencodie-page-h1">Simple, transparent pricing</h1>
+          <h1 className="opencodie-page-h1">Simple pricing. Full control.</h1>
           <p className="opencodie-page-intro">
-            Start building for free. Upgrade when you need more power.
+            You own the infrastructure. We handle everything else.
           </p>
         </div>
 
-        <div className="mt-10 grid gap-4 md:grid-cols-3">
+        <div className="mt-10 grid gap-4 lg:grid-cols-3">
           {plans.map((plan, index) => (
             <Panel
               key={plan.name}
-              className={cn(
-                "opencodie-interactive-card opencodie-reveal flex h-full flex-col gap-4 p-5",
-                index === 1 ? "opencodie-reveal-delay-1" : "",
-                index === 2 ? "opencodie-reveal-delay-2" : "",
-                plan.highlight
-                  ? "border-[color-mix(in_srgb,var(--opencodie-primary)_52%,var(--opencodie-border))] bg-[color-mix(in_srgb,var(--opencodie-primary)_10%,var(--opencodie-bg-panel))] shadow-[0_20px_34px_rgba(15,23,42,0.5)]"
-                  : "",
-              )}
+              className={index === 1 ? "opencodie-interactive-card opencodie-reveal opencodie-reveal-delay-1 flex h-full flex-col gap-4 border-[color-mix(in_srgb,var(--opencodie-primary)_52%,var(--opencodie-border))] bg-[color-mix(in_srgb,var(--opencodie-primary)_10%,var(--opencodie-bg-panel))] p-5" : index === 2 ? "opencodie-interactive-card opencodie-reveal opencodie-reveal-delay-2 flex h-full flex-col gap-4 p-5" : "opencodie-interactive-card opencodie-reveal flex h-full flex-col gap-4 p-5"}
             >
               <div className="flex items-center justify-between gap-3">
-                <p className="text-sm uppercase tracking-[0.14em] text-[var(--opencodie-accent)]">
-                  {plan.name}
-                </p>
+                <h2 className="text-2xl">{plan.name}</h2>
                 {plan.highlight ? (
                   <span className="rounded-full border border-[color-mix(in_srgb,var(--opencodie-primary)_55%,var(--opencodie-border))] bg-[color-mix(in_srgb,var(--opencodie-primary)_22%,var(--opencodie-bg-elevated))] px-2.5 py-1 text-[0.65rem] font-semibold uppercase tracking-[0.12em] text-[var(--opencodie-text)]">
                     Popular
                   </span>
                 ) : null}
               </div>
-              <h2 className="text-3xl">{plan.price}</h2>
-              <p className="text-sm">{plan.detail}</p>
-              <ul className="mt-1 space-y-2 text-sm text-[var(--opencodie-text-muted)]">
+
+              <p className="text-4xl font-semibold tracking-tight text-[var(--opencodie-text)]">
+                {plan.price}
+                <span className="ml-1 text-sm font-medium text-[var(--opencodie-text-muted)]">
+                  {plan.period}
+                </span>
+              </p>
+
+              <p className="text-sm">{plan.copy}</p>
+
+              <ul className="space-y-2 text-sm text-[var(--opencodie-text-muted)]">
                 {plan.points.map((point) => (
                   <li key={point} className="flex items-start gap-2">
                     <span className="mt-1 h-1.5 w-1.5 rounded-full bg-[var(--opencodie-accent)]" />
@@ -88,12 +99,9 @@ export default function PricingPage() {
                   </li>
                 ))}
               </ul>
+
               <Link
-                href={
-                  plan.name === "Team / Scale"
-                    ? siteConfig.portal.loginUrl
-                    : siteConfig.portal.getStartedUrl
-                }
+                href={plan.name === "Team" ? siteConfig.portal.loginUrl : siteConfig.portal.getStartedUrl}
                 className={buttonClasses(plan.highlight ? "primary" : "secondary", "mt-auto w-full")}
               >
                 {plan.cta}
@@ -104,66 +112,35 @@ export default function PricingPage() {
       </section>
 
       <section className="opencodie-page-section">
-        <div className="grid gap-4 lg:grid-cols-[1.2fr_0.8fr]">
+        <div className="grid gap-4 2xl:grid-cols-[1fr_1fr]">
           <Panel className="opencodie-reveal space-y-4 p-5 md:p-6">
-            <p className="text-sm uppercase tracking-[0.16em] text-[var(--opencodie-accent)]">
-              Why Pricing Is Simple
-            </p>
-            <h2 className="opencodie-page-h2">No hidden complexity</h2>
+            <h2 className="opencodie-page-h2">No vendor lock-in</h2>
             <p className="text-sm md:text-base">
-              With OpenCodie, you do not pay for separate hosting, multiple services,
-              or complex infrastructure management.
+              Your application runs on your own server. You can move or leave
+              whenever you want.
             </p>
-            <p className="text-sm font-medium text-[var(--opencodie-text)]">Everything is included.</p>
+            <p className="text-sm md:text-base">
+              OpenCodie is the platform layer, not the owner of your infrastructure.
+            </p>
           </Panel>
 
-          <Panel className="opencodie-reveal opencodie-reveal-delay-1 flex h-full flex-col gap-4 p-5 md:p-6">
-            <p className="text-sm uppercase tracking-[0.16em] text-[var(--opencodie-accent)]">
-              Cost Comparison
+          <Panel className="opencodie-reveal opencodie-reveal-delay-1 space-y-4 p-5 md:p-6">
+            <h2 className="opencodie-page-h2">Honest cost model</h2>
+            <p className="text-sm md:text-base">
+              OpenCodie pricing covers the platform experience.
             </p>
-            <h3 className="opencodie-page-h2">Build more for less</h3>
-            <ul className="space-y-2 text-sm text-[var(--opencodie-text-muted)]">
-              {[
-                "cheaper than combining multiple tools",
-                "no DevOps overhead",
-                "no setup costs",
-              ].map((point) => (
-                <li key={point} className="flex items-start gap-2">
-                  <span className="mt-1 h-1.5 w-1.5 rounded-full bg-[var(--opencodie-accent)]" />
-                  {point}
-                </li>
-              ))}
-            </ul>
+            <p className="text-sm md:text-base">
+              Infrastructure costs (server, storage, bandwidth) depend on your own
+              hosting setup and usage.
+            </p>
             <p className="text-sm font-medium text-[var(--opencodie-text)]">
-              Compared to traditional stacks, OpenCodie keeps total cost and complexity lower.
+              Any estimate is an estimate. Your real cost depends on real traffic.
             </p>
           </Panel>
         </div>
       </section>
 
-      <section className="opencodie-page-section">
-        <Panel className="opencodie-reveal space-y-4 p-5 md:p-6">
-          <p className="text-sm uppercase tracking-[0.16em] text-[var(--opencodie-accent)]">
-            Billing
-          </p>
-          <h2 className="opencodie-page-h2">Flexible billing</h2>
-          <ul className="space-y-2 text-sm text-[var(--opencodie-text-muted)]">
-            {["Upgrade anytime", "Cancel anytime", "Transparent usage"].map((point) => (
-              <li key={point} className="flex items-start gap-2">
-                <span className="mt-1 h-1.5 w-1.5 rounded-full bg-[var(--opencodie-accent)]" />
-                {point}
-              </li>
-            ))}
-          </ul>
-        </Panel>
-
-        <p className="mt-8 max-w-4xl text-sm text-[var(--opencodie-text-muted)] opencodie-reveal">
-          OpenCodie is a modern development platform designed for building, running,
-          and deploying applications in a single environment.
-        </p>
-      </section>
-
-      <MainCtaSection className="pt-8 md:pt-10" />
+      <MainCtaSection />
     </>
   );
 }

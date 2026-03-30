@@ -19,14 +19,14 @@ const heroSignals = [
 export function HeroSection() {
   return (
     <section className="opencodie-page-hero">
-      <div className="grid items-center gap-8 lg:grid-cols-[1.02fr_0.98fr] lg:gap-10">
+      <div className="grid items-center gap-8 xl:grid-cols-[1.02fr_0.98fr] xl:gap-10">
         <div className="space-y-8 opencodie-reveal">
           <StatusBadge status="info" className="shadow-[0_10px_22px_rgba(0,8,20,0.28)]">
             OpenCodie Development Platform
           </StatusBadge>
 
           <div className="space-y-6">
-            <h1 className="opencodie-heading-display opencodie-heading-accent max-w-3xl text-4xl sm:text-5xl md:text-7xl">
+            <h1 className="opencodie-heading-display opencodie-heading-accent max-w-3xl text-4xl sm:text-5xl md:text-6xl xl:text-7xl">
               Build, run, and deploy software from one unified control layer
             </h1>
             <p className="max-w-xl text-base md:text-lg">

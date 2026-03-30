@@ -50,8 +50,8 @@ export function WorkflowSection() {
           </p>
         </div>
 
-        <div className="relative mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5">
-          <div className="pointer-events-none absolute left-[10%] right-[10%] top-10 hidden h-px bg-gradient-to-r from-transparent via-[var(--opencodie-accent)]/60 to-transparent xl:block" />
+        <div className="relative mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-5">
+          <div className="pointer-events-none absolute left-[10%] right-[10%] top-10 hidden h-px bg-gradient-to-r from-transparent via-[var(--opencodie-accent)]/60 to-transparent 2xl:block" />
           {workflow.map((item, index) => (
             <Panel
               key={item.step}

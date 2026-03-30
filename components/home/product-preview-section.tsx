@@ -28,7 +28,7 @@ const infrastructurePoints = [
 export function ProductPreviewSection() {
   return (
     <section className="opencodie-band-dark">
-      <div className="opencodie-section pb-8 md:pb-12">
+      <div className="opencodie-section">
         <div className="opencodie-section-heading opencodie-reveal">
           <p className="text-sm uppercase tracking-[0.16em] text-[var(--opencodie-accent)]">
             Infrastructure Layer
@@ -171,7 +171,7 @@ export function ProductPreviewSection() {
           </div>
           </Panel>
 
-          <Panel className="absolute left-2 top-8 hidden w-52 p-4 xl:block opencodie-reveal opencodie-reveal-delay-2">
+          <Panel className="absolute left-2 top-8 hidden w-52 p-4 2xl:block opencodie-reveal opencodie-reveal-delay-2">
             <p className="text-xs uppercase tracking-[0.14em] text-[var(--opencodie-text-muted)]">
               Active Projects
             </p>
@@ -179,7 +179,7 @@ export function ProductPreviewSection() {
             <p className="mt-1 text-xs text-[var(--opencodie-text-muted)]">Across 12 organizations</p>
           </Panel>
 
-          <Panel className="absolute bottom-8 right-2 hidden w-56 p-4 xl:block opencodie-reveal opencodie-reveal-delay-3">
+          <Panel className="absolute bottom-8 right-2 hidden w-56 p-4 2xl:block opencodie-reveal opencodie-reveal-delay-3">
             <p className="text-xs uppercase tracking-[0.14em] text-[var(--opencodie-text-muted)]">
               Runtime Alerts
             </p>

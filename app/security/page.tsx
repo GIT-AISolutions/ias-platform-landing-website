@@ -50,7 +50,7 @@ export default function SecurityPage() {
         </div>
       </section>
 
-      <MainCtaSection className="pt-8 md:pt-10" />
+      <MainCtaSection />
     </>
   );
 }

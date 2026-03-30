@@ -2,16 +2,11 @@ import Link from "next/link";
 import { buttonClasses } from "@/components/ui/button";
 import { Panel } from "@/components/ui/panel";
 import { siteConfig } from "@/lib/site-config";
-import { cn } from "@/lib/utils";
 
-type MainCtaSectionProps = {
-  className?: string;
-};
-
-export function MainCtaSection({ className }: MainCtaSectionProps) {
+export function MainCtaSection() {
   return (
-    <section id="pricing" className="opencodie-band-dark">
-      <div className={cn("opencodie-section pb-0 pt-10 md:pt-14", className)}>
+    <section id="final-cta" className="opencodie-band-dark">
+      <div className="opencodie-section">
         <Panel className="opencodie-light-sweep relative overflow-hidden p-0 opencodie-reveal">
           <div className="opencodie-grid-drift opencodie-mesh-float absolute inset-0 bg-[linear-gradient(to_right,rgba(37,50,74,0.32)_1px,transparent_1px),linear-gradient(to_bottom,rgba(37,50,74,0.32)_1px,transparent_1px)] [background-size:34px_34px]" />
           <div className="opencodie-ambient-drift absolute -right-24 -top-20 h-64 w-64 rounded-full bg-[radial-gradient(circle,_rgba(99,102,241,0.18)_0%,_rgba(99,102,241,0)_70%)]" />
@@ -23,11 +18,10 @@ export function MainCtaSection({ className }: MainCtaSectionProps) {
                 Final CTA
               </p>
               <h2 className="opencodie-heading-accent max-w-2xl text-3xl sm:text-4xl md:text-5xl">
-                Build faster. Ship earlier. Stay in flow.
+                Start building without DevOps
               </h2>
               <p className="max-w-2xl text-base md:text-lg">
-                Build, run, and deploy full-stack applications without setup,
-                tool switching, or infrastructure complexity.
+                Deploy your first app with OpenCodie.
               </p>
             </div>
 
@@ -36,13 +30,13 @@ export function MainCtaSection({ className }: MainCtaSectionProps) {
                 href={siteConfig.portal.getStartedUrl}
                 className={buttonClasses("primary", "w-full sm:w-auto")}
               >
-                Start building
+                Get started
               </Link>
               <Link
-                href={siteConfig.portal.getStartedUrl}
+                href="/pricing"
                 className={buttonClasses("secondary", "w-full sm:w-auto")}
               >
-                Get started
+                View pricing
               </Link>
             </div>
           </div>

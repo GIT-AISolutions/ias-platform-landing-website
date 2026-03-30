@@ -1,181 +1,274 @@
-import { CoreCapabilitiesSection } from "@/components/home/features/core-capabilities-section";
-import { InfrastructureSection } from "@/components/home/features/infrastructure-section";
-import { WorkflowSection } from "@/components/home/features/workflow-section";
-import { HeroSection } from "@/components/home/hero-section";
+import Link from "next/link";
 import { MainCtaSection } from "@/components/home/main-cta-section";
-import { ProductPreviewSection } from "@/components/home/product-preview-section";
+import { buttonClasses } from "@/components/ui/button";
 import { Panel } from "@/components/ui/panel";
+import { siteConfig } from "@/lib/site-config";
 
-const whyPoints = [
-  "Full-stack support",
-  "Production deployments",
-  "Scalable architecture",
-  "Built for SaaS development",
+const trustItems = [
+  "No DevOps required",
+  "Runs on your own server",
+  "Works with VS Code + AI",
+  "No vendor lock-in",
 ];
 
-const costItems = [
-  "separate hosting platforms",
-  "external deployment tools",
-  "complex cloud configurations",
-  "multiple subscriptions",
+const solutionItems = [
+  "Deployments",
+  "Infrastructure",
+  "Logs",
+  "Databases",
+  "Environment setup",
 ];
 
-const collaborationPillars = [
-  "Shared workspaces",
-  "Environment visibility",
-  "Release alignment",
-  "Single source of truth",
+const workflowSteps = [
+  {
+    step: "1",
+    title: "Code locally",
+    copy: "Use VS Code, your terminal, and any AI model (Codex, Gemini, Claude).",
+  },
+  {
+    step: "2",
+    title: "Connect your project",
+    copy: "Link your repo or project to OpenCodie.",
+  },
+  {
+    step: "3",
+    title: "Deploy instantly",
+    copy: "OpenCodie builds and runs your app on your server.",
+  },
 ];
 
-const collaborationStats = [
-  { label: "Project surfaces", value: "Code + Runtime + Deploy" },
-  { label: "Team mode", value: "Shared by default" },
-] as const;
+const whyItems = [
+  {
+    title: "No vendor lock-in",
+    copy: "Your app runs on your own infrastructure.",
+  },
+  {
+    title: "No DevOps needed",
+    copy: "No configs, no pipelines, no setup.",
+  },
+  {
+    title: "Works with your tools",
+    copy: "VS Code, Git, terminal, and AI tools.",
+  },
+  {
+    title: "Built for AI development",
+    copy: "Fits modern coding workflows from day one.",
+  },
+];
+
+const includes = [
+  "Deployments",
+  "Databases",
+  "Environment variables",
+  "Logs & debugging",
+  "Updates & redeploys",
+];
 
 export default function Home() {
   return (
     <>
-      <HeroSection />
-
-      <section className="opencodie-band-dark">
-        <div className="opencodie-page-section">
+      <section className="opencodie-page-hero">
+        <div className="grid gap-6 2xl:grid-cols-[1.05fr_0.95fr] 2xl:items-end">
           <div className="opencodie-section-heading opencodie-reveal">
             <p className="text-sm uppercase tracking-[0.16em] text-[var(--opencodie-accent)]">
-              Value Proposition
+              OpenCodie Developer Platform
             </p>
-            <h2 className="text-3xl md:text-5xl">From idea to live app in minutes</h2>
+            <h1 className="opencodie-page-h1">
+              Deploy apps like Vercel.
+              <br />
+              Own everything like Coolify.
+            </h1>
+            <p className="opencodie-page-intro">
+              Keep coding in VS Code with AI. OpenCodie handles deployment,
+              infrastructure, and everything in between.
+            </p>
+            <p className="text-base font-medium text-[var(--opencodie-text)] md:text-lg">
+              You build. We run it.
+            </p>
+
+            <div className="flex w-full flex-col items-stretch gap-3 sm:w-auto sm:flex-row sm:items-center">
+              <Link
+                href={siteConfig.portal.getStartedUrl}
+                className={buttonClasses("primary", "w-full sm:w-auto")}
+              >
+                Get started
+              </Link>
+              <Link
+                href="/product"
+                className={buttonClasses("secondary", "w-full sm:w-auto")}
+              >
+                View product
+              </Link>
+            </div>
+          </div>
+
+          <Panel className="opencodie-reveal opencodie-reveal-delay-1 space-y-4 p-5 md:p-6">
+            <p className="text-xs uppercase tracking-[0.14em] text-[var(--opencodie-accent)]">
+              Core Positioning
+            </p>
+            <h2 className="text-2xl md:text-3xl">
+              Local development + AI + instant deployment + full ownership
+            </h2>
+            <p className="text-sm md:text-base">
+              You keep your local workflow. OpenCodie removes the operational layer
+              and runs your app on infrastructure you control.
+            </p>
+            <div className="grid gap-2 sm:grid-cols-3">
+              {[
+                "You work locally",
+                "OpenCodie handles DevOps",
+                "You own infrastructure",
+              ].map((item) => (
+                <div
+                  key={item}
+                  className="rounded-xl border border-[var(--opencodie-border)] bg-[color-mix(in_srgb,var(--opencodie-bg-elevated)_74%,transparent)] px-3 py-2 text-xs font-medium text-[var(--opencodie-text)]"
+                >
+                  {item}
+                </div>
+              ))}
+            </div>
+          </Panel>
+        </div>
+
+        <Panel className="opencodie-reveal opencodie-reveal-delay-2 mt-8 p-4 md:p-5">
+          <div className="grid gap-2 sm:grid-cols-2 lg:grid-cols-4">
+            {trustItems.map((item) => (
+              <div
+                key={item}
+                className="rounded-xl border border-[var(--opencodie-border)] bg-[color-mix(in_srgb,var(--opencodie-bg-elevated)_72%,transparent)] px-3 py-2.5 text-sm font-medium text-[var(--opencodie-text)]"
+              >
+                {item}
+              </div>
+            ))}
+          </div>
+        </Panel>
+      </section>
+
+      <section className="opencodie-band-dark">
+        <div className="opencodie-section">
+          <div className="opencodie-section-heading opencodie-reveal">
+            <p className="text-sm uppercase tracking-[0.16em] text-[var(--opencodie-accent)]">
+              The Problem
+            </p>
+            <h2 className="text-3xl md:text-5xl">Deploying apps shouldn’t be this hard</h2>
             <p className="max-w-3xl text-base md:text-lg">
-              Build your application from start to finish in one connected workflow.
-              Write code, see changes instantly, connect your backend, and deploy
-              without leaving the platform.
+              Setting up infrastructure, configuring deployments, managing environments
+              - it slows you down.
+            </p>
+            <p className="text-base font-medium text-[var(--opencodie-text)] md:text-lg">
+              You just want to build and ship.
             </p>
           </div>
         </div>
       </section>
 
-      <CoreCapabilitiesSection />
-      <InfrastructureSection />
+      <section className="opencodie-page-section">
+        <div className="grid gap-4 2xl:grid-cols-[1.08fr_0.92fr]">
+          <Panel className="opencodie-reveal space-y-4 p-5 md:p-6">
+            <p className="text-sm uppercase tracking-[0.16em] text-[var(--opencodie-accent)]">
+              The Solution
+            </p>
+            <h2 className="text-3xl md:text-4xl">OpenCodie removes the DevOps layer</h2>
+            <p className="text-sm md:text-base">
+              You keep your workflow. VS Code, terminal, AI tools - nothing changes.
+            </p>
+            <p className="text-sm md:text-base">
+              OpenCodie takes care of the operational work so you can ship faster.
+            </p>
+          </Panel>
+
+          <Panel className="opencodie-reveal opencodie-reveal-delay-1 p-5 md:p-6">
+            <ul className="space-y-2 text-sm text-[var(--opencodie-text-muted)]">
+              {solutionItems.map((item) => (
+                <li key={item} className="flex items-start gap-2">
+                  <span className="mt-1 h-1.5 w-1.5 rounded-full bg-[var(--opencodie-accent)]" />
+                  {item}
+                </li>
+              ))}
+            </ul>
+          </Panel>
+        </div>
+      </section>
 
       <section className="opencodie-band-dark">
-        <div className="opencodie-section pb-10 pt-8 md:pb-12 md:pt-10">
-          <div className="grid gap-4 lg:grid-cols-[1.1fr_0.9fr]">
-            <Panel className="opencodie-reveal space-y-4 p-5 md:p-6">
-              <p className="text-sm uppercase tracking-[0.16em] text-[var(--opencodie-accent)]">
-                Why OpenCodie
-              </p>
-              <h2 className="text-3xl md:text-4xl">
-                Built for real applications - not just experiments
-              </h2>
-              <p className="text-sm md:text-base">
-                Unlike traditional development tools, OpenCodie is designed for complete,
-                production-ready applications. You are not just writing code; you are
-                building real products.
-              </p>
-              <div className="grid gap-2 sm:grid-cols-2">
-                {whyPoints.map((item) => (
-                  <div
-                    key={item}
-                    className="rounded-xl border border-[var(--opencodie-border)] bg-[color-mix(in_srgb,var(--opencodie-bg-elevated)_72%,transparent)] px-3 py-2.5 text-sm text-[var(--opencodie-text-muted)]"
-                  >
-                    {item}
-                  </div>
-                ))}
-              </div>
-            </Panel>
+        <div className="opencodie-section">
+          <div className="opencodie-section-heading opencodie-reveal">
+            <p className="text-sm uppercase tracking-[0.16em] text-[var(--opencodie-accent)]">
+              How It Works
+            </p>
+            <h2 className="text-3xl md:text-5xl">From code to production in minutes</h2>
+          </div>
 
-            <Panel className="opencodie-reveal opencodie-reveal-delay-1 space-y-4 p-5 md:p-6">
-              <p className="text-sm uppercase tracking-[0.16em] text-[var(--opencodie-accent)]">
-                Development Platform
-              </p>
-              <h3 className="text-2xl md:text-3xl">Build and deploy apps in one flow</h3>
-              <p className="text-sm md:text-base">
-                OpenCodie gives you a browser-based development platform for full-stack
-                development, SaaS development, and instant deployment workflows.
-              </p>
-              <p className="text-sm md:text-base">
-                From coding environment online to backend and database integration,
-                everything stays connected.
-              </p>
-            </Panel>
+          <div className="mt-8 grid gap-4 lg:grid-cols-3">
+            {workflowSteps.map((item, index) => (
+              <Panel
+                key={item.step}
+                className={`opencodie-interactive-card opencodie-reveal space-y-3 p-5 ${index === 1 ? "opencodie-reveal-delay-1" : ""} ${index === 2 ? "opencodie-reveal-delay-2" : ""}`}
+              >
+                <p className="text-xs uppercase tracking-[0.14em] text-[var(--opencodie-accent)]">
+                  Step {item.step}
+                </p>
+                <h3 className="text-xl">{item.title}</h3>
+                <p className="text-sm">{item.copy}</p>
+              </Panel>
+            ))}
           </div>
         </div>
       </section>
 
-      <WorkflowSection />
+      <section className="opencodie-page-section">
+        <div className="opencodie-section-heading opencodie-reveal">
+          <p className="text-sm uppercase tracking-[0.16em] text-[var(--opencodie-accent)]">
+            Why OpenCodie
+          </p>
+          <h2 className="text-3xl md:text-5xl">Why developers choose OpenCodie</h2>
+        </div>
+
+        <div className="mt-8 grid gap-4 sm:grid-cols-2">
+          {whyItems.map((item, index) => (
+            <Panel
+              key={item.title}
+              className={`opencodie-interactive-card opencodie-reveal space-y-2 p-5 ${index % 2 === 1 ? "opencodie-reveal-delay-1" : ""}`}
+            >
+              <h3 className="text-xl">{item.title}</h3>
+              <p className="text-sm">{item.copy}</p>
+            </Panel>
+          ))}
+        </div>
+      </section>
 
       <section className="opencodie-band-dark">
-        <div className="opencodie-section relative overflow-hidden pb-12 pt-2 md:pb-14">
-          <div className="pointer-events-none absolute inset-x-[6%] top-1 -z-10 h-36 bg-[radial-gradient(ellipse_at_center,rgba(52,209,191,0.12)_0%,rgba(52,209,191,0)_72%)]" />
-          <div className="pointer-events-none absolute -bottom-8 left-[16%] -z-10 h-28 w-[34%] bg-[radial-gradient(ellipse_at_center,rgba(255,122,24,0.14)_0%,rgba(255,122,24,0)_72%)]" />
+        <div className="opencodie-section">
+          <div className="opencodie-section-heading opencodie-reveal">
+            <p className="text-sm uppercase tracking-[0.16em] text-[var(--opencodie-accent)]">
+              What You Get
+            </p>
+          </div>
 
-          <div className="grid gap-4 lg:grid-cols-[1.1fr_0.9fr]">
-            <Panel className="opencodie-interactive-card opencodie-reveal space-y-5 p-5 md:p-6">
-              <p className="text-sm uppercase tracking-[0.16em] text-[var(--opencodie-accent)]">
-                Less Tools. Lower Costs.
-              </p>
-              <h2 className="text-3xl md:text-4xl">Everything is built in.</h2>
-              <p className="text-sm md:text-base">
-                Stop paying for multiple services and managing complex infrastructure.
-                With OpenCodie, your development and deployment workflow runs in one system.
-              </p>
-              <ul className="space-y-2 text-sm text-[var(--opencodie-text-muted)]">
-                {costItems.map((item) => (
-                  <li key={item} className="flex items-start gap-2">
-                    <span className="mt-1 h-1.5 w-1.5 rounded-full bg-[var(--opencodie-accent)]" />
-                    {item}
-                  </li>
-                ))}
-              </ul>
-
-              <div className="rounded-xl border border-[color-mix(in_srgb,var(--opencodie-accent)_30%,var(--opencodie-border))] bg-[color-mix(in_srgb,var(--opencodie-bg-elevated)_78%,transparent)] px-3 py-2.5 text-xs uppercase tracking-[0.12em] text-[var(--opencodie-text-muted)]">
-                One platform subscription replaces fragmented tooling spend.
+          <div className="mt-6 grid gap-2 sm:grid-cols-2 lg:grid-cols-3">
+            {includes.map((item, index) => (
+              <div
+                key={item}
+                className={`opencodie-interactive-card opencodie-reveal rounded-xl border border-[var(--opencodie-border)] bg-[color-mix(in_srgb,var(--opencodie-bg-elevated)_74%,transparent)] px-3 py-2.5 text-sm text-[var(--opencodie-text)] ${index === 1 || index === 4 ? "opencodie-reveal-delay-1" : ""}`}
+              >
+                {item}
               </div>
-            </Panel>
-
-            <Panel className="opencodie-interactive-card opencodie-reveal opencodie-reveal-delay-1 flex h-full flex-col gap-5 p-5 md:p-6">
-              <p className="text-sm uppercase tracking-[0.16em] text-[var(--opencodie-accent)]">
-                Team Collaboration
-              </p>
-              <h3 className="text-2xl md:text-3xl">Built for developers and teams</h3>
-              <p className="text-sm md:text-base">
-                Collaborate on projects, manage environments, and build together in
-                one shared platform.
-              </p>
-              <p className="text-sm md:text-base">
-                Keep coding, runtime, backend, and deployment in one workspace model
-                for faster alignment across product and engineering teams.
-              </p>
-
-              <div className="grid gap-2 sm:grid-cols-2">
-                {collaborationPillars.map((item, index) => (
-                  <div
-                    key={item}
-                    className={`rounded-xl border border-[var(--opencodie-border)] px-3 py-2 text-sm ${index === 1 || index === 2 ? "bg-[color-mix(in_srgb,var(--opencodie-accent)_9%,var(--opencodie-bg-elevated))] text-[var(--opencodie-text)]" : "bg-[color-mix(in_srgb,var(--opencodie-bg-elevated)_72%,transparent)] text-[var(--opencodie-text-muted)]"}`}
-                  >
-                    {item}
-                  </div>
-                ))}
-              </div>
-
-              <div className="mt-auto grid gap-2">
-                {collaborationStats.map((item) => (
-                  <div
-                    key={item.label}
-                    className="flex items-center justify-between gap-3 rounded-xl border border-[var(--opencodie-border)] bg-[color-mix(in_srgb,var(--opencodie-bg-elevated)_70%,transparent)] px-3 py-2.5"
-                  >
-                    <span className="text-[0.67rem] uppercase tracking-[0.13em] text-[var(--opencodie-text-muted)]">
-                      {item.label}
-                    </span>
-                    <span className="text-xs font-medium text-[var(--opencodie-text)]">{item.value}</span>
-                  </div>
-                ))}
-              </div>
-            </Panel>
+            ))}
           </div>
         </div>
       </section>
 
-      <ProductPreviewSection />
+      <section className="opencodie-page-section">
+        <Panel className="opencodie-reveal space-y-3 p-5 md:p-6">
+          <p className="text-sm uppercase tracking-[0.16em] text-[var(--opencodie-accent)]">
+            Control
+          </p>
+          <h2 className="text-3xl md:text-4xl">You stay in control</h2>
+          <p className="text-sm md:text-base">Your code runs on your server.</p>
+          <p className="text-sm md:text-base">Your data stays yours.</p>
+          <p className="text-sm md:text-base">You can leave anytime.</p>
+        </Panel>
+      </section>
 
       <MainCtaSection />
     </>

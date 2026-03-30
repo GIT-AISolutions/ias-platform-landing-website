@@ -22,8 +22,9 @@ const monoFont = JetBrains_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "OpenCodie",
-  description: "Foundational landing page design system",
+  title: "OpenCodie | Deploy apps like Vercel. Own everything like Coolify.",
+  description:
+    "Keep coding in VS Code with AI. OpenCodie handles deployment, infrastructure, logs, databases, and updates on your own server.",
 };
 
 export default function RootLayout({

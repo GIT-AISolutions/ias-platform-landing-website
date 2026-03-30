@@ -1,64 +1,45 @@
+import type { Metadata } from "next";
 import { MainCtaSection } from "@/components/home/main-cta-section";
 import { Panel } from "@/components/ui/panel";
-import { cn } from "@/lib/utils";
+
+export const metadata: Metadata = {
+  title: "FAQ | OpenCodie",
+  description:
+    "Frequently asked questions about OpenCodie, local development, AI workflow, and deployment on your own server.",
+};
 
 const faqItems = [
   {
-    topic: "Platform",
     question: "What is OpenCodie?",
     answer:
-      "OpenCodie is a development platform that lets you build, run, and deploy applications in one place.",
+      "OpenCodie is a developer platform that lets you keep coding locally while it handles deployment, infrastructure, and runtime operations.",
   },
   {
-    topic: "Setup",
-    question: "Do I need to install anything?",
-    answer: "No. OpenCodie runs entirely in your browser.",
-  },
-  {
-    topic: "Deployments",
-    question: "Can I deploy apps directly?",
-    answer: "Yes. You can deploy your app instantly with one click.",
-  },
-  {
-    topic: "Databases",
-    question: "Does OpenCodie support databases?",
+    question: "Do I need DevOps?",
     answer:
-      "Yes. You can create and connect databases directly within the platform.",
+      "No. OpenCodie is built for developers who want to ship without managing DevOps complexity.",
   },
   {
-    topic: "AI",
-    question: "What AI tools are supported?",
-    answer: "OpenCodie supports OpenAI, Claude, and Meta AI integrations.",
-  },
-  {
-    topic: "Production",
-    question: "Is OpenCodie suitable for production apps?",
+    question: "Where does my app run?",
     answer:
-      "Yes. OpenCodie is designed for building real, production-ready applications.",
+      "Your app runs on your own server. You keep full infrastructure ownership.",
   },
   {
-    topic: "Positioning",
-    question: "How is this different from other platforms?",
+    question: "Can I use AI tools?",
     answer:
-      "OpenCodie combines development, infrastructure, and deployment into one connected system, reducing complexity and cost.",
+      "Yes. OpenCodie fits AI-first workflows with tools like Codex, Gemini, and Claude.",
   },
   {
-    topic: "Full-stack",
-    question: "Can I build full-stack apps?",
-    answer: "Yes. OpenCodie supports both frontend and backend development.",
-  },
-  {
-    topic: "Pricing",
-    question: "Is OpenCodie free?",
-    answer: "You can start for free, with paid plans available for advanced usage.",
-  },
-  {
-    topic: "Audience",
-    question: "Who is OpenCodie for?",
+    question: "Do I code in the browser?",
     answer:
-      "OpenCodie is built for developers, startups, and teams building modern applications.",
+      "No. You work locally in VS Code and terminal, then deploy through OpenCodie.",
   },
-];
+  {
+    question: "Is this like Vercel?",
+    answer:
+      "OpenCodie gives a Vercel-like deployment experience, but with infrastructure ownership similar to Coolify.",
+  },
+] as const;
 
 export default function FaqPage() {
   return (
@@ -70,8 +51,7 @@ export default function FaqPage() {
           </p>
           <h1 className="opencodie-page-h1">Frequently asked questions</h1>
           <p className="opencodie-page-intro">
-            Find clear answers about product capabilities, platform workflows, and
-            operating OpenCodie in production.
+            Short answers to the most common questions before you start.
           </p>
         </div>
 
@@ -79,26 +59,14 @@ export default function FaqPage() {
           {faqItems.map((item, index) => (
             <Panel
               key={item.question}
-              className={cn(
-                "opencodie-interactive-card opencodie-reveal p-4 sm:p-5",
-                index % 3 === 1 ? "opencodie-reveal-delay-1" : "",
-                index % 3 === 2 ? "opencodie-reveal-delay-2" : "",
-              )}
+              className={index === 1 || index === 3 || index === 5 ? "opencodie-interactive-card opencodie-reveal opencodie-reveal-delay-1 p-4 sm:p-5" : "opencodie-interactive-card opencodie-reveal p-4 sm:p-5"}
             >
-              <details
-                open={index === 0}
-                className="group [&_summary::-webkit-details-marker]:hidden"
-              >
+              <details open={index === 0} className="group [&_summary::-webkit-details-marker]:hidden">
                 <summary className="flex cursor-pointer items-start gap-3">
                   <span className="inline-flex h-7 w-7 shrink-0 items-center justify-center rounded-full border border-[var(--opencodie-border)] bg-[var(--opencodie-bg-elevated)] text-[0.65rem] font-semibold tracking-[0.1em] text-[var(--opencodie-accent)]">
                     {String(index + 1).padStart(2, "0")}
                   </span>
-                  <div className="min-w-0 flex-1 space-y-1">
-                    <p className="text-xs uppercase tracking-[0.14em] text-[var(--opencodie-text-muted)]">
-                      {item.topic}
-                    </p>
-                    <h2 className="text-lg sm:text-xl">{item.question}</h2>
-                  </div>
+                  <h2 className="min-w-0 flex-1 text-lg sm:text-xl">{item.question}</h2>
                   <span className="mt-1 text-sm font-semibold text-[var(--opencodie-accent)] transition-transform duration-[180ms] group-open:rotate-45">
                     +
                   </span>
@@ -108,14 +76,9 @@ export default function FaqPage() {
             </Panel>
           ))}
         </div>
-
-        <p className="mt-8 max-w-4xl text-sm text-[var(--opencodie-text-muted)] opencodie-reveal">
-          OpenCodie is a modern development platform designed for building, running,
-          and deploying applications in a single environment.
-        </p>
       </section>
 
-      <MainCtaSection className="pt-8 md:pt-10" />
+      <MainCtaSection />
     </>
   );
 }

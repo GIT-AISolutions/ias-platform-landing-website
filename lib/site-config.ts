@@ -20,9 +20,9 @@ function resolvePortalUrl(path: string) {
 export const siteConfig = {
   name: "OpenCodie",
   shortDescription:
-    "OpenCodie is a modern development platform that combines coding, live preview, backend hosting, database integration, and deployment into one system.",
+    "Deploy apps like Vercel. Own everything like Coolify. Keep coding locally while OpenCodie handles deployment and infrastructure on your own server.",
   seoFooterText:
-    "Build full-stack applications directly from the browser without installing tools or managing infrastructure. From SaaS products to backend systems, OpenCodie provides a complete environment to develop, test, and deploy quickly.",
+    "OpenCodie is a developer platform for local development with AI, instant deployment, and full infrastructure ownership. Build in VS Code and terminal, then deploy to your own server without DevOps overhead.",
   navigation: [
     { label: "Features", href: "/features" },
     { label: "Product", href: "/product" },
