@@ -12,16 +12,21 @@ export function SiteHeader() {
   const primaryNavigation = [{ label: "Home", href: "/" }, ...siteConfig.navigation];
 
   return (
-    <header className="sticky top-0 z-40 border-b border-[var(--nexra-border)]/80 bg-[color-mix(in_srgb,var(--nexra-bg-base)_72%,transparent)] backdrop-blur-xl">
-      <div className="nexra-container py-3 md:py-0">
-        <div className="flex min-h-12 items-center justify-between gap-3 md:h-20 md:gap-4">
-          <Link href="/" className="flex items-center gap-3">
-            <span className="inline-flex h-8 w-8 items-center justify-center rounded-xl border border-[var(--nexra-border)] bg-[var(--nexra-bg-elevated)] text-xs font-semibold text-[var(--nexra-accent)]">
+    <header className="sticky top-0 z-40 px-4 pt-3 md:px-6 xl:px-8">
+      <div className="mx-auto w-full max-w-[1380px] rounded-2xl border border-[color-mix(in_srgb,var(--nexra-border)_78%,var(--nexra-accent))] bg-[color-mix(in_srgb,var(--nexra-bg-panel)_72%,transparent)] shadow-[0_20px_42px_rgba(0,8,20,0.4)] backdrop-blur-xl">
+        <div className="flex min-h-12 items-center justify-between gap-3 px-3 py-2 md:min-h-20 md:gap-4 md:px-5">
+          <Link href="/" className="flex items-center gap-3 rounded-xl px-2 py-1">
+            <span className="inline-flex h-9 w-9 items-center justify-center rounded-xl border border-[color-mix(in_srgb,var(--nexra-accent)_52%,var(--nexra-border))] bg-[color-mix(in_srgb,var(--nexra-accent)_16%,var(--nexra-bg-elevated))] text-xs font-semibold text-[var(--nexra-accent)]">
               NX
             </span>
-            <span className="text-base font-semibold tracking-tight text-[var(--nexra-text)] md:text-lg">
-              {siteConfig.name}
-            </span>
+            <div className="leading-tight">
+              <span className="block text-base font-semibold tracking-tight text-[var(--nexra-text)] md:text-lg">
+                {siteConfig.name}
+              </span>
+              <span className="hidden text-[0.62rem] uppercase tracking-[0.18em] text-[var(--nexra-text-muted)] sm:block">
+                Engineering platform
+              </span>
+            </div>
           </Link>
 
           <nav className="hidden items-center gap-8 md:flex" aria-label="Primary">
@@ -29,7 +34,7 @@ export function SiteHeader() {
               <Link
                 key={item.label}
                 href={item.href}
-                className="text-sm font-medium text-[var(--nexra-text-muted)] transition-colors duration-[180ms] hover:text-[var(--nexra-text)]"
+                className="relative text-sm font-medium text-[var(--nexra-text-muted)] transition-colors duration-[180ms] hover:text-[var(--nexra-text)] after:absolute after:-bottom-1 after:left-0 after:h-px after:w-full after:origin-left after:scale-x-0 after:bg-[color-mix(in_srgb,var(--nexra-accent)_85%,#fff)] after:transition-transform after:duration-200 hover:after:scale-x-100"
               >
                 {item.label}
               </Link>
@@ -39,13 +44,19 @@ export function SiteHeader() {
           <div className="hidden items-center gap-2 md:flex md:gap-3">
             <Link
               href={siteConfig.portal.loginUrl}
-              className={buttonClasses("secondary", "px-3 py-2 text-xs sm:text-sm md:px-4 md:py-2.5")}
+              className={buttonClasses(
+                "secondary",
+                "rounded-xl px-3 py-2 text-xs sm:text-sm md:px-4 md:py-2.5",
+              )}
             >
               Log in
             </Link>
             <Link
               href={siteConfig.portal.getStartedUrl}
-              className={buttonClasses("primary", "px-3 py-2 text-xs sm:text-sm md:px-4 md:py-2.5")}
+              className={buttonClasses(
+                "primary",
+                "rounded-xl px-3 py-2 text-xs sm:text-sm md:px-4 md:py-2.5",
+              )}
             >
               Get started
             </Link>
@@ -54,7 +65,7 @@ export function SiteHeader() {
           <div className="flex items-center gap-2 md:hidden">
             <Link
               href={siteConfig.portal.getStartedUrl}
-              className={buttonClasses("primary", "px-3 py-2 text-xs")}
+              className={buttonClasses("primary", "rounded-xl px-3 py-2 text-xs")}
             >
               Get started
             </Link>
@@ -101,7 +112,7 @@ export function SiteHeader() {
         >
           <div className="min-h-0">
             <nav
-              className="mt-3 space-y-2 rounded-2xl border border-[var(--nexra-border)] bg-[color-mix(in_srgb,var(--nexra-bg-elevated)_76%,transparent)] p-3"
+              className="mx-3 mb-3 mt-2 space-y-2 rounded-2xl border border-[var(--nexra-border)] bg-[color-mix(in_srgb,var(--nexra-bg-elevated)_78%,transparent)] p-3"
               aria-label="Mobile primary"
             >
               {primaryNavigation.map((item) => (
@@ -119,14 +130,14 @@ export function SiteHeader() {
                 <Link
                   href={siteConfig.portal.loginUrl}
                   onClick={() => setIsMenuOpen(false)}
-                  className={buttonClasses("secondary", "flex-1 px-3 py-2 text-xs")}
+                  className={buttonClasses("secondary", "flex-1 rounded-xl px-3 py-2 text-xs")}
                 >
                   Log in
                 </Link>
                 <Link
                   href={siteConfig.portal.getStartedUrl}
                   onClick={() => setIsMenuOpen(false)}
-                  className={buttonClasses("primary", "flex-1 px-3 py-2 text-xs")}
+                  className={buttonClasses("primary", "flex-1 rounded-xl px-3 py-2 text-xs")}
                 >
                   Get started
                 </Link>
