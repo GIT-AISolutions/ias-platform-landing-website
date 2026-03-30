@@ -5,14 +5,14 @@ import { cn } from "@/lib/utils";
 const faqItems = [
   {
     topic: "Platform",
-    question: "What is Nexra?",
+    question: "What is OpenCodie?",
     answer:
-      "Nexra is a development platform that lets you build, run, and deploy applications in one place.",
+      "OpenCodie is a development platform that lets you build, run, and deploy applications in one place.",
   },
   {
     topic: "Setup",
     question: "Do I need to install anything?",
-    answer: "No. Nexra runs entirely in your browser.",
+    answer: "No. OpenCodie runs entirely in your browser.",
   },
   {
     topic: "Deployments",
@@ -21,57 +21,57 @@ const faqItems = [
   },
   {
     topic: "Databases",
-    question: "Does Nexra support databases?",
+    question: "Does OpenCodie support databases?",
     answer:
       "Yes. You can create and connect databases directly within the platform.",
   },
   {
     topic: "AI",
     question: "What AI tools are supported?",
-    answer: "Nexra supports OpenAI, Claude, and Meta AI integrations.",
+    answer: "OpenCodie supports OpenAI, Claude, and Meta AI integrations.",
   },
   {
     topic: "Production",
-    question: "Is Nexra suitable for production apps?",
+    question: "Is OpenCodie suitable for production apps?",
     answer:
-      "Yes. Nexra is designed for building real, production-ready applications.",
+      "Yes. OpenCodie is designed for building real, production-ready applications.",
   },
   {
     topic: "Positioning",
     question: "How is this different from other platforms?",
     answer:
-      "Nexra combines development, infrastructure, and deployment into one connected system, reducing complexity and cost.",
+      "OpenCodie combines development, infrastructure, and deployment into one connected system, reducing complexity and cost.",
   },
   {
     topic: "Full-stack",
     question: "Can I build full-stack apps?",
-    answer: "Yes. Nexra supports both frontend and backend development.",
+    answer: "Yes. OpenCodie supports both frontend and backend development.",
   },
   {
     topic: "Pricing",
-    question: "Is Nexra free?",
+    question: "Is OpenCodie free?",
     answer: "You can start for free, with paid plans available for advanced usage.",
   },
   {
     topic: "Audience",
-    question: "Who is Nexra for?",
+    question: "Who is OpenCodie for?",
     answer:
-      "Nexra is built for developers, startups, and teams building modern applications.",
+      "OpenCodie is built for developers, startups, and teams building modern applications.",
   },
 ];
 
 export default function FaqPage() {
   return (
     <>
-      <section className="nexra-page-hero">
-        <div className="nexra-section-heading nexra-reveal">
-          <p className="text-sm uppercase tracking-[0.16em] text-[var(--nexra-accent)]">
+      <section className="opencodie-page-hero">
+        <div className="opencodie-section-heading opencodie-reveal">
+          <p className="text-sm uppercase tracking-[0.16em] text-[var(--opencodie-accent)]">
             FAQ
           </p>
-          <h1 className="nexra-page-h1">Frequently asked questions</h1>
-          <p className="nexra-page-intro">
+          <h1 className="opencodie-page-h1">Frequently asked questions</h1>
+          <p className="opencodie-page-intro">
             Find clear answers about product capabilities, platform workflows, and
-            operating Nexra in production.
+            operating OpenCodie in production.
           </p>
         </div>
 
@@ -80,9 +80,9 @@ export default function FaqPage() {
             <Panel
               key={item.question}
               className={cn(
-                "nexra-interactive-card nexra-reveal p-4 sm:p-5",
-                index % 3 === 1 ? "nexra-reveal-delay-1" : "",
-                index % 3 === 2 ? "nexra-reveal-delay-2" : "",
+                "opencodie-interactive-card opencodie-reveal p-4 sm:p-5",
+                index % 3 === 1 ? "opencodie-reveal-delay-1" : "",
+                index % 3 === 2 ? "opencodie-reveal-delay-2" : "",
               )}
             >
               <details
@@ -90,16 +90,16 @@ export default function FaqPage() {
                 className="group [&_summary::-webkit-details-marker]:hidden"
               >
                 <summary className="flex cursor-pointer items-start gap-3">
-                  <span className="inline-flex h-7 w-7 shrink-0 items-center justify-center rounded-full border border-[var(--nexra-border)] bg-[var(--nexra-bg-elevated)] text-[0.65rem] font-semibold tracking-[0.1em] text-[var(--nexra-accent)]">
+                  <span className="inline-flex h-7 w-7 shrink-0 items-center justify-center rounded-full border border-[var(--opencodie-border)] bg-[var(--opencodie-bg-elevated)] text-[0.65rem] font-semibold tracking-[0.1em] text-[var(--opencodie-accent)]">
                     {String(index + 1).padStart(2, "0")}
                   </span>
                   <div className="min-w-0 flex-1 space-y-1">
-                    <p className="text-xs uppercase tracking-[0.14em] text-[var(--nexra-text-muted)]">
+                    <p className="text-xs uppercase tracking-[0.14em] text-[var(--opencodie-text-muted)]">
                       {item.topic}
                     </p>
                     <h2 className="text-lg sm:text-xl">{item.question}</h2>
                   </div>
-                  <span className="mt-1 text-sm font-semibold text-[var(--nexra-accent)] transition-transform duration-[180ms] group-open:rotate-45">
+                  <span className="mt-1 text-sm font-semibold text-[var(--opencodie-accent)] transition-transform duration-[180ms] group-open:rotate-45">
                     +
                   </span>
                 </summary>
@@ -109,8 +109,8 @@ export default function FaqPage() {
           ))}
         </div>
 
-        <p className="mt-8 max-w-4xl text-sm text-[var(--nexra-text-muted)] nexra-reveal">
-          Nexra is a modern development platform designed for building, running,
+        <p className="mt-8 max-w-4xl text-sm text-[var(--opencodie-text-muted)] opencodie-reveal">
+          OpenCodie is a modern development platform designed for building, running,
           and deploying applications in a single environment.
         </p>
       </section>

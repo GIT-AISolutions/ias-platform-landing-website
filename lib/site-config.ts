@@ -18,11 +18,11 @@ function resolvePortalUrl(path: string) {
 }
 
 export const siteConfig = {
-  name: "Nexra",
+  name: "OpenCodie",
   shortDescription:
-    "Nexra is a modern development platform that combines coding, live preview, backend hosting, database integration, and deployment into one system.",
+    "OpenCodie is a modern development platform that combines coding, live preview, backend hosting, database integration, and deployment into one system.",
   seoFooterText:
-    "Build full-stack applications directly from the browser without installing tools or managing infrastructure. From SaaS products to backend systems, Nexra provides a complete environment to develop, test, and deploy quickly.",
+    "Build full-stack applications directly from the browser without installing tools or managing infrastructure. From SaaS products to backend systems, OpenCodie provides a complete environment to develop, test, and deploy quickly.",
   navigation: [
     { label: "Features", href: "/features" },
     { label: "Product", href: "/product" },

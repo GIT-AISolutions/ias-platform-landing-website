@@ -1,28 +1,30 @@
 @import "tailwindcss";
 
 :root {
-  --nexra-bg-base: #060d15;
-  --nexra-bg-panel: #0b1828;
-  --nexra-bg-elevated: #14253a;
-  --nexra-border: #2a4664;
-  --nexra-text: #f2f7ff;
-  --nexra-text-muted: #9bb2cc;
-  --nexra-primary: #ff7a18;
-  --nexra-primary-hover: #ea6300;
-  --nexra-accent: #34d1bf;
-  --nexra-success: #2dd4bf;
-  --nexra-warning: #f59e0b;
-  --nexra-danger: #fb7185;
-  --nexra-shadow: 0 28px 52px rgba(0, 8, 20, 0.45);
-  --nexra-font-sans: var(--font-body), "Avenir Next", "Segoe UI", sans-serif;
-  --nexra-font-display: var(--font-display), "Iowan Old Style", serif;
-  --nexra-font-mono: var(--font-mono), "SFMono-Regular", Menlo, monospace;
+  --opencodie-bg-base: #060d15;
+  --opencodie-bg-panel: #0b1828;
+  --opencodie-bg-elevated: #14253a;
+  --opencodie-border: #2a4664;
+  --opencodie-text: #f2f7ff;
+  --opencodie-text-muted: #9bb2cc;
+  --opencodie-primary: #ff7a18;
+  --opencodie-primary-hover: #ea6300;
+  --opencodie-accent: #34d1bf;
+  --opencodie-success: #2dd4bf;
+  --opencodie-warning: #f59e0b;
+  --opencodie-danger: #fb7185;
+  --opencodie-shadow: 0 28px 52px rgba(0, 8, 20, 0.45);
+  --opencodie-font-sans: var(--font-body), "Avenir Next", "Segoe UI", sans-serif;
+  --opencodie-font-display: var(--font-display), "Iowan Old Style", serif;
+  --opencodie-font-mono: var(--font-mono), "SFMono-Regular", Menlo, monospace;
+  --opencodie-radius-panel: 1.35rem;
+  --opencodie-ease-out: cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 @theme inline {
-  --color-background: var(--nexra-bg-base);
-  --color-foreground: var(--nexra-text);
-  --font-sans: var(--nexra-font-sans);
+  --color-background: var(--opencodie-bg-base);
+  --color-foreground: var(--opencodie-text);
+  --font-sans: var(--opencodie-font-sans);
 }
 
 *,
@@ -40,8 +42,8 @@ body {
 body {
   position: relative;
   min-height: 100vh;
-  color: var(--nexra-text);
-  font-family: var(--nexra-font-sans);
+  color: var(--opencodie-text);
+  font-family: var(--opencodie-font-sans);
   text-rendering: optimizeLegibility;
   letter-spacing: 0.004em;
   background:
@@ -49,6 +51,8 @@ body {
     radial-gradient(circle at 88% 4%, rgba(255, 122, 24, 0.14) 0%, transparent 38%),
     radial-gradient(circle at 52% 115%, rgba(46, 67, 102, 0.34) 0%, transparent 46%),
     linear-gradient(160deg, #040b13 0%, #061123 52%, #091628 100%);
+  background-size: 110% 110%, 112% 112%, 118% 118%, 100% 100%;
+  animation: opencodie-bg-shift 26s var(--opencodie-ease-out) infinite alternate;
 }
 
 body::before {
@@ -65,8 +69,31 @@ body::before {
   z-index: -2;
 }
 
+body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: -1;
+  opacity: 0.12;
+  mix-blend-mode: soft-light;
+  background:
+    radial-gradient(circle at 22% 28%, rgba(52, 209, 191, 0.18), transparent 42%),
+    radial-gradient(circle at 78% 72%, rgba(255, 122, 24, 0.22), transparent 46%);
+  animation: opencodie-noise-drift 18s linear infinite;
+}
+
+a {
+  color: inherit;
+}
+
+::selection {
+  color: #05111b;
+  background: color-mix(in srgb, var(--opencodie-accent) 82%, #fff);
+}
+
 p {
-  color: var(--nexra-text-muted);
+  color: var(--opencodie-text-muted);
 }
 
 h1,
@@ -75,244 +102,448 @@ h3,
 h4,
 h5,
 h6 {
-  font-family: var(--nexra-font-display);
+  font-family: var(--opencodie-font-display);
   font-weight: 620;
   line-height: 1.08;
   letter-spacing: -0.015em;
-  color: var(--nexra-text);
+  color: var(--opencodie-text);
   text-wrap: balance;
+  text-shadow: 0 10px 36px rgba(0, 8, 20, 0.4);
 }
 
 @layer components {
-  .nexra-container {
+  .opencodie-container {
     @apply mx-auto w-full max-w-[1380px] px-4 md:px-6 xl:px-8;
   }
 
-  .nexra-section {
+  .opencodie-section {
     @apply mx-auto w-full max-w-[1380px] px-4 py-16 md:px-6 md:py-24 xl:px-8;
+    position: relative;
+    isolation: isolate;
   }
 
-  .nexra-section-heading {
+  .opencodie-section-heading {
     @apply max-w-3xl space-y-4;
+    position: relative;
   }
 
-  .nexra-page-hero {
+  .opencodie-section-heading::after {
+    content: "";
+    display: block;
+    width: min(8rem, 28vw);
+    height: 1px;
+    margin-top: 0.45rem;
+    background: linear-gradient(
+      90deg,
+      color-mix(in srgb, var(--opencodie-accent) 82%, transparent) 0%,
+      color-mix(in srgb, var(--opencodie-primary) 62%, transparent) 100%
+    );
+    opacity: 0.75;
+  }
+
+  .opencodie-band-dark {
+    background: transparent;
+    border: 0;
+  }
+
+  .opencodie-page-hero {
     @apply mx-auto w-full max-w-[1380px] px-4 pb-10 pt-14 md:px-6 md:pb-12 md:pt-20 xl:px-8;
+    position: relative;
+    isolation: isolate;
   }
 
-  .nexra-page-section {
+  .opencodie-page-hero::before {
+    content: "";
+    position: absolute;
+    inset: 8% -8% auto;
+    height: 44%;
+    z-index: -1;
+    pointer-events: none;
+    filter: blur(58px);
+    opacity: 0.34;
+    background: radial-gradient(
+      circle,
+      color-mix(in srgb, var(--opencodie-accent) 34%, transparent) 0%,
+      color-mix(in srgb, var(--opencodie-primary) 34%, transparent) 52%,
+      transparent 74%
+    );
+  }
+
+  .opencodie-page-section {
     @apply mx-auto w-full max-w-[1380px] px-4 pb-10 pt-0 md:px-6 md:pb-12 xl:px-8;
+    position: relative;
+    isolation: isolate;
   }
 
-  .nexra-page-h1 {
+  .opencodie-page-h1 {
     @apply max-w-3xl text-4xl md:text-6xl;
+    background: linear-gradient(
+      145deg,
+      color-mix(in srgb, var(--opencodie-text) 96%, transparent) 0%,
+      color-mix(in srgb, var(--opencodie-accent) 64%, var(--opencodie-text)) 48%,
+      color-mix(in srgb, var(--opencodie-primary) 60%, var(--opencodie-text)) 100%
+    );
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
   }
 
-  .nexra-page-h2 {
+  .opencodie-page-h2 {
     @apply text-3xl md:text-4xl;
   }
 
-  .nexra-page-intro {
+  .opencodie-page-intro {
     @apply max-w-2xl text-base md:text-lg;
+    color: color-mix(in srgb, var(--opencodie-text-muted) 86%, #fff);
   }
 
-  .nexra-btn {
-    @apply inline-flex items-center justify-center rounded-2xl border px-5 py-3 text-sm font-semibold tracking-tight focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--nexra-bg-base)] disabled:pointer-events-none disabled:opacity-60;
+  .opencodie-heading-accent {
+    background: linear-gradient(
+      146deg,
+      color-mix(in srgb, var(--opencodie-text) 92%, transparent) 0%,
+      color-mix(in srgb, var(--opencodie-accent) 72%, var(--opencodie-text)) 64%,
+      color-mix(in srgb, var(--opencodie-primary) 52%, var(--opencodie-text)) 100%
+    );
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+
+  .opencodie-btn {
+    @apply inline-flex items-center justify-center rounded-2xl border px-5 py-3 text-sm font-semibold tracking-tight focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--opencodie-bg-base)] disabled:pointer-events-none disabled:opacity-60;
+    position: relative;
+    overflow: hidden;
+    isolation: isolate;
     transition:
-      background-color 180ms ease-out,
-      border-color 180ms ease-out,
-      color 180ms ease-out,
-      transform 180ms ease-out,
-      box-shadow 180ms ease-out;
+      background-color 220ms var(--opencodie-ease-out),
+      border-color 220ms var(--opencodie-ease-out),
+      color 220ms var(--opencodie-ease-out),
+      transform 220ms var(--opencodie-ease-out),
+      box-shadow 220ms var(--opencodie-ease-out);
   }
 
-  .nexra-btn-primary {
-    border-color: color-mix(in srgb, var(--nexra-primary) 65%, #fff);
+  .opencodie-btn::after {
+    content: "";
+    position: absolute;
+    inset: -180% auto -180% -62%;
+    width: 40%;
+    pointer-events: none;
+    z-index: -1;
+    opacity: 0;
+    transform: translateX(0) rotate(16deg);
+    background: linear-gradient(
+      90deg,
+      transparent 0%,
+      rgba(255, 255, 255, 0.28) 50%,
+      transparent 100%
+    );
+    transition:
+      transform 420ms var(--opencodie-ease-out),
+      opacity 260ms var(--opencodie-ease-out);
+  }
+
+  .opencodie-btn-primary {
+    border-color: color-mix(in srgb, var(--opencodie-primary) 65%, #fff);
     background:
       linear-gradient(
         136deg,
-        color-mix(in srgb, var(--nexra-primary) 92%, #fff) 0%,
-        color-mix(in srgb, var(--nexra-accent) 38%, var(--nexra-primary)) 100%
+        color-mix(in srgb, var(--opencodie-primary) 92%, #fff) 0%,
+        color-mix(in srgb, var(--opencodie-accent) 38%, var(--opencodie-primary)) 100%
       );
     color: #07131f;
-    box-shadow: 0 16px 28px rgba(255, 122, 24, 0.25);
+    box-shadow:
+      0 16px 28px rgba(255, 122, 24, 0.25),
+      inset 0 1px 0 rgba(255, 255, 255, 0.26);
   }
 
-  .nexra-btn-primary:hover {
+  .opencodie-btn-primary:hover {
     background:
       linear-gradient(
         136deg,
-        color-mix(in srgb, var(--nexra-primary-hover) 95%, #fff) 0%,
-        color-mix(in srgb, var(--nexra-accent) 48%, var(--nexra-primary-hover)) 100%
+        color-mix(in srgb, var(--opencodie-primary-hover) 95%, #fff) 0%,
+        color-mix(in srgb, var(--opencodie-accent) 48%, var(--opencodie-primary-hover)) 100%
       );
   }
 
-  .nexra-btn-secondary {
-    border-color: color-mix(in srgb, var(--nexra-border) 70%, var(--nexra-accent));
-    background: color-mix(in srgb, var(--nexra-bg-elevated) 68%, transparent);
-    color: var(--nexra-text);
+  .opencodie-btn-secondary {
+    border-color: color-mix(in srgb, var(--opencodie-border) 70%, var(--opencodie-accent));
+    background: color-mix(in srgb, var(--opencodie-bg-elevated) 68%, transparent);
+    color: var(--opencodie-text);
+    box-shadow: inset 0 1px 0 rgba(240, 247, 255, 0.06);
   }
 
-  .nexra-btn-secondary:hover {
-    background: color-mix(in srgb, var(--nexra-bg-elevated) 85%, transparent);
-    border-color: color-mix(in srgb, var(--nexra-accent) 45%, var(--nexra-border));
+  .opencodie-btn-secondary:hover {
+    background: color-mix(in srgb, var(--opencodie-bg-elevated) 85%, transparent);
+    border-color: color-mix(in srgb, var(--opencodie-accent) 45%, var(--opencodie-border));
   }
 
-  .nexra-panel {
-    @apply relative rounded-[1.35rem] border p-6 md:p-8;
-    border-color: color-mix(in srgb, var(--nexra-border) 82%, var(--nexra-accent));
+  .opencodie-panel {
+    @apply relative border p-6 md:p-8;
+    border-radius: var(--opencodie-radius-panel);
+    border-color: color-mix(in srgb, var(--opencodie-border) 82%, var(--opencodie-accent));
     background:
       linear-gradient(
         165deg,
-        color-mix(in srgb, var(--nexra-bg-panel) 88%, #081120) 0%,
-        color-mix(in srgb, var(--nexra-bg-panel) 74%, #132740) 100%
+        color-mix(in srgb, var(--opencodie-bg-panel) 88%, #081120) 0%,
+        color-mix(in srgb, var(--opencodie-bg-panel) 74%, #132740) 100%
       );
-    box-shadow: var(--nexra-shadow);
+    box-shadow:
+      var(--opencodie-shadow),
+      inset 0 1px 0 rgba(233, 243, 255, 0.04);
+    backdrop-filter: blur(6px);
   }
 
-  .nexra-panel::before {
+  .opencodie-panel::before {
     content: "";
     position: absolute;
     inset: 1px;
     border-radius: inherit;
     pointer-events: none;
-    border: 1px solid color-mix(in srgb, var(--nexra-accent) 14%, transparent);
+    border: 1px solid color-mix(in srgb, var(--opencodie-accent) 14%, transparent);
     opacity: 0.5;
   }
 
-  .nexra-interactive-card {
+  .opencodie-panel::after {
+    content: "";
+    position: absolute;
+    inset: 1px 1px auto;
+    height: 36%;
+    border-radius: inherit;
+    pointer-events: none;
+    background: linear-gradient(
+      180deg,
+      rgba(241, 248, 255, 0.1) 0%,
+      rgba(241, 248, 255, 0) 100%
+    );
+    opacity: 0.35;
+  }
+
+  .opencodie-interactive-card {
     transition:
-      transform 180ms ease-out,
-      border-color 180ms ease-out,
-      box-shadow 180ms ease-out,
-      background-color 180ms ease-out;
+      transform 260ms var(--opencodie-ease-out),
+      border-color 220ms var(--opencodie-ease-out),
+      box-shadow 260ms var(--opencodie-ease-out),
+      background-color 220ms var(--opencodie-ease-out);
+    will-change: transform;
   }
 
-  .nexra-reveal {
+  .opencodie-reveal {
     opacity: 1;
     transform: translateY(0);
   }
 
-  .nexra-inview {
+  .opencodie-inview {
     opacity: 1;
     transform: translateY(0);
   }
 
-  .nexra-badge {
+  .opencodie-badge {
     @apply inline-flex items-center rounded-full border px-3 py-1 text-xs font-semibold uppercase tracking-[0.12em];
-    border-color: color-mix(in srgb, var(--nexra-border) 76%, var(--nexra-accent));
-    color: var(--nexra-text-muted);
-    background-color: color-mix(in srgb, var(--nexra-bg-elevated) 78%, transparent);
+    border-color: color-mix(in srgb, var(--opencodie-border) 76%, var(--opencodie-accent));
+    color: var(--opencodie-text-muted);
+    background-color: color-mix(in srgb, var(--opencodie-bg-elevated) 78%, transparent);
+    box-shadow: inset 0 1px 0 rgba(240, 247, 255, 0.1);
   }
 
-  .nexra-badge-info {
-    color: var(--nexra-accent);
-    border-color: color-mix(in srgb, var(--nexra-accent) 50%, var(--nexra-border));
+  .opencodie-badge-info {
+    color: var(--opencodie-accent);
+    border-color: color-mix(in srgb, var(--opencodie-accent) 50%, var(--opencodie-border));
   }
 
-  .nexra-badge-success {
-    color: var(--nexra-success);
-    border-color: color-mix(in srgb, var(--nexra-success) 50%, var(--nexra-border));
+  .opencodie-badge-success {
+    color: var(--opencodie-success);
+    border-color: color-mix(in srgb, var(--opencodie-success) 50%, var(--opencodie-border));
   }
 
-  .nexra-badge-warning {
-    color: var(--nexra-warning);
-    border-color: color-mix(in srgb, var(--nexra-warning) 50%, var(--nexra-border));
+  .opencodie-badge-warning {
+    color: var(--opencodie-warning);
+    border-color: color-mix(in srgb, var(--opencodie-warning) 50%, var(--opencodie-border));
   }
 
-  .nexra-badge-danger {
-    color: var(--nexra-danger);
-    border-color: color-mix(in srgb, var(--nexra-danger) 50%, var(--nexra-border));
+  .opencodie-badge-danger {
+    color: var(--opencodie-danger);
+    border-color: color-mix(in srgb, var(--opencodie-danger) 50%, var(--opencodie-border));
   }
 
-  .nexra-heading-display {
-    font-family: var(--nexra-font-display);
+  .opencodie-heading-display {
+    font-family: var(--opencodie-font-display);
     font-variation-settings: "opsz" 64;
     line-height: 0.97;
     letter-spacing: -0.03em;
+    background: linear-gradient(
+      145deg,
+      color-mix(in srgb, var(--opencodie-text) 98%, transparent) 0%,
+      color-mix(in srgb, var(--opencodie-accent) 64%, var(--opencodie-text)) 54%,
+      color-mix(in srgb, var(--opencodie-primary) 58%, var(--opencodie-text)) 100%
+    );
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
   }
 
-  .nexra-metric-card {
+  .opencodie-metric-card {
     @apply rounded-2xl border px-3 py-2.5;
-    border-color: color-mix(in srgb, var(--nexra-border) 70%, var(--nexra-accent));
-    background: color-mix(in srgb, var(--nexra-bg-panel) 86%, transparent);
+    border-color: color-mix(in srgb, var(--opencodie-border) 70%, var(--opencodie-accent));
+    background: color-mix(in srgb, var(--opencodie-bg-panel) 86%, transparent);
+    box-shadow: inset 0 1px 0 rgba(240, 247, 255, 0.05);
+  }
+
+  .opencodie-nav-shell {
+    border: 1px solid color-mix(in srgb, var(--opencodie-border) 78%, var(--opencodie-accent));
+    background: color-mix(in srgb, var(--opencodie-bg-panel) 72%, transparent);
+    box-shadow:
+      0 20px 42px rgba(0, 8, 20, 0.4),
+      inset 0 1px 0 rgba(240, 247, 255, 0.09);
+    backdrop-filter: blur(18px);
+  }
+
+  .opencodie-nav-link {
+    position: relative;
+    color: var(--opencodie-text-muted);
+    transition: color 190ms var(--opencodie-ease-out);
+  }
+
+  .opencodie-nav-link::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: -0.3rem;
+    width: 100%;
+    height: 1px;
+    transform: scaleX(0);
+    transform-origin: left center;
+    background: linear-gradient(
+      90deg,
+      color-mix(in srgb, var(--opencodie-accent) 84%, #fff) 0%,
+      color-mix(in srgb, var(--opencodie-primary) 58%, #fff) 100%
+    );
+    transition: transform 220ms var(--opencodie-ease-out);
+  }
+
+  .opencodie-nav-link-active {
+    color: var(--opencodie-text);
+  }
+
+  .opencodie-nav-link-active::after {
+    transform: scaleX(1);
+  }
+
+  .opencodie-brand-mark {
+    box-shadow:
+      inset 0 1px 0 rgba(242, 250, 255, 0.3),
+      0 12px 24px rgba(9, 20, 35, 0.35);
+  }
+
+  .opencodie-floating-node {
+    animation: opencodie-floating-node 6.8s var(--opencodie-ease-out) infinite;
+  }
+
+  .opencodie-floating-node-delay-1 {
+    animation-delay: 0.8s;
+  }
+
+  .opencodie-floating-node-delay-2 {
+    animation-delay: 1.6s;
+  }
+
+  .opencodie-mesh-float {
+    animation: opencodie-mesh-float 13s ease-in-out infinite alternate;
   }
 }
 
 @media (hover: hover) {
-  .nexra-btn:hover {
-    transform: translateY(-1px);
-    box-shadow: 0 16px 30px rgba(0, 8, 20, 0.42);
+  .opencodie-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 18px 34px rgba(0, 8, 20, 0.5);
   }
 
-  .nexra-interactive-card:hover {
-    transform: translateY(-4px);
-    border-color: color-mix(in srgb, var(--nexra-accent) 34%, var(--nexra-border));
-    box-shadow: 0 20px 34px rgba(0, 8, 20, 0.46);
+  .opencodie-btn:hover::after {
+    opacity: 1;
+    transform: translateX(370%) rotate(16deg);
+  }
+
+  .opencodie-nav-link:hover {
+    color: var(--opencodie-text);
+  }
+
+  .opencodie-nav-link:hover::after {
+    transform: scaleX(1);
+  }
+
+  .opencodie-interactive-card:hover {
+    transform: translateY(-6px);
+    border-color: color-mix(in srgb, var(--opencodie-accent) 34%, var(--opencodie-border));
+    box-shadow:
+      0 22px 38px rgba(0, 8, 20, 0.48),
+      inset 0 1px 0 rgba(240, 247, 255, 0.06);
   }
 }
 
 @media (prefers-reduced-motion: no-preference) {
-  .nexra-motion-ready .nexra-reveal {
+  .opencodie-motion-ready .opencodie-reveal {
     opacity: 0;
-    transform: translateY(22px) scale(0.985);
+    transform: translateY(24px) scale(0.985);
     filter: blur(2px);
     transition:
-      opacity 200ms ease-out,
-      transform 200ms ease-out,
-      filter 200ms ease-out;
+      opacity 320ms var(--opencodie-ease-out),
+      transform 320ms var(--opencodie-ease-out),
+      filter 320ms var(--opencodie-ease-out);
     will-change: opacity, transform, filter;
   }
 
-  .nexra-motion-ready .nexra-reveal.nexra-inview {
+  .opencodie-motion-ready .opencodie-reveal.opencodie-inview {
     opacity: 1;
     transform: translateY(0) scale(1);
     filter: blur(0);
   }
 
-  .nexra-reveal-delay-1 {
-    transition-delay: 45ms;
+  .opencodie-reveal-delay-1 {
+    transition-delay: 80ms;
   }
 
-  .nexra-reveal-delay-2 {
-    transition-delay: 90ms;
+  .opencodie-reveal-delay-2 {
+    transition-delay: 140ms;
   }
 
-  .nexra-reveal-delay-3 {
-    transition-delay: 135ms;
+  .opencodie-reveal-delay-3 {
+    transition-delay: 220ms;
   }
 
-  .nexra-ambient-drift {
-    animation: nexra-ambient-drift 10s ease-in-out infinite alternate;
+  .opencodie-ambient-drift {
+    animation: opencodie-ambient-drift 10s ease-in-out infinite alternate;
   }
 
-  .nexra-ambient-drift-delay {
+  .opencodie-ambient-drift-delay {
     animation-delay: 1.2s;
   }
 
-  .nexra-grid-drift {
-    animation: nexra-grid-drift 20s linear infinite;
+  .opencodie-grid-drift {
+    animation: opencodie-grid-drift 20s linear infinite;
   }
 
-  .nexra-glow-pulse {
-    animation: nexra-glow-pulse 2.9s ease-in-out infinite;
+  .opencodie-glow-pulse {
+    animation: opencodie-glow-pulse 2.9s ease-in-out infinite;
   }
 
-  .nexra-glow-pulse-delay {
+  .opencodie-glow-pulse-delay {
     animation-delay: 0.9s;
   }
 
-  .nexra-status-pulse {
-    animation: nexra-status-pulse 2.2s ease-in-out infinite;
+  .opencodie-status-pulse {
+    animation: opencodie-status-pulse 2.2s ease-in-out infinite;
   }
 
-  .nexra-bar-active {
+  .opencodie-brand-mark {
+    animation: opencodie-brand-pulse 4.8s ease-in-out infinite;
+  }
+
+  .opencodie-bar-active {
     position: relative;
     overflow: hidden;
     contain: paint;
   }
 
-  .nexra-bar-active::after {
+  .opencodie-bar-active::after {
     content: "";
     position: absolute;
     top: 0;
@@ -326,16 +557,16 @@ h6 {
       transparent 80%
     );
     transform: translateX(0);
-    animation: nexra-bar-scan 2.6s ease-in-out infinite;
+    animation: opencodie-bar-scan 2.6s ease-in-out infinite;
     pointer-events: none;
   }
 
-  .nexra-light-sweep {
+  .opencodie-light-sweep {
     position: relative;
     overflow: hidden;
   }
 
-  .nexra-light-sweep::after {
+  .opencodie-light-sweep::after {
     content: "";
     position: absolute;
     inset: -20%;
@@ -346,34 +577,65 @@ h6 {
       transparent 64%
     );
     transform: translateX(-120%);
-    animation: nexra-light-sweep 7.1s ease-in-out infinite;
+    animation: opencodie-light-sweep 7.1s ease-in-out infinite;
     pointer-events: none;
   }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .nexra-btn,
-  .nexra-interactive-card,
-  .nexra-reveal,
-  .nexra-inview,
-  .nexra-ambient-drift,
-  .nexra-grid-drift,
-  .nexra-glow-pulse,
-  .nexra-status-pulse,
-  .nexra-bar-active::after,
-  .nexra-light-sweep::after {
+  body {
+    animation: none;
+  }
+
+  body::after {
+    animation: none;
+  }
+
+  .opencodie-btn,
+  .opencodie-interactive-card,
+  .opencodie-reveal,
+  .opencodie-inview,
+  .opencodie-ambient-drift,
+  .opencodie-grid-drift,
+  .opencodie-glow-pulse,
+  .opencodie-status-pulse,
+  .opencodie-brand-mark,
+  .opencodie-floating-node,
+  .opencodie-mesh-float,
+  .opencodie-bar-active::after,
+  .opencodie-light-sweep::after {
     transition: none;
     animation: none;
   }
 
-  .nexra-reveal,
-  .nexra-inview {
+  .opencodie-reveal,
+  .opencodie-inview {
     opacity: 1;
     transform: none;
   }
 }
 
-@keyframes nexra-ambient-drift {
+@keyframes opencodie-bg-shift {
+  0% {
+    background-position: 0% 0%, 100% 0%, 50% 100%, 0% 0%;
+  }
+
+  100% {
+    background-position: 10% 8%, 88% 7%, 46% 94%, 0% 0%;
+  }
+}
+
+@keyframes opencodie-noise-drift {
+  0% {
+    transform: translate3d(0, 0, 0);
+  }
+
+  100% {
+    transform: translate3d(0, 0.5%, 0);
+  }
+}
+
+@keyframes opencodie-ambient-drift {
   from {
     transform: translate3d(-1%, -1.1%, 0) scale(1);
     opacity: 0.72;
@@ -385,7 +647,7 @@ h6 {
   }
 }
 
-@keyframes nexra-grid-drift {
+@keyframes opencodie-grid-drift {
   from {
     background-position: 0 0, 0 0;
   }
@@ -395,7 +657,7 @@ h6 {
   }
 }
 
-@keyframes nexra-glow-pulse {
+@keyframes opencodie-glow-pulse {
   0%,
   100% {
     opacity: 0.84;
@@ -408,7 +670,7 @@ h6 {
   }
 }
 
-@keyframes nexra-light-sweep {
+@keyframes opencodie-light-sweep {
   0%,
   70%,
   100% {
@@ -422,7 +684,7 @@ h6 {
   }
 }
 
-@keyframes nexra-status-pulse {
+@keyframes opencodie-status-pulse {
   0%,
   100% {
     opacity: 0.76;
@@ -433,7 +695,39 @@ h6 {
   }
 }
 
-@keyframes nexra-bar-scan {
+@keyframes opencodie-brand-pulse {
+  0%,
+  100% {
+    filter: brightness(1);
+  }
+
+  50% {
+    filter: brightness(1.18);
+  }
+}
+
+@keyframes opencodie-floating-node {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0);
+  }
+
+  50% {
+    transform: translate3d(0, -6px, 0);
+  }
+}
+
+@keyframes opencodie-mesh-float {
+  0% {
+    transform: scale(1) translate3d(0, 0, 0);
+  }
+
+  100% {
+    transform: scale(1.04) translate3d(0.5%, -0.6%, 0);
+  }
+}
+
+@keyframes opencodie-bar-scan {
   0% {
     transform: translateX(0%);
     opacity: 0.2;

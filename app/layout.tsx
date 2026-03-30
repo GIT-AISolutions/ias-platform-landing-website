@@ -22,7 +22,7 @@ const monoFont = JetBrains_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Nexra",
+  title: "OpenCodie",
   description: "Foundational landing page design system",
 };
 

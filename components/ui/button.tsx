@@ -8,8 +8,8 @@ type ButtonProps = ButtonHTMLAttributes<HTMLButtonElement> & {
 };
 
 const buttonVariants: Record<ButtonVariant, string> = {
-  primary: "nexra-btn nexra-btn-primary",
-  secondary: "nexra-btn nexra-btn-secondary",
+  primary: "opencodie-btn opencodie-btn-primary",
+  secondary: "opencodie-btn opencodie-btn-secondary",
 };
 
 export function buttonClasses(variant: ButtonVariant, className?: string) {

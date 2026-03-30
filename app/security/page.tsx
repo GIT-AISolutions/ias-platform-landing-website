@@ -23,16 +23,16 @@ const controls = [
 export default function SecurityPage() {
   return (
     <>
-      <section className="nexra-page-hero">
-        <div className="nexra-section-heading nexra-reveal">
-          <p className="text-sm uppercase tracking-[0.16em] text-[var(--nexra-accent)]">
+      <section className="opencodie-page-hero">
+        <div className="opencodie-section-heading opencodie-reveal">
+          <p className="text-sm uppercase tracking-[0.16em] text-[var(--opencodie-accent)]">
             Security
           </p>
-          <h1 className="nexra-page-h1">
+          <h1 className="opencodie-page-h1">
             Platform controls for serious production workloads
           </h1>
-          <p className="nexra-page-intro">
-            Security and governance placeholders showing how Nexra can present
+          <p className="opencodie-page-intro">
+            Security and governance placeholders showing how OpenCodie can present
             trust-critical details outside the homepage.
           </p>
         </div>
@@ -41,7 +41,7 @@ export default function SecurityPage() {
           {controls.map((item, index) => (
             <Panel
               key={item.title}
-              className={`nexra-interactive-card nexra-reveal space-y-3 p-5 ${index % 2 === 1 ? "nexra-reveal-delay-1" : ""}`}
+              className={`opencodie-interactive-card opencodie-reveal space-y-3 p-5 ${index % 2 === 1 ? "opencodie-reveal-delay-1" : ""}`}
             >
               <h2 className="text-2xl">{item.title}</h2>
               <p className="text-sm">{item.description}</p>

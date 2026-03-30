@@ -10,7 +10,7 @@ type SectionHeadingProps = HTMLAttributes<HTMLDivElement> & {
 };
 
 export function Section({ className, ...props }: SectionProps) {
-  return <section className={cn("nexra-section", className)} {...props} />;
+  return <section className={cn("opencodie-section", className)} {...props} />;
 }
 
 export function SectionHeading({
@@ -21,9 +21,9 @@ export function SectionHeading({
   ...props
 }: SectionHeadingProps) {
   return (
-    <div className={cn("nexra-section-heading", className)} {...props}>
+    <div className={cn("opencodie-section-heading", className)} {...props}>
       {eyebrow ? (
-        <p className="text-sm font-medium uppercase tracking-[0.16em] text-[var(--nexra-accent)]">
+        <p className="text-sm font-medium uppercase tracking-[0.16em] text-[var(--opencodie-accent)]">
           {eyebrow}
         </p>
       ) : null}

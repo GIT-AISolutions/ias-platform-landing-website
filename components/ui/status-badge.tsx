@@ -8,10 +8,10 @@ type StatusBadgeProps = HTMLAttributes<HTMLSpanElement> & {
 };
 
 const statusClasses: Record<Status, string> = {
-  info: "nexra-badge-info",
-  success: "nexra-badge-success",
-  warning: "nexra-badge-warning",
-  danger: "nexra-badge-danger",
+  info: "opencodie-badge-info",
+  success: "opencodie-badge-success",
+  warning: "opencodie-badge-warning",
+  danger: "opencodie-badge-danger",
 };
 
 export function StatusBadge({
@@ -21,7 +21,7 @@ export function StatusBadge({
 }: StatusBadgeProps) {
   return (
     <span
-      className={cn("nexra-badge", statusClasses[status], className)}
+      className={cn("opencodie-badge", statusClasses[status], className)}
       {...props}
     />
   );

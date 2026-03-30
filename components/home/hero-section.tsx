@@ -18,21 +18,19 @@ const heroSignals = [
 
 export function HeroSection() {
   return (
-    <section className="nexra-section relative isolate overflow-hidden pt-14 md:pt-24">
-      <div className="absolute inset-0 -z-10 bg-[linear-gradient(to_bottom,rgba(8,16,30,0.18),transparent_52%,rgba(3,8,16,0.62))]" />
-      <div className="nexra-ambient-drift absolute inset-0 -z-10 bg-[radial-gradient(circle_at_12%_18%,rgba(52,209,191,0.18)_0%,transparent_42%),radial-gradient(circle_at_84%_8%,rgba(255,122,24,0.16)_0%,transparent_44%)]" />
-      <div className="pointer-events-none absolute -right-20 top-8 -z-10 h-56 w-56 rounded-full border border-[color-mix(in_srgb,var(--nexra-accent)_40%,var(--nexra-border))] bg-[radial-gradient(circle,rgba(52,209,191,0.18)_0%,rgba(52,209,191,0)_72%)] blur-2xl" />
-
+    <section className="opencodie-page-hero">
       <div className="grid items-center gap-8 lg:grid-cols-[1.02fr_0.98fr] lg:gap-10">
-        <div className="space-y-8 nexra-reveal">
-          <StatusBadge status="info">Nexra Development Platform</StatusBadge>
+        <div className="space-y-8 opencodie-reveal">
+          <StatusBadge status="info" className="shadow-[0_10px_22px_rgba(0,8,20,0.28)]">
+            OpenCodie Development Platform
+          </StatusBadge>
 
           <div className="space-y-6">
-            <h1 className="nexra-heading-display max-w-3xl text-4xl sm:text-5xl md:text-7xl">
+            <h1 className="opencodie-heading-display opencodie-heading-accent max-w-3xl text-4xl sm:text-5xl md:text-7xl">
               Build, run, and deploy software from one unified control layer
             </h1>
             <p className="max-w-xl text-base md:text-lg">
-              Nexra is a complete development environment where you can write
+              OpenCodie is a complete development environment where you can write
               code, run applications, connect databases, and deploy instantly -
               all from your browser, without setup or complex infrastructure.
             </p>
@@ -42,12 +40,12 @@ export function HeroSection() {
             {heroSignals.map((item, index) => (
               <div
                 key={item.label}
-                className={`nexra-metric-card nexra-reveal ${index === 1 ? "nexra-reveal-delay-1" : ""} ${index === 2 ? "nexra-reveal-delay-2" : ""}`}
+                className={`opencodie-metric-card opencodie-interactive-card opencodie-reveal ${index === 1 ? "opencodie-reveal-delay-1" : ""} ${index === 2 ? "opencodie-reveal-delay-2" : ""}`}
               >
-                <p className="text-[0.62rem] uppercase tracking-[0.16em] text-[var(--nexra-text-muted)]">
+                <p className="text-[0.62rem] uppercase tracking-[0.16em] text-[var(--opencodie-text-muted)]">
                   {item.label}
                 </p>
-                <p className="mt-1 text-xl font-semibold tracking-tight text-[var(--nexra-text)]">
+                <p className="mt-1 text-xl font-semibold tracking-tight text-[var(--opencodie-text)]">
                   {item.value}
                 </p>
               </div>
@@ -69,14 +67,14 @@ export function HeroSection() {
             </Link>
           </div>
 
-          <div className="rounded-2xl border border-[var(--nexra-border)] bg-[color-mix(in_srgb,var(--nexra-bg-elevated)_74%,transparent)] p-4">
-            <p className="text-sm font-medium text-[var(--nexra-text)]">
+          <div className="opencodie-interactive-card rounded-2xl border border-[var(--opencodie-border)] bg-[color-mix(in_srgb,var(--opencodie-bg-elevated)_74%,transparent)] p-4 shadow-[inset_0_1px_0_rgba(241,248,255,0.08)]">
+            <p className="text-sm font-medium text-[var(--opencodie-text)]">
               No setup. No switching tools. No unnecessary complexity.
             </p>
-            <ul className="mt-3 grid gap-2 text-sm text-[var(--nexra-text-muted)] sm:grid-cols-3">
+            <ul className="mt-3 grid gap-2 text-sm text-[var(--opencodie-text-muted)] sm:grid-cols-3">
               {heroPillars.map((item) => (
                 <li key={item} className="flex items-center gap-2">
-                  <span className="h-1.5 w-1.5 rounded-full bg-[var(--nexra-accent)]" />
+                  <span className="h-1.5 w-1.5 rounded-full bg-[var(--opencodie-accent)]" />
                   {item}
                 </li>
               ))}
@@ -84,7 +82,7 @@ export function HeroSection() {
           </div>
         </div>
 
-        <div className="nexra-reveal nexra-reveal-delay-2">
+        <div className="opencodie-reveal opencodie-reveal-delay-2">
           <HeroControlCenter />
         </div>
       </div>

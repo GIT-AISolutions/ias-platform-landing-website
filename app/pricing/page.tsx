@@ -44,13 +44,13 @@ const plans = [
 export default function PricingPage() {
   return (
     <>
-      <section className="nexra-page-hero">
-        <div className="nexra-section-heading nexra-reveal">
-          <p className="text-sm uppercase tracking-[0.16em] text-[var(--nexra-accent)]">
+      <section className="opencodie-page-hero">
+        <div className="opencodie-section-heading opencodie-reveal">
+          <p className="text-sm uppercase tracking-[0.16em] text-[var(--opencodie-accent)]">
             Pricing
           </p>
-          <h1 className="nexra-page-h1">Simple, transparent pricing</h1>
-          <p className="nexra-page-intro">
+          <h1 className="opencodie-page-h1">Simple, transparent pricing</h1>
+          <p className="opencodie-page-intro">
             Start building for free. Upgrade when you need more power.
           </p>
         </div>
@@ -60,30 +60,30 @@ export default function PricingPage() {
             <Panel
               key={plan.name}
               className={cn(
-                "nexra-interactive-card nexra-reveal flex h-full flex-col gap-4 p-5",
-                index === 1 ? "nexra-reveal-delay-1" : "",
-                index === 2 ? "nexra-reveal-delay-2" : "",
+                "opencodie-interactive-card opencodie-reveal flex h-full flex-col gap-4 p-5",
+                index === 1 ? "opencodie-reveal-delay-1" : "",
+                index === 2 ? "opencodie-reveal-delay-2" : "",
                 plan.highlight
-                  ? "border-[color-mix(in_srgb,var(--nexra-primary)_52%,var(--nexra-border))] bg-[color-mix(in_srgb,var(--nexra-primary)_10%,var(--nexra-bg-panel))] shadow-[0_20px_34px_rgba(15,23,42,0.5)]"
+                  ? "border-[color-mix(in_srgb,var(--opencodie-primary)_52%,var(--opencodie-border))] bg-[color-mix(in_srgb,var(--opencodie-primary)_10%,var(--opencodie-bg-panel))] shadow-[0_20px_34px_rgba(15,23,42,0.5)]"
                   : "",
               )}
             >
               <div className="flex items-center justify-between gap-3">
-                <p className="text-sm uppercase tracking-[0.14em] text-[var(--nexra-accent)]">
+                <p className="text-sm uppercase tracking-[0.14em] text-[var(--opencodie-accent)]">
                   {plan.name}
                 </p>
                 {plan.highlight ? (
-                  <span className="rounded-full border border-[color-mix(in_srgb,var(--nexra-primary)_55%,var(--nexra-border))] bg-[color-mix(in_srgb,var(--nexra-primary)_22%,var(--nexra-bg-elevated))] px-2.5 py-1 text-[0.65rem] font-semibold uppercase tracking-[0.12em] text-[var(--nexra-text)]">
+                  <span className="rounded-full border border-[color-mix(in_srgb,var(--opencodie-primary)_55%,var(--opencodie-border))] bg-[color-mix(in_srgb,var(--opencodie-primary)_22%,var(--opencodie-bg-elevated))] px-2.5 py-1 text-[0.65rem] font-semibold uppercase tracking-[0.12em] text-[var(--opencodie-text)]">
                     Popular
                   </span>
                 ) : null}
               </div>
               <h2 className="text-3xl">{plan.price}</h2>
               <p className="text-sm">{plan.detail}</p>
-              <ul className="mt-1 space-y-2 text-sm text-[var(--nexra-text-muted)]">
+              <ul className="mt-1 space-y-2 text-sm text-[var(--opencodie-text-muted)]">
                 {plan.points.map((point) => (
                   <li key={point} className="flex items-start gap-2">
-                    <span className="mt-1 h-1.5 w-1.5 rounded-full bg-[var(--nexra-accent)]" />
+                    <span className="mt-1 h-1.5 w-1.5 rounded-full bg-[var(--opencodie-accent)]" />
                     {point}
                   </li>
                 ))}
@@ -103,62 +103,62 @@ export default function PricingPage() {
         </div>
       </section>
 
-      <section className="nexra-page-section">
+      <section className="opencodie-page-section">
         <div className="grid gap-4 lg:grid-cols-[1.2fr_0.8fr]">
-          <Panel className="nexra-reveal space-y-4 p-5 md:p-6">
-            <p className="text-sm uppercase tracking-[0.16em] text-[var(--nexra-accent)]">
+          <Panel className="opencodie-reveal space-y-4 p-5 md:p-6">
+            <p className="text-sm uppercase tracking-[0.16em] text-[var(--opencodie-accent)]">
               Why Pricing Is Simple
             </p>
-            <h2 className="nexra-page-h2">No hidden complexity</h2>
+            <h2 className="opencodie-page-h2">No hidden complexity</h2>
             <p className="text-sm md:text-base">
-              With Nexra, you do not pay for separate hosting, multiple services,
+              With OpenCodie, you do not pay for separate hosting, multiple services,
               or complex infrastructure management.
             </p>
-            <p className="text-sm font-medium text-[var(--nexra-text)]">Everything is included.</p>
+            <p className="text-sm font-medium text-[var(--opencodie-text)]">Everything is included.</p>
           </Panel>
 
-          <Panel className="nexra-reveal nexra-reveal-delay-1 flex h-full flex-col gap-4 p-5 md:p-6">
-            <p className="text-sm uppercase tracking-[0.16em] text-[var(--nexra-accent)]">
+          <Panel className="opencodie-reveal opencodie-reveal-delay-1 flex h-full flex-col gap-4 p-5 md:p-6">
+            <p className="text-sm uppercase tracking-[0.16em] text-[var(--opencodie-accent)]">
               Cost Comparison
             </p>
-            <h3 className="nexra-page-h2">Build more for less</h3>
-            <ul className="space-y-2 text-sm text-[var(--nexra-text-muted)]">
+            <h3 className="opencodie-page-h2">Build more for less</h3>
+            <ul className="space-y-2 text-sm text-[var(--opencodie-text-muted)]">
               {[
                 "cheaper than combining multiple tools",
                 "no DevOps overhead",
                 "no setup costs",
               ].map((point) => (
                 <li key={point} className="flex items-start gap-2">
-                  <span className="mt-1 h-1.5 w-1.5 rounded-full bg-[var(--nexra-accent)]" />
+                  <span className="mt-1 h-1.5 w-1.5 rounded-full bg-[var(--opencodie-accent)]" />
                   {point}
                 </li>
               ))}
             </ul>
-            <p className="text-sm font-medium text-[var(--nexra-text)]">
-              Compared to traditional stacks, Nexra keeps total cost and complexity lower.
+            <p className="text-sm font-medium text-[var(--opencodie-text)]">
+              Compared to traditional stacks, OpenCodie keeps total cost and complexity lower.
             </p>
           </Panel>
         </div>
       </section>
 
-      <section className="nexra-page-section">
-        <Panel className="nexra-reveal space-y-4 p-5 md:p-6">
-          <p className="text-sm uppercase tracking-[0.16em] text-[var(--nexra-accent)]">
+      <section className="opencodie-page-section">
+        <Panel className="opencodie-reveal space-y-4 p-5 md:p-6">
+          <p className="text-sm uppercase tracking-[0.16em] text-[var(--opencodie-accent)]">
             Billing
           </p>
-          <h2 className="nexra-page-h2">Flexible billing</h2>
-          <ul className="space-y-2 text-sm text-[var(--nexra-text-muted)]">
+          <h2 className="opencodie-page-h2">Flexible billing</h2>
+          <ul className="space-y-2 text-sm text-[var(--opencodie-text-muted)]">
             {["Upgrade anytime", "Cancel anytime", "Transparent usage"].map((point) => (
               <li key={point} className="flex items-start gap-2">
-                <span className="mt-1 h-1.5 w-1.5 rounded-full bg-[var(--nexra-accent)]" />
+                <span className="mt-1 h-1.5 w-1.5 rounded-full bg-[var(--opencodie-accent)]" />
                 {point}
               </li>
             ))}
           </ul>
         </Panel>
 
-        <p className="mt-8 max-w-4xl text-sm text-[var(--nexra-text-muted)] nexra-reveal">
-          Nexra is a modern development platform designed for building, running,
+        <p className="mt-8 max-w-4xl text-sm text-[var(--opencodie-text-muted)] opencodie-reveal">
+          OpenCodie is a modern development platform designed for building, running,
           and deploying applications in a single environment.
         </p>
       </section>

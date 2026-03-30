@@ -56,16 +56,16 @@ const capabilities = [
 
 export function CoreCapabilitiesSection() {
   return (
-    <section id="features" className="nexra-section">
-      <div className="nexra-section-heading nexra-reveal">
-        <p className="text-sm uppercase tracking-[0.16em] text-[var(--nexra-accent)]">
+    <section id="features" className="opencodie-section">
+      <div className="opencodie-section-heading opencodie-reveal">
+        <p className="text-sm uppercase tracking-[0.16em] text-[var(--opencodie-accent)]">
           Core Capabilities
         </p>
-        <h2 className="text-3xl md:text-5xl">
+        <h2 className="opencodie-heading-accent text-3xl md:text-5xl">
           Everything you need to build modern applications
         </h2>
         <p className="max-w-2xl text-base md:text-lg">
-          Nexra combines browser-based development, AI tooling, backend services,
+          OpenCodie combines browser-based development, AI tooling, backend services,
           database integration, and deployment into one connected workflow.
         </p>
       </div>
@@ -75,20 +75,20 @@ export function CoreCapabilitiesSection() {
           <Panel
             key={item.title}
             className={cn(
-              "nexra-interactive-card nexra-reveal flex h-full flex-col gap-4",
-              index % 3 === 1 ? "nexra-reveal-delay-1" : "",
-              index % 3 === 2 ? "nexra-reveal-delay-2" : "",
+              "opencodie-interactive-card opencodie-reveal flex h-full flex-col gap-4",
+              index % 3 === 1 ? "opencodie-reveal-delay-1" : "",
+              index % 3 === 2 ? "opencodie-reveal-delay-2" : "",
             )}
           >
             <div className="flex items-center justify-between">
-              <span className="inline-flex h-9 w-9 items-center justify-center rounded-xl border border-[var(--nexra-border)] bg-[color-mix(in_srgb,var(--nexra-bg-elevated)_80%,transparent)] text-[var(--nexra-accent)]">
+              <span className="inline-flex h-9 w-9 items-center justify-center rounded-xl border border-[var(--opencodie-border)] bg-[color-mix(in_srgb,var(--opencodie-bg-elevated)_80%,transparent)] text-[var(--opencodie-accent)]">
                 <FeatureIcon name={item.icon} className="h-4 w-4" />
               </span>
               <StatusBadge status="info">{item.badge}</StatusBadge>
             </div>
             <h3 className="text-xl">{item.title}</h3>
             <p className="text-sm">{item.description}</p>
-            <p className="mt-auto text-xs uppercase tracking-[0.12em] text-[var(--nexra-text-muted)]">
+            <p className="mt-auto text-xs uppercase tracking-[0.12em] text-[var(--opencodie-text-muted)]">
               {item.systemLink}
             </p>
           </Panel>

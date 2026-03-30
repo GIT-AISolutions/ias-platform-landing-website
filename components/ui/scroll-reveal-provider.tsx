@@ -3,7 +3,7 @@
 import { useEffect } from "react";
 import { usePathname } from "next/navigation";
 
-const REVEAL_SELECTOR = ".nexra-reveal";
+const REVEAL_SELECTOR = ".opencodie-reveal";
 
 export function ScrollRevealProvider() {
   const pathname = usePathname();
@@ -22,11 +22,11 @@ export function ScrollRevealProvider() {
     ).matches;
 
     if (prefersReducedMotion) {
-      elements.forEach((element) => element.classList.add("nexra-inview"));
+      elements.forEach((element) => element.classList.add("opencodie-inview"));
       return;
     }
 
-    document.documentElement.classList.add("nexra-motion-ready");
+    document.documentElement.classList.add("opencodie-motion-ready");
 
     const observer = new IntersectionObserver(
       (entries) => {
@@ -35,7 +35,7 @@ export function ScrollRevealProvider() {
             return;
           }
 
-          entry.target.classList.add("nexra-inview");
+          entry.target.classList.add("opencodie-inview");
           observer.unobserve(entry.target);
         });
       },
@@ -46,7 +46,7 @@ export function ScrollRevealProvider() {
     );
 
     elements.forEach((element) => {
-      if (!element.classList.contains("nexra-inview")) {
+      if (!element.classList.contains("opencodie-inview")) {
         observer.observe(element);
       }
     });
