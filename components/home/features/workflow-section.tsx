@@ -5,28 +5,28 @@ import { cn } from "@/lib/utils";
 const workflow = [
   {
     step: "01",
-    title: "Create a project",
-    summary: "Start a new app workspace in seconds directly from your browser.",
+    title: "Code locally",
+    summary: "Use VS Code, your terminal, and AI models like Codex, Gemini, and Claude.",
   },
   {
     step: "02",
-    title: "Start your workspace",
-    summary: "Launch your coding environment with runtime and tooling already connected.",
+    title: "Connect project",
+    summary: "Link your project or repository to OpenCodie with minimal setup.",
   },
   {
     step: "03",
-    title: "Build your application",
-    summary: "Write full-stack code, run commands, and iterate with live preview.",
+    title: "Configure runtime",
+    summary: "Set environment variables and attach databases without manual DevOps work.",
   },
   {
     step: "04",
-    title: "Connect your database",
-    summary: "Provision and link your backend data layer without external setup.",
+    title: "Deploy instantly",
+    summary: "OpenCodie builds and runs your app on your own server infrastructure.",
   },
   {
     step: "05",
-    title: "Deploy instantly",
-    summary: "Ship your app from development to production in one continuous flow.",
+    title: "Monitor and update",
+    summary: "Use logs and safe redeploys to keep production stable as you ship.",
   },
 ];
 
@@ -41,13 +41,13 @@ export function WorkflowSection() {
           <p className="text-sm uppercase tracking-[0.16em] text-[var(--opencodie-accent)]">
             How It Works
           </p>
-          <h2 className="opencodie-heading-accent text-3xl md:text-5xl">
-            How OpenCodie works
-          </h2>
-          <p className="max-w-2xl text-base md:text-lg">
-            Build your application from start to finish in one connected workflow.
-            No setup. No complexity. Just building.
-          </p>
+        <h2 className="opencodie-heading-accent text-3xl md:text-5xl">
+          From code to production in minutes
+        </h2>
+        <p className="max-w-2xl text-base md:text-lg">
+          Keep your local workflow and ship faster without operating deployment
+          pipelines or infrastructure manually.
+        </p>
         </div>
 
         <div className="relative mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-5">
@@ -79,9 +79,9 @@ export function WorkflowSection() {
         <Panel className="mt-6 p-0 opencodie-reveal opencodie-reveal-delay-2">
           <div className="grid gap-0 md:grid-cols-3">
             {[
-              ["Workflow model", "Code -> Preview -> Backend -> Database -> Deployment"],
-              ["Setup overhead", "Near zero"],
-              ["Core principle", "Everything connected"],
+              ["Workflow model", "Local code -> Connect -> Deploy -> Observe"],
+              ["Setup overhead", "No DevOps required"],
+              ["Core principle", "Own infra + instant deploy"],
             ].map(([label, value]) => (
               <div
                 key={label}

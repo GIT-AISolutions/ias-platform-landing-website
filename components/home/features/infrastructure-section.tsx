@@ -4,18 +4,18 @@ import { StatusBadge } from "@/components/ui/status-badge";
 
 const platformLayers = [
   {
-    layer: "Code",
-    detail: "Write and organize your application logic in a browser-based workspace.",
+    layer: "Your tools",
+    detail: "Code locally in VS Code and terminal with AI tools you already use.",
     icon: "platform" as const,
   },
   {
-    layer: "Preview + Backend",
-    detail: "See changes instantly and run backend services in the same environment.",
+    layer: "OpenCodie operations",
+    detail: "Deployments, runtime setup, logs, and database wiring handled for you.",
     icon: "deploy" as const,
   },
   {
-    layer: "Database + Deployment",
-    detail: "Connect data and ship to production without switching tools or setup.",
+    layer: "Your server ownership",
+    detail: "Apps run on infrastructure you control, without vendor lock-in.",
     icon: "billing" as const,
   },
 ];
@@ -26,26 +26,26 @@ export function InfrastructureSection() {
       <div className="opencodie-section">
         <div className="grid gap-8 xl:grid-cols-[0.95fr_1.05fr] xl:items-start">
           <div className="space-y-6 opencodie-reveal">
-            <StatusBadge status="success">Differentiator</StatusBadge>
+            <StatusBadge status="success">Why OpenCodie</StatusBadge>
             <h2 className="opencodie-heading-accent text-3xl md:text-5xl">
-              One platform. Fully connected.
+              Why developers choose OpenCodie
             </h2>
             <p className="max-w-lg text-base md:text-lg">
-              OpenCodie connects everything in your development process: code, preview,
-              backend, database, and deployment. All in one system.
+              You keep your workflow while OpenCodie removes infrastructure friction.
+              Fast deployment experience with full infrastructure ownership.
             </p>
             <ul className="space-y-3 text-sm text-[var(--opencodie-text-muted)]">
               <li className="flex items-start gap-2">
                 <span className="mt-1 h-1.5 w-1.5 rounded-full bg-[var(--opencodie-accent)]" />
-                No need for separate tools, services, or complex setups.
+                No vendor lock-in: your app runs on your own server.
               </li>
               <li className="flex items-start gap-2">
                 <span className="mt-1 h-1.5 w-1.5 rounded-full bg-[var(--opencodie-accent)]" />
-                Everything stays in one connected workflow.
+                No DevOps needed: no pipeline maintenance or setup burden.
               </li>
               <li className="flex items-start gap-2">
                 <span className="mt-1 h-1.5 w-1.5 rounded-full bg-[var(--opencodie-accent)]" />
-                Build and deploy apps with one unified platform model.
+                Works with your tools: VS Code, Git, terminal, and AI assistants.
               </li>
             </ul>
           </div>
@@ -75,18 +75,18 @@ export function InfrastructureSection() {
             <div className="relative grid gap-3 sm:grid-cols-2">
               <Panel className="opencodie-interactive-card p-4">
                 <p className="text-xs uppercase tracking-[0.14em] text-[var(--opencodie-text-muted)]">
-                  Connected surfaces
+                  Infrastructure model
                 </p>
                 <p className="mt-2 text-2xl font-semibold tracking-tight text-[var(--opencodie-text)]">
-                  5
+                  You own it
                 </p>
               </Panel>
               <Panel className="opencodie-interactive-card p-4">
                 <p className="text-xs uppercase tracking-[0.14em] text-[var(--opencodie-text-muted)]">
-                  Tool switching
+                  DevOps burden
                 </p>
                 <p className="mt-2 text-2xl font-semibold tracking-tight text-[var(--opencodie-text)]">
-                  0
+                  Removed
                 </p>
               </Panel>
             </div>

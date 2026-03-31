@@ -5,52 +5,52 @@ import { cn } from "@/lib/utils";
 
 const capabilities = [
   {
-    title: "Browser-based development environment",
+    title: "Deployments",
     description:
-      "Work in a full VS Code environment directly in your browser. No installation, no setup - just open and start building.",
-    systemLink: "Coding environment online with full project context.",
-    icon: "workspace" as const,
-    badge: "Browser IDE",
+      "Deploy directly from your local workflow without maintaining CI/CD pipelines.",
+    systemLink: "Ship faster without DevOps setup overhead.",
+    icon: "deploy" as const,
+    badge: "Delivery",
   },
   {
-    title: "Live preview while you build",
+    title: "AI workflow",
     description:
-      "See your application update instantly as you code. No manual refresh or complex configuration required.",
-    systemLink: "Instant feedback while building and iterating.",
-    icon: "preview" as const,
-    badge: "Live",
-  },
-  {
-    title: "AI-powered development",
-    description:
-      "Use OpenAI, Claude, or Meta AI directly inside your workflow. Generate code, fix bugs, and build faster without switching tools.",
-    systemLink: "AI development tools integrated in the workspace.",
+      "Keep using Codex, Gemini, Claude, and your existing AI tools in VS Code.",
+    systemLink: "No tool switching, no workflow reset.",
     icon: "ai" as const,
     badge: "AI",
   },
   {
-    title: "Built-in database integration",
+    title: "Secrets",
     description:
-      "Create and connect databases with a few clicks. No external setup or complicated configuration.",
-    systemLink: "Backend and database connected in one platform.",
+      "Manage environment variables and sensitive configuration safely per environment.",
+    systemLink: "Protect production settings without manual server edits.",
+    icon: "workspace" as const,
+    badge: "Secure",
+  },
+  {
+    title: "Databases",
+    description:
+      "Provision databases quickly and keep backend services connected to each deploy.",
+    systemLink: "Backend-ready without infrastructure detours.",
     icon: "database" as const,
     badge: "Database",
   },
   {
-    title: "One-click deployment",
+    title: "Logs & debugging",
     description:
-      "Deploy your application instantly. From development to production in one flow.",
-    systemLink: "Build and deploy apps without separate tools.",
-    icon: "deploy" as const,
-    badge: "Deploy",
+      "See deploy output and runtime logs in one place when issues appear.",
+    systemLink: "Debug quickly and ship with confidence.",
+    icon: "preview" as const,
+    badge: "Logs",
   },
   {
-    title: "Integrated terminal and runtime",
+    title: "Updates & redeploys",
     description:
-      "Run commands, manage your environment, and control your app directly in your workspace.",
-    systemLink: "Runtime control stays inside the same development loop.",
+      "Roll out changes safely when your app evolves across environments.",
+    systemLink: "Continuous delivery without pipeline maintenance.",
     icon: "terminal" as const,
-    badge: "Runtime",
+    badge: "Update",
   },
 ];
 
@@ -59,14 +59,14 @@ export function CoreCapabilitiesSection() {
     <section id="features" className="opencodie-section">
       <div className="opencodie-section-heading opencodie-reveal">
         <p className="text-sm uppercase tracking-[0.16em] text-[var(--opencodie-accent)]">
-          Core Capabilities
+          The Solution
         </p>
         <h2 className="opencodie-heading-accent text-3xl md:text-5xl">
-          Everything you need to build modern applications
+          OpenCodie removes the DevOps layer
         </h2>
         <p className="max-w-2xl text-base md:text-lg">
-          OpenCodie combines browser-based development, AI tooling, backend services,
-          database integration, and deployment into one connected workflow.
+          You keep your workflow. VS Code, terminal, and AI tools stay the same while
+          OpenCodie handles the operational layer.
         </p>
       </div>
 

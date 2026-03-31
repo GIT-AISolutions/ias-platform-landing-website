@@ -5,15 +5,15 @@ import { StatusBadge } from "@/components/ui/status-badge";
 import { siteConfig } from "@/lib/site-config";
 
 const heroPillars = [
-  "No setup.",
-  "No switching tools.",
-  "No unnecessary complexity.",
+  "No DevOps required",
+  "Runs on your own server",
+  "No vendor lock-in",
 ];
 
 const heroSignals = [
-  { label: "Workspace boot", value: "14s" },
-  { label: "Deploy regions", value: "12" },
-  { label: "Avg. release loop", value: "<2m" },
+  { label: "Deploy speed", value: "<2m to prod" },
+  { label: "AI workflow", value: "Codex + Gemini + Claude" },
+  { label: "Ownership", value: "100% your infra" },
 ] as const;
 
 export function HeroSection() {
@@ -27,12 +27,16 @@ export function HeroSection() {
 
           <div className="space-y-6">
             <h1 className="opencodie-heading-display opencodie-heading-accent max-w-3xl text-4xl sm:text-5xl md:text-6xl xl:text-7xl">
-              Build, run, and deploy software from one unified control layer
+              Deploy apps like Vercel.
+              <br />
+              Own everything like Coolify.
             </h1>
             <p className="max-w-xl text-base md:text-lg">
-              OpenCodie is a complete development environment where you can write
-              code, run applications, connect databases, and deploy instantly -
-              all from your browser, without setup or complex infrastructure.
+              Keep coding in VS Code with AI. OpenCodie handles deployment,
+              infrastructure, and everything in between.
+            </p>
+            <p className="text-base font-medium text-[var(--opencodie-text)] md:text-lg">
+              You build. We run it.
             </p>
           </div>
 
@@ -57,19 +61,19 @@ export function HeroSection() {
               href={siteConfig.portal.getStartedUrl}
               className={buttonClasses("primary", "w-full sm:w-auto")}
             >
-              Start building
+              Get started
             </Link>
             <Link
-              href={siteConfig.portal.getStartedUrl}
+              href="/product"
               className={buttonClasses("secondary", "w-full sm:w-auto")}
             >
-              Launch your first app
+              View product
             </Link>
           </div>
 
           <div className="opencodie-interactive-card rounded-2xl border border-[var(--opencodie-border)] bg-[color-mix(in_srgb,var(--opencodie-bg-elevated)_74%,transparent)] p-4 shadow-[inset_0_1px_0_rgba(241,248,255,0.08)]">
             <p className="text-sm font-medium text-[var(--opencodie-text)]">
-              No setup. No switching tools. No unnecessary complexity.
+              Local development + AI + instant deployment + full ownership.
             </p>
             <ul className="mt-3 grid gap-2 text-sm text-[var(--opencodie-text-muted)] sm:grid-cols-3">
               {heroPillars.map((item) => (
