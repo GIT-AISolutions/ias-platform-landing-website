@@ -1,24 +1,35 @@
+import type { Metadata } from "next";
 import { MainCtaSection } from "@/components/home/main-cta-section";
 import { Panel } from "@/components/ui/panel";
 
+export const metadata: Metadata = {
+  title: "Security | OpenCodie",
+  description:
+    "Security and governance overview for OpenCodie, including access control, data protection, and operational audit visibility.",
+};
+
 const controls = [
   {
-    title: "Access Governance",
-    description: "Role-based permissions, organization scopes, and audit visibility.",
+    title: "Access Control",
+    description:
+      "Role-based permissions and organization-level boundaries for teams and shared projects.",
   },
   {
     title: "Data Protection",
-    description: "Encrypted data paths with environment-level isolation boundaries.",
+    description:
+      "Encrypted data paths and environment isolation to keep project boundaries clear.",
   },
   {
     title: "Operational Audit",
-    description: "Track release actions, workspace events, and admin operations.",
+    description:
+      "Track deployments, environment changes, and key admin actions with clear event history.",
   },
   {
-    title: "Compliance Posture",
-    description: "Placeholder controls for SOC 2, GDPR, and enterprise review workflows.",
+    title: "Compliance Readiness",
+    description:
+      "Security controls and documentation patterns designed to support vendor and compliance reviews.",
   },
-];
+] as const;
 
 export default function SecurityPage() {
   return (
@@ -29,15 +40,15 @@ export default function SecurityPage() {
             Security
           </p>
           <h1 className="opencodie-page-h1">
-            Platform controls for serious production workloads
+            Security controls for production workloads
           </h1>
           <p className="opencodie-page-intro">
-            Security and governance placeholders showing how OpenCodie can present
-            trust-critical details outside the homepage.
+            OpenCodie is designed for teams that need fast delivery with clear
+            operational and governance controls.
           </p>
         </div>
 
-        <div className="mt-10 grid gap-4 sm:grid-cols-2">
+        <div className="opencodie-stack-md grid gap-4 sm:grid-cols-2">
           {controls.map((item, index) => (
             <Panel
               key={item.title}

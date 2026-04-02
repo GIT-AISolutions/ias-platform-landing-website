@@ -55,7 +55,7 @@ export default function FaqPage() {
           </p>
         </div>
 
-        <div className="mt-10 space-y-3">
+        <div className="opencodie-stack-md space-y-3">
           {faqItems.map((item, index) => (
             <Panel
               key={item.question}

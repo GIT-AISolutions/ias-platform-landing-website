@@ -19,14 +19,20 @@ const heroSignals = [
 export function HeroSection() {
   return (
     <section className="opencodie-page-hero">
-      <div className="grid items-center gap-8 xl:grid-cols-[1.02fr_0.98fr] xl:gap-10">
-        <div className="space-y-8 opencodie-reveal">
-          <StatusBadge status="info" className="shadow-[0_10px_22px_rgba(0,8,20,0.28)]">
-            OpenCodie Development Platform
-          </StatusBadge>
+      <div className="grid items-center gap-6 min-[1400px]:grid-cols-[1.02fr_0.98fr] min-[1400px]:gap-10">
+        <div className="order-1 mx-auto w-full max-w-[58rem] opencodie-reveal opencodie-reveal-delay-2 min-[1400px]:order-2 min-[1400px]:max-w-none">
+          <HeroControlCenter />
+        </div>
 
-          <div className="space-y-6">
-            <h1 className="opencodie-heading-display opencodie-heading-accent max-w-3xl text-4xl sm:text-5xl md:text-6xl xl:text-7xl">
+        <div className="order-2 mx-auto w-full max-w-3xl space-y-7 text-center opencodie-reveal min-[1400px]:order-1 min-[1400px]:mx-0 min-[1400px]:max-w-none min-[1400px]:space-y-8 min-[1400px]:text-left">
+          <div className="flex justify-center min-[1400px]:justify-start">
+            <StatusBadge status="info" className="shadow-[0_10px_22px_rgba(0,8,20,0.28)]">
+              OpenCodie Development Platform
+            </StatusBadge>
+          </div>
+
+          <div className="space-y-5 min-[1400px]:space-y-6">
+            <h1 className="opencodie-heading-display opencodie-heading-accent mx-auto max-w-3xl text-[clamp(2rem,5.3vw,3.6rem)] min-[1400px]:mx-0 min-[1400px]:text-7xl">
               Deploy apps like Vercel.
               <br />
               Own everything like Coolify.
@@ -56,7 +62,7 @@ export function HeroSection() {
             ))}
           </div>
 
-          <div className="flex flex-col items-stretch gap-3 sm:flex-row sm:items-center">
+          <div className="flex flex-col items-stretch gap-3 sm:flex-row sm:items-center sm:justify-center min-[1400px]:justify-start">
             <Link
               href={siteConfig.portal.getStartedUrl}
               className={buttonClasses("primary", "w-full sm:w-auto")}
@@ -84,10 +90,6 @@ export function HeroSection() {
               ))}
             </ul>
           </div>
-        </div>
-
-        <div className="opencodie-reveal opencodie-reveal-delay-2">
-          <HeroControlCenter />
         </div>
       </div>
     </section>

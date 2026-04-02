@@ -4,6 +4,7 @@ import { WorkflowSection } from "@/components/home/features/workflow-section";
 import { HeroSection } from "@/components/home/hero-section";
 import { MainCtaSection } from "@/components/home/main-cta-section";
 import { ProductPreviewSection } from "@/components/home/product-preview-section";
+import { BringYourAiPanel } from "@/components/shared/bring-your-ai-panel";
 import { Panel } from "@/components/ui/panel";
 
 const trustItems = [
@@ -33,7 +34,7 @@ export default function Home() {
       <HeroSection />
 
       <section className="opencodie-band-dark">
-        <div className="opencodie-page-section pt-0 md:pt-0">
+        <div className="opencodie-page-section-compact">
           <Panel className="opencodie-reveal p-4 md:p-5">
             <div className="grid gap-2 sm:grid-cols-2 lg:grid-cols-4">
               {trustItems.map((item) => (
@@ -47,6 +48,10 @@ export default function Home() {
             </div>
           </Panel>
         </div>
+      </section>
+
+      <section className="opencodie-page-section">
+        <BringYourAiPanel />
       </section>
 
       <section className="opencodie-band-dark">
@@ -72,7 +77,7 @@ export default function Home() {
       <WorkflowSection />
 
       <section className="opencodie-band-dark">
-        <div className="opencodie-section relative overflow-hidden pb-12 pt-2 md:pb-14">
+        <div className="opencodie-section-compact relative overflow-hidden">
           <div className="pointer-events-none absolute inset-x-[6%] top-1 -z-10 h-36 bg-[radial-gradient(ellipse_at_center,rgba(52,209,191,0.12)_0%,rgba(52,209,191,0)_72%)]" />
           <div className="pointer-events-none absolute -bottom-8 left-[16%] -z-10 h-28 w-[34%] bg-[radial-gradient(ellipse_at_center,rgba(255,122,24,0.14)_0%,rgba(255,122,24,0)_72%)]" />
 

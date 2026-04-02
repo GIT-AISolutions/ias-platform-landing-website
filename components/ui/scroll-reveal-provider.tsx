@@ -9,24 +9,26 @@ export function ScrollRevealProvider() {
   const pathname = usePathname();
 
   useEffect(() => {
-    const elements = Array.from(
-      document.querySelectorAll<HTMLElement>(REVEAL_SELECTOR),
-    );
+    const elements = Array.from(document.querySelectorAll<HTMLElement>(REVEAL_SELECTOR));
 
     if (elements.length === 0) {
       return;
     }
 
-    const prefersReducedMotion = window.matchMedia(
-      "(prefers-reduced-motion: reduce)",
-    ).matches;
+    const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
-    if (prefersReducedMotion) {
+    if (prefersReducedMotion || typeof IntersectionObserver === "undefined") {
       elements.forEach((element) => element.classList.add("opencodie-inview"));
       return;
     }
 
     document.documentElement.classList.add("opencodie-motion-ready");
+
+    const revealAllFallbackTimer = window.setTimeout(() => {
+      document
+        .querySelectorAll<HTMLElement>(REVEAL_SELECTOR)
+        .forEach((element) => element.classList.add("opencodie-inview"));
+    }, 1600);
 
     const observer = new IntersectionObserver(
       (entries) => {
@@ -51,7 +53,10 @@ export function ScrollRevealProvider() {
       }
     });
 
-    return () => observer.disconnect();
+    return () => {
+      window.clearTimeout(revealAllFallbackTimer);
+      observer.disconnect();
+    };
   }, [pathname]);
 
   return null;

@@ -47,21 +47,21 @@ export function SiteFooter() {
 
           <div>
             <h2 className="text-sm uppercase tracking-[0.14em] text-[var(--opencodie-text-muted)]">
-              Legal & Support
+              Resources
             </h2>
             <ul className="mt-4 space-y-3 text-sm text-[var(--opencodie-text-muted)]">
               <li>
                 <Link href="/security" className="transition-colors hover:text-[var(--opencodie-text)]">
-                  Privacy
+                  Security
                 </Link>
               </li>
               <li>
-                <Link href="#" className="transition-colors hover:text-[var(--opencodie-text)]">
-                  Terms
+                <Link href="/faq" className="transition-colors hover:text-[var(--opencodie-text)]">
+                  FAQ
                 </Link>
               </li>
               <li>
-                <Link href="#" className="transition-colors hover:text-[var(--opencodie-text)]">
+                <Link href="/faq" className="transition-colors hover:text-[var(--opencodie-text)]">
                   Support
                 </Link>
               </li>
