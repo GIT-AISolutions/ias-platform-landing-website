@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 import { Panel } from "@/components/ui/panel";
 import { siteConfig } from "@/lib/site-config";
@@ -6,7 +7,24 @@ type BringYourAiPanelProps = {
   className?: string;
 };
 
+const supportedLogos = [
+  { name: "OpenAI", src: "/ai-logos/openai.png" },
+  { name: "Claude", src: "/ai-logos/claude.png" },
+  { name: "Gemini", src: "/ai-logos/gemini.png" },
+  { name: "Llama", src: "/ai-logos/llama.png" },
+  { name: "Mistral", src: "/ai-logos/mistral.png" },
+  { name: "DeepSeek", src: "/ai-logos/deepseek.png" },
+  { name: "Cohere", src: "/ai-logos/cohere.png" },
+  { name: "xAI", src: "/ai-logos/xai.png" },
+  { name: "GitHub", src: "/ai-logos/github.png" },
+  { name: "Docker", src: "/ai-logos/docker.png" },
+  { name: "PostgreSQL", src: "/ai-logos/postgresql.png" },
+  { name: "Redis", src: "/ai-logos/redis.png" },
+] as const;
+
 export function BringYourAiPanel({ className = "" }: BringYourAiPanelProps) {
+  const marqueeLogos = [...supportedLogos, ...supportedLogos];
+
   return (
     <Panel className={`opencodie-light-sweep opencodie-reveal space-y-4 p-5 md:p-6 ${className}`}>
       <p className="text-sm uppercase tracking-[0.16em] text-[var(--opencodie-accent)]">
@@ -68,6 +86,38 @@ export function BringYourAiPanel({ className = "" }: BringYourAiPanelProps) {
           >
             Start building →
           </Link>
+        </div>
+      </div>
+
+      <div className="space-y-2.5">
+        <p className="text-xs uppercase tracking-[0.12em] text-[var(--opencodie-accent)]">
+          Works with your existing AI and tools
+        </p>
+        <div className="opencodie-logo-marquee" aria-label="Supported AI and tooling logos">
+          <div className="opencodie-logo-track">
+            {marqueeLogos.map((logo, index) => {
+              const isClone = index >= supportedLogos.length;
+
+              return (
+                <div
+                  key={`${logo.name}-${index}`}
+                  className="opencodie-logo-chip"
+                  aria-hidden={isClone}
+                >
+                  <Image
+                    src={logo.src}
+                    alt={isClone ? "" : `${logo.name} logo`}
+                    width={128}
+                    height={36}
+                    className="h-6 w-auto object-contain"
+                  />
+                  <span className="text-[0.68rem] uppercase tracking-[0.08em] text-[var(--opencodie-text-muted)]">
+                    {logo.name}
+                  </span>
+                </div>
+              );
+            })}
+          </div>
         </div>
       </div>
     </Panel>
