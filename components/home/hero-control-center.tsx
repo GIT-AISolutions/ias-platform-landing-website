@@ -86,7 +86,7 @@ export function HeroControlCenter() {
           ))}
         </div>
 
-        <div className="opencodie-light-sweep relative hidden h-[22rem] rounded-2xl border border-[var(--opencodie-border)] bg-[color-mix(in_srgb,var(--opencodie-bg-panel)_85%,transparent)] sm:block">
+        <div className="opencodie-light-sweep relative hidden h-[16.75rem] rounded-2xl border border-[var(--opencodie-border)] bg-[color-mix(in_srgb,var(--opencodie-bg-panel)_85%,transparent)] sm:block md:h-[17.75rem] lg:h-[18.75rem]">
           <div className="absolute left-[18%] right-[18%] top-[30%] h-px bg-gradient-to-r from-transparent via-[var(--opencodie-accent)]/70 to-transparent" />
           <div className="absolute left-[18%] right-[18%] top-[66%] h-px bg-gradient-to-r from-transparent via-[var(--opencodie-primary)]/70 to-transparent" />
           <div className="absolute left-1/2 top-[30%] h-[36%] w-px -translate-x-1/2 bg-gradient-to-b from-[var(--opencodie-accent)]/70 to-[var(--opencodie-primary)]/70" />

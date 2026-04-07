@@ -33,10 +33,19 @@ export default function Home() {
     <>
       <HeroSection />
 
-      <section className="opencodie-band-dark">
-        <div className="opencodie-page-section-compact">
-          <Panel className="opencodie-reveal p-4 md:p-5">
-            <div className="grid gap-2 sm:grid-cols-2 lg:grid-cols-4">
+      <section className="opencodie-page-section">
+        <div className="w-full">
+          <Panel className="opencodie-reveal opencodie-reveal-delay-1 space-y-4 p-5 md:p-6">
+            <p className="text-xs uppercase tracking-[0.14em] text-[var(--opencodie-accent)]">
+              Why teams choose OpenCodie
+            </p>
+            <h3 className="text-2xl md:text-3xl">Everything you need, without platform lock-in</h3>
+            <p className="text-sm md:text-base">
+              Build with your own tools, deploy on infrastructure you control, and keep
+              ownership from day one.
+            </p>
+
+            <div className="grid gap-2 sm:grid-cols-2 md:grid-cols-4">
               {trustItems.map((item) => (
                 <div
                   key={item}
@@ -50,7 +59,7 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="opencodie-page-section">
+      <section className="opencodie-page-section-compact">
         <BringYourAiPanel />
       </section>
 

@@ -1,3 +1,4 @@
+import type { CSSProperties } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { Panel } from "@/components/ui/panel";
@@ -8,18 +9,18 @@ type BringYourAiPanelProps = {
 };
 
 const supportedLogos = [
-  { name: "OpenAI", src: "/ai-logos/openai.png" },
-  { name: "Claude", src: "/ai-logos/claude.png" },
-  { name: "Gemini", src: "/ai-logos/gemini.png" },
-  { name: "Llama", src: "/ai-logos/llama.png" },
-  { name: "Mistral", src: "/ai-logos/mistral.png" },
-  { name: "DeepSeek", src: "/ai-logos/deepseek.png" },
-  { name: "Cohere", src: "/ai-logos/cohere.png" },
-  { name: "xAI", src: "/ai-logos/xai.png" },
-  { name: "GitHub", src: "/ai-logos/github.png" },
-  { name: "Docker", src: "/ai-logos/docker.png" },
-  { name: "PostgreSQL", src: "/ai-logos/postgresql.png" },
-  { name: "Redis", src: "/ai-logos/redis.png" },
+  { name: "OpenAI", src: "/ai-logos/openai.png", scale: 1.2, href: "https://openai.com" },
+  { name: "Claude", src: "/ai-logos/claude.png", scale: 1.08, href: "https://www.anthropic.com" },
+  { name: "Gemini", src: "/ai-logos/gemini.png", scale: 1.12, href: "https://gemini.google.com" },
+  { name: "Llama", src: "/ai-logos/llama.png", scale: 1.06, href: "https://www.llama.com" },
+  { name: "Mistral", src: "/ai-logos/mistral.png", scale: 1.14, href: "https://mistral.ai" },
+  { name: "DeepSeek", src: "/ai-logos/deepseek.png", scale: 1.14, href: "https://www.deepseek.com" },
+  { name: "Cohere", src: "/ai-logos/cohere.png", scale: 1.04, href: "https://cohere.com" },
+  { name: "xAI", src: "/ai-logos/xai.png", scale: 1.46, href: "https://x.ai" },
+  { name: "GitHub", src: "/ai-logos/github.png", scale: 1.2, href: "https://github.com" },
+  { name: "Docker", src: "/ai-logos/docker.png", scale: 1.02, href: "https://www.docker.com" },
+  { name: "PostgreSQL", src: "/ai-logos/postgresql.png", scale: 1.34, href: "https://www.postgresql.org" },
+  { name: "Redis", src: "/ai-logos/redis.png", scale: 1.34, href: "https://redis.io" },
 ] as const;
 
 export function BringYourAiPanel({ className = "" }: BringYourAiPanelProps) {
@@ -96,24 +97,31 @@ export function BringYourAiPanel({ className = "" }: BringYourAiPanelProps) {
         <div className="opencodie-logo-marquee" aria-label="Supported AI and tooling logos">
           <div className="opencodie-logo-track">
             {marqueeLogos.map((logo, index) => {
-              const isClone = index >= supportedLogos.length;
-
               return (
-                <div
-                  key={`${logo.name}-${index}`}
-                  className="opencodie-logo-chip"
-                  aria-hidden={isClone}
-                >
-                  <Image
-                    src={logo.src}
-                    alt={isClone ? "" : `${logo.name} logo`}
-                    width={128}
-                    height={36}
-                    className="h-6 w-auto object-contain"
-                  />
-                  <span className="text-[0.68rem] uppercase tracking-[0.08em] text-[var(--opencodie-text-muted)]">
-                    {logo.name}
-                  </span>
+                <div key={`${logo.name}-${index}`} className="opencodie-logo-item">
+                  <a
+                    href={logo.href}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="opencodie-logo-link"
+                    aria-label={`Visit ${logo.name}`}
+                  >
+                    <div
+                      className="opencodie-logo-chip"
+                      style={{ "--logo-scale": `${logo.scale}` } as CSSProperties}
+                    >
+                      <Image
+                        src={logo.src}
+                        alt={`${logo.name} logo`}
+                        width={128}
+                        height={36}
+                        className="opencodie-logo-image"
+                      />
+                    </div>
+                    <span className="opencodie-logo-label">
+                      {logo.name}
+                    </span>
+                  </a>
                 </div>
               );
             })}
