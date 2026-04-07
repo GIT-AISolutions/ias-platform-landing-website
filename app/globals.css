@@ -14,9 +14,9 @@
   --opencodie-warning: #f59e0b;
   --opencodie-danger: #fb7185;
   --opencodie-shadow: 0 28px 52px rgba(0, 8, 20, 0.45);
-  --opencodie-font-sans: var(--font-body), "Avenir Next", "Segoe UI", sans-serif;
-  --opencodie-font-display: var(--font-display), "Iowan Old Style", serif;
-  --opencodie-font-mono: var(--font-mono), "SFMono-Regular", Menlo, monospace;
+  --opencodie-font-sans: var(--font-body, "Avenir Next"), "Segoe UI", sans-serif;
+  --opencodie-font-display: var(--font-display, "Iowan Old Style"), serif;
+  --opencodie-font-mono: var(--font-mono, "SFMono-Regular"), Menlo, monospace;
   --opencodie-radius-panel: 1.35rem;
   --opencodie-ease-out: cubic-bezier(0.22, 1, 0.36, 1);
   --opencodie-space-section: clamp(3.25rem, 7vw, 5.5rem);
