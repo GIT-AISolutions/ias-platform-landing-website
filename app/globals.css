@@ -24,6 +24,7 @@
   --opencodie-space-page-hero-top: clamp(3.25rem, 8vw, 5.5rem);
   --opencodie-space-block: clamp(1.5rem, 3.2vw, 2.4rem);
   --opencodie-space-block-tight: clamp(1rem, 2.3vw, 1.6rem);
+  --opencodie-overview-offset: clamp(5rem, 8vh, 7rem);
 }
 
 @theme inline {
@@ -41,12 +42,17 @@
 html,
 body {
   max-width: 100%;
+}
+
+html {
   overflow-x: hidden;
+  overflow-x: clip;
 }
 
 body {
   position: relative;
   min-height: 100vh;
+  overflow-y: visible;
   color: var(--opencodie-text);
   font-family: var(--opencodie-font-sans);
   text-rendering: optimizeLegibility;
@@ -226,6 +232,20 @@ h6 {
 
   .opencodie-stack-tight {
     margin-top: var(--opencodie-space-block-tight);
+  }
+
+  :is(
+    .opencodie-overview,
+    .opencodie-page-hero,
+    .opencodie-page-section,
+    .opencodie-page-section-compact,
+    .opencodie-section,
+    .opencodie-section-compact
+  ) {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    min-height: calc(100svh - var(--opencodie-overview-offset));
   }
 
   .opencodie-page-h1 {
@@ -684,6 +704,112 @@ h6 {
 
   .opencodie-page-intro {
     max-width: 58ch;
+  }
+
+  :is(
+    .opencodie-overview,
+    .opencodie-page-hero,
+    .opencodie-page-section,
+    .opencodie-page-section-compact,
+    .opencodie-section,
+    .opencodie-section-compact
+  ) {
+    min-height: auto;
+    justify-content: flex-start;
+  }
+}
+
+@media (min-width: 1024px) {
+  :is(
+      .opencodie-overview,
+      .opencodie-page-hero,
+      .opencodie-page-section,
+      .opencodie-page-section-compact,
+      .opencodie-section,
+      .opencodie-section-compact
+    )
+    > .grid,
+  :is(
+      .opencodie-overview,
+      .opencodie-page-hero,
+      .opencodie-page-section,
+      .opencodie-page-section-compact,
+      .opencodie-section,
+      .opencodie-section-compact
+    )
+    > div > .grid {
+    align-items: stretch;
+  }
+
+  :is(
+      .opencodie-overview,
+      .opencodie-page-hero,
+      .opencodie-page-section,
+      .opencodie-page-section-compact,
+      .opencodie-section,
+      .opencodie-section-compact
+    )
+    > .opencodie-panel,
+  :is(
+      .opencodie-overview,
+      .opencodie-page-hero,
+      .opencodie-page-section,
+      .opencodie-page-section-compact,
+      .opencodie-section,
+      .opencodie-section-compact
+    )
+    > div > .opencodie-panel {
+    min-height: clamp(18rem, 34vh, 26rem);
+  }
+
+  :is(
+      .opencodie-overview,
+      .opencodie-page-hero,
+      .opencodie-page-section,
+      .opencodie-page-section-compact,
+      .opencodie-section,
+      .opencodie-section-compact
+    )
+    > .grid > .opencodie-panel,
+  :is(
+      .opencodie-overview,
+      .opencodie-page-hero,
+      .opencodie-page-section,
+      .opencodie-page-section-compact,
+      .opencodie-section,
+      .opencodie-section-compact
+    )
+    > div > .grid > .opencodie-panel,
+  :is(
+      .opencodie-overview,
+      .opencodie-page-hero,
+      .opencodie-page-section,
+      .opencodie-page-section-compact,
+      .opencodie-section,
+      .opencodie-section-compact
+    )
+    > div[class*="grid"] > .opencodie-panel {
+    min-height: clamp(21rem, 42vh, 32rem);
+  }
+}
+
+.opencodie-overview-off {
+  min-height: auto;
+  justify-content: flex-start;
+}
+
+@media (min-width: 1024px) {
+  .opencodie-overview-off > .grid,
+  .opencodie-overview-off > div > .grid {
+    align-items: initial;
+  }
+
+  .opencodie-overview-off > .opencodie-panel,
+  .opencodie-overview-off > div > .opencodie-panel,
+  .opencodie-overview-off > .grid > .opencodie-panel,
+  .opencodie-overview-off > div > .grid > .opencodie-panel,
+  .opencodie-overview-off > div[class*="grid"] > .opencodie-panel {
+    min-height: auto;
   }
 }
 

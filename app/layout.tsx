@@ -17,8 +17,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className="h-full">
-      <body className="flex min-h-full flex-col overflow-x-hidden antialiased">
+    <html lang="en">
+      <body className="flex min-h-screen flex-col antialiased">
         <ScrollRevealProvider />
         <PageShell>
           <SiteHeader />

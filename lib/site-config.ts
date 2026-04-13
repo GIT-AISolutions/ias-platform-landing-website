@@ -19,6 +19,7 @@ function resolvePortalUrl(path: string) {
 
 export const siteConfig = {
   name: "OpenCodie",
+  logoPath: "/opencodie-logo.png",
   shortDescription:
     "Deploy apps like Vercel. Own everything like Coolify. Keep coding locally while OpenCodie handles deployment and infrastructure on your own server.",
   seoFooterText:

@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 import { siteConfig } from "@/lib/site-config";
 
@@ -11,9 +12,13 @@ export function SiteFooter() {
         <div className="grid gap-12 md:grid-cols-4">
           <div className="space-y-4 md:col-span-2">
             <Link href="/" className="flex items-center gap-3">
-              <span className="opencodie-brand-mark inline-flex h-9 w-9 items-center justify-center rounded-xl border border-[color-mix(in_srgb,var(--opencodie-accent)_52%,var(--opencodie-border))] bg-[color-mix(in_srgb,var(--opencodie-accent)_15%,var(--opencodie-bg-elevated))] text-xs font-semibold text-[var(--opencodie-accent)]">
-                OC
-              </span>
+              <Image
+                src={siteConfig.logoPath}
+                alt="OpenCodie logo"
+                width={40}
+                height={40}
+                className="h-10 w-10 object-contain"
+              />
               <div className="leading-tight">
                 <span className="block text-base font-semibold tracking-tight text-[var(--opencodie-text)]">
                   {siteConfig.name}

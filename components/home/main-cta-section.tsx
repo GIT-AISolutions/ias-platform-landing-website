@@ -6,7 +6,7 @@ import { siteConfig } from "@/lib/site-config";
 export function MainCtaSection() {
   return (
     <section id="final-cta" className="opencodie-band-dark">
-      <div className="opencodie-section">
+      <div className="opencodie-section opencodie-overview">
         <Panel className="opencodie-light-sweep relative overflow-hidden p-0 opencodie-reveal">
           <div className="opencodie-grid-drift opencodie-mesh-float absolute inset-0 bg-[linear-gradient(to_right,rgba(37,50,74,0.32)_1px,transparent_1px),linear-gradient(to_bottom,rgba(37,50,74,0.32)_1px,transparent_1px)] [background-size:34px_34px]" />
           <div className="opencodie-ambient-drift absolute -right-24 -top-20 h-64 w-64 rounded-full bg-[radial-gradient(circle,_rgba(99,102,241,0.18)_0%,_rgba(99,102,241,0)_70%)]" />

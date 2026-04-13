@@ -12,7 +12,7 @@ const heroSignals = [
 
 export function HeroSection() {
   return (
-    <section className="opencodie-page-hero">
+    <section className="opencodie-page-hero opencodie-overview">
       <div className="grid items-start gap-6 xl:grid-cols-[1.02fr_0.98fr] xl:gap-8 min-[1400px]:gap-10">
         <div className="order-1 mx-auto w-full max-w-[58rem] space-y-2 opencodie-reveal opencodie-reveal-delay-2 xl:order-2 xl:max-w-none">
           <HeroControlCenter />

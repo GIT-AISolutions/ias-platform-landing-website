@@ -33,7 +33,7 @@ export default function Home() {
     <>
       <HeroSection />
 
-      <section className="opencodie-page-section">
+      <section className="opencodie-page-section opencodie-overview">
         <div className="w-full">
           <Panel className="opencodie-reveal opencodie-reveal-delay-1 space-y-4 p-5 md:p-6">
             <p className="text-xs uppercase tracking-[0.14em] text-[var(--opencodie-accent)]">
@@ -59,12 +59,12 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="opencodie-page-section-compact">
+      <section className="opencodie-page-section-compact opencodie-overview">
         <BringYourAiPanel />
       </section>
 
       <section className="opencodie-band-dark">
-        <div className="opencodie-page-section">
+        <div className="opencodie-page-section opencodie-overview">
           <div className="opencodie-section-heading opencodie-reveal">
             <p className="text-sm uppercase tracking-[0.16em] text-[var(--opencodie-accent)]">
               The Problem
@@ -86,7 +86,7 @@ export default function Home() {
       <WorkflowSection />
 
       <section className="opencodie-band-dark">
-        <div className="opencodie-section-compact relative overflow-hidden">
+        <div className="opencodie-section-compact opencodie-overview relative overflow-hidden">
           <div className="pointer-events-none absolute inset-x-[6%] top-1 -z-10 h-36 bg-[radial-gradient(ellipse_at_center,rgba(52,209,191,0.12)_0%,rgba(52,209,191,0)_72%)]" />
           <div className="pointer-events-none absolute -bottom-8 left-[16%] -z-10 h-28 w-[34%] bg-[radial-gradient(ellipse_at_center,rgba(255,122,24,0.14)_0%,rgba(255,122,24,0)_72%)]" />
 

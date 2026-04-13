@@ -44,7 +44,7 @@ const faqItems = [
 export default function FaqPage() {
   return (
     <>
-      <section className="opencodie-page-hero">
+      <section className="opencodie-page-hero opencodie-overview-off">
         <div className="opencodie-section-heading opencodie-reveal">
           <p className="text-sm uppercase tracking-[0.16em] text-[var(--opencodie-accent)]">
             FAQ

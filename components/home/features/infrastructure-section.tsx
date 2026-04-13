@@ -23,7 +23,7 @@ const platformLayers = [
 export function InfrastructureSection() {
   return (
     <section className="opencodie-band-dark">
-      <div className="opencodie-section">
+      <div className="opencodie-section opencodie-overview">
         <div className="grid gap-8 xl:grid-cols-[0.95fr_1.05fr] xl:items-start">
           <div className="space-y-6 opencodie-reveal">
             <StatusBadge status="success">Why OpenCodie</StatusBadge>

@@ -28,7 +28,7 @@ const infrastructurePoints = [
 export function ProductPreviewSection() {
   return (
     <section className="opencodie-band-dark">
-      <div className="opencodie-section">
+      <div className="opencodie-section opencodie-overview">
         <div className="opencodie-section-heading opencodie-reveal">
           <p className="text-sm uppercase tracking-[0.16em] text-[var(--opencodie-accent)]">
             Product Layer

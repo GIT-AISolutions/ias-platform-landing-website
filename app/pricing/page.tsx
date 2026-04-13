@@ -91,34 +91,40 @@ const comparisonRows = [
 export default function PricingPage() {
   return (
     <>
-      <section className="opencodie-page-hero">
-        <div className="opencodie-section-heading opencodie-reveal">
-          <p className="text-sm uppercase tracking-[0.16em] text-[var(--opencodie-accent)]">
-            Pricing
-          </p>
-          <h1 className="opencodie-page-h1">
-            Instant deploys.
-            <br />
-            No DevOps complexity.
-          </h1>
-          <p className="opencodie-page-intro">
-            Built for developers who ship fast in VS Code and terminal. OpenCodie
-            keeps deployment simple from first app to production.
-          </p>
+      <section className="opencodie-page-hero opencodie-overview">
+        <div className="grid gap-6 xl:grid-cols-[1fr_0.95fr] xl:items-stretch">
+          <div className="opencodie-section-heading opencodie-reveal">
+            <p className="text-sm uppercase tracking-[0.16em] text-[var(--opencodie-accent)]">
+              Pricing
+            </p>
+            <h1 className="opencodie-page-h1">
+              Instant deploys.
+              <br />
+              No DevOps complexity.
+            </h1>
+            <p className="opencodie-page-intro">
+              Built for developers who ship fast in VS Code and terminal. OpenCodie
+              keeps deployment simple from first app to production.
+            </p>
+          </div>
+
+          <Panel className="opencodie-reveal opencodie-reveal-delay-1 p-5 md:p-6 xl:flex xl:h-full xl:flex-col xl:justify-center">
+            <p className="text-sm md:text-base">
+              Deploy apps instantly. Everything is managed for you.
+            </p>
+            <p className="opencodie-stack-tight text-sm md:text-base">
+              No infrastructure complexity. Just build and ship.
+            </p>
+          </Panel>
         </div>
+      </section>
 
-        <Panel className="opencodie-reveal opencodie-reveal-delay-1 opencodie-stack-md p-5 md:p-6">
-          <p className="text-sm md:text-base">
-            Deploy apps instantly. Everything is managed for you.
-          </p>
-          <p className="opencodie-stack-tight text-sm md:text-base">
-            No infrastructure complexity. Just build and ship.
-          </p>
-        </Panel>
+      <section className="opencodie-page-section-compact opencodie-overview">
+        <BringYourAiPanel className="opencodie-reveal-delay-2" />
+      </section>
 
-        <BringYourAiPanel className="opencodie-reveal-delay-2 opencodie-stack-md" />
-
-        <div className="opencodie-stack-md grid gap-4 lg:grid-cols-3">
+      <section className="opencodie-page-section opencodie-overview">
+        <div className="grid gap-4 lg:grid-cols-3">
           {plans.map((plan, index) => (
             <Panel
               key={plan.name}
@@ -166,7 +172,7 @@ export default function PricingPage() {
         </div>
       </section>
 
-      <section className="opencodie-band-dark">
+      <section className="opencodie-band-dark opencodie-overview">
         <div className="opencodie-section">
           <Panel className="opencodie-reveal space-y-3 p-5 md:p-6">
             <p className="text-sm uppercase tracking-[0.16em] text-[var(--opencodie-accent)]">
@@ -186,7 +192,7 @@ export default function PricingPage() {
         </div>
       </section>
 
-      <section className="opencodie-page-section">
+      <section className="opencodie-page-section opencodie-overview">
         <Panel className="opencodie-reveal p-5 md:p-6">
           <p className="text-sm uppercase tracking-[0.16em] text-[var(--opencodie-accent)]">
             Trust
@@ -204,7 +210,7 @@ export default function PricingPage() {
         </Panel>
       </section>
 
-      <section className="opencodie-band-dark">
+      <section className="opencodie-band-dark opencodie-overview">
         <div className="opencodie-section">
           <div className="opencodie-section-heading opencodie-reveal">
             <p className="text-sm uppercase tracking-[0.16em] text-[var(--opencodie-accent)]">
@@ -238,7 +244,7 @@ export default function PricingPage() {
         </div>
       </section>
 
-      <section className="opencodie-page-section">
+      <section className="opencodie-page-section opencodie-overview">
         <Panel className="opencodie-light-sweep opencodie-reveal p-6 md:p-8">
           <p className="text-sm uppercase tracking-[0.16em] text-[var(--opencodie-accent)]">
             Final CTA

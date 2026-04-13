@@ -103,8 +103,8 @@ const stackLabels = [
 export default function ProductPage() {
   return (
     <>
-      <section className="opencodie-page-hero">
-        <div className="grid gap-6 xl:grid-cols-[1fr_0.95fr] xl:items-end">
+      <section className="opencodie-page-hero opencodie-overview">
+        <div className="grid gap-6 xl:grid-cols-[1fr_0.95fr] xl:items-stretch">
           <div className="opencodie-section-heading opencodie-reveal">
             <p className="text-sm uppercase tracking-[0.16em] text-[var(--opencodie-accent)]">
               Product
@@ -134,10 +134,10 @@ export default function ProductPage() {
             </div>
           </div>
 
-          <Panel className="opencodie-light-sweep opencodie-reveal opencodie-reveal-delay-1 relative overflow-hidden p-5 md:p-6">
+          <Panel className="opencodie-light-sweep opencodie-reveal opencodie-reveal-delay-1 relative flex h-full min-h-[24rem] items-center overflow-hidden p-5 md:p-6 lg:min-h-[26rem]">
             <div className="opencodie-grid-drift absolute inset-0 bg-[linear-gradient(to_right,rgba(37,50,74,0.3)_1px,transparent_1px),linear-gradient(to_bottom,rgba(37,50,74,0.3)_1px,transparent_1px)] [background-size:24px_24px]" />
             <div className="opencodie-ambient-drift absolute -right-20 top-4 h-44 w-44 rounded-full bg-[radial-gradient(circle,_rgba(99,102,241,0.18)_0%,_rgba(99,102,241,0)_72%)]" />
-            <div className="relative space-y-4">
+            <div className="relative w-full space-y-4">
               <p className="text-xs uppercase tracking-[0.14em] text-[var(--opencodie-accent)]">
                 Product flow
               </p>
@@ -171,11 +171,11 @@ export default function ProductPage() {
         </div>
       </section>
 
-      <section className="opencodie-page-section-compact">
+      <section className="opencodie-page-section-compact opencodie-overview">
         <BringYourAiPanel />
       </section>
 
-      <section id="how-it-works" className="opencodie-page-section">
+      <section id="how-it-works" className="opencodie-page-section opencodie-overview">
         <div className="grid gap-4 lg:grid-cols-[1.1fr_0.9fr]">
           <Panel className="opencodie-reveal opencodie-light-sweep space-y-4 p-5 md:p-6">
             <p className="text-sm uppercase tracking-[0.16em] text-[var(--opencodie-accent)]">
@@ -242,7 +242,7 @@ export default function ProductPage() {
         </div>
       </section>
 
-      <section className="opencodie-page-section">
+      <section className="opencodie-page-section opencodie-overview">
         <div className="grid gap-4 lg:grid-cols-[1.1fr_0.9fr]">
           <Panel className="opencodie-reveal opencodie-interactive-card space-y-4 p-5 md:p-6">
             <p className="text-sm uppercase tracking-[0.16em] text-[var(--opencodie-accent)]">
@@ -289,7 +289,7 @@ export default function ProductPage() {
       </section>
 
       <section className="opencodie-band-dark">
-        <div className="opencodie-section">
+        <div className="opencodie-section opencodie-overview">
           <Panel className="opencodie-light-sweep opencodie-reveal relative overflow-hidden p-0">
             <div className="opencodie-grid-drift absolute inset-0 bg-[linear-gradient(to_right,rgba(37,50,74,0.28)_1px,transparent_1px),linear-gradient(to_bottom,rgba(37,50,74,0.28)_1px,transparent_1px)] [background-size:28px_28px]" />
             <div className="relative grid gap-4 p-5 md:grid-cols-[1.1fr_0.9fr] md:p-6">

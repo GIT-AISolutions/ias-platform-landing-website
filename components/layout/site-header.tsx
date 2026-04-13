@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import Link from "next/link";
 import { useId, useState } from "react";
 import { usePathname } from "next/navigation";
@@ -22,9 +23,14 @@ export function SiteHeader() {
       <div className="opencodie-nav-shell mx-auto w-full max-w-[1380px] rounded-2xl">
         <div className="flex min-h-12 items-center justify-between gap-3 px-3 py-2 md:min-h-20 md:gap-4 md:px-5">
           <Link href="/" className="flex items-center gap-3 rounded-xl px-2 py-1">
-            <span className="opencodie-brand-mark inline-flex h-9 w-9 items-center justify-center rounded-xl border border-[color-mix(in_srgb,var(--opencodie-accent)_52%,var(--opencodie-border))] bg-[color-mix(in_srgb,var(--opencodie-accent)_16%,var(--opencodie-bg-elevated))] text-xs font-semibold text-[var(--opencodie-accent)]">
-              OC
-            </span>
+            <Image
+              src={siteConfig.logoPath}
+              alt="OpenCodie logo"
+              width={40}
+              height={40}
+              className="h-10 w-10 object-contain"
+              priority
+            />
             <div className="leading-tight">
               <span className="block text-base font-semibold tracking-tight text-[var(--opencodie-text)] md:text-lg">
                 {siteConfig.name}

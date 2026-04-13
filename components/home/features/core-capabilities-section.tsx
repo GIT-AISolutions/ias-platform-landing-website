@@ -56,7 +56,7 @@ const capabilities = [
 
 export function CoreCapabilitiesSection() {
   return (
-    <section id="features" className="opencodie-section">
+    <section id="features" className="opencodie-section opencodie-overview">
       <div className="opencodie-section-heading opencodie-reveal">
         <p className="text-sm uppercase tracking-[0.16em] text-[var(--opencodie-accent)]">
           The Solution

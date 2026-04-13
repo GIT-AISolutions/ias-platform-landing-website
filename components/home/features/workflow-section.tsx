@@ -36,7 +36,7 @@ export function WorkflowSection() {
       id="product"
       className="border-y border-[var(--opencodie-border)]/90 bg-[color-mix(in_srgb,var(--opencodie-bg-panel)_78%,transparent)]"
     >
-      <div className="opencodie-section">
+      <div className="opencodie-section opencodie-overview">
         <div className="opencodie-section-heading opencodie-reveal">
           <p className="text-sm uppercase tracking-[0.16em] text-[var(--opencodie-accent)]">
             How It Works
