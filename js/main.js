@@ -46,18 +46,20 @@ if (heroHint) heroTl.fromTo(heroHint, { y: 12, opacity: 0 }, { y: 0, opacity: 1,
 /* ══════════════════════════════════════════
    HERO V2 — hero text fade on scroll
 ══════════════════════════════════════════ */
-ScrollTrigger.create({
-  trigger: '#hero',
-  start: 'top top',
-  end: 'bottom top',
-  scrub: 1.5,
-  onUpdate(self) {
-    const content = document.querySelector('.hero-intro-content');
-    if (content) {
-      gsap.set(content, { y: self.progress * 60, opacity: Math.max(0, 1 - self.progress * 1.4) });
+if (!window.matchMedia('(max-width: 560px)').matches) {
+  ScrollTrigger.create({
+    trigger: '#hero',
+    start: 'top top',
+    end: 'bottom top',
+    scrub: 1.5,
+    onUpdate(self) {
+      const content = document.querySelector('.hero-intro-content');
+      if (content) {
+        gsap.set(content, { y: self.progress * 60, opacity: Math.max(0, 1 - self.progress * 1.4) });
+      }
     }
-  }
-});
+  });
+}
 
 /* ══════════════════════════════════════════
    VIDEO DEMO — MACBOOK CINEMA

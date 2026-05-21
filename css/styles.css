@@ -141,10 +141,14 @@ nav.is-open .nav-burger span:nth-child(3) { transform: translateY(-7px) rotate(-
 /* Mobile dropdown menu */
 .nav-mobile {
   display: none;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
   flex-direction: column;
   gap: 1.5rem;
   padding: 1.25rem 1.5rem 1.75rem;
-  margin-top: 1.5rem;
+  margin-top: 0;
   background: rgba(6,13,21,0.96);
   backdrop-filter: blur(20px) saturate(1.6);
   -webkit-backdrop-filter: blur(20px) saturate(1.6);
@@ -1990,6 +1994,42 @@ footer {
 }
 
 @media (max-width: 560px) {
+  nav {
+    padding: 1rem 0 1.25rem;
+  }
+  nav .container {
+    padding: 0 1.25rem;
+  }
+  nav .logo img {
+    height: 40px;
+  }
+  #hero {
+    min-height: auto;
+    padding-top: 7rem;
+    padding-bottom: 4rem;
+  }
+  .hero-eyebrow {
+    margin-bottom: 1rem;
+  }
+  #hero-h1 {
+    font-size: clamp(2.15rem, 11vw, 3rem);
+    margin-bottom: 1rem;
+  }
+  .hero-subtext {
+    font-size: 1rem;
+    line-height: 1.65;
+    margin-bottom: 1.5rem;
+  }
+  #hero-actions {
+    margin-bottom: 0;
+  }
+  #hero-actions .btn {
+    width: 100%;
+    justify-content: center;
+  }
+  .hero-scroll-hint {
+    display: none;
+  }
   .vd-sticky { padding: 4rem 1.25rem 3rem; }
   .vd-title  { font-size: 2rem; }
   .vd-laptop-wrap { width: 96vw; }

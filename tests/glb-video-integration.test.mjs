@@ -14,6 +14,7 @@ assert.match(indexHtml, /data-video-src="video\/Video_opencodie\.mp4"/, 'model s
 assert.match(indexHtml, /<script type="importmap">/, 'index.html should define an import map for Three.js modules');
 assert.match(indexHtml, /"three": "https:\/\/unpkg\.com\/three@0\.160\.0\/build\/three\.module\.js"/, 'import map should resolve the Three.js module');
 
+assert.match(mainJs, /if \(!window\.matchMedia\('\(max-width: 560px\)'\)\.matches\) \{[\s\S]*ScrollTrigger\.create\(\{[\s\S]*trigger: '#hero'/, 'mobile hero should not fade into an empty panel while scrolling');
 assert.match(mainJs, /GLTFLoader/, 'main.js should load GLTFLoader');
 assert.match(mainJs, /import\('three'\)/, 'main.js should load Three.js through the import map');
 assert.match(mainJs, /VideoTexture/, 'main.js should create a video texture for the laptop screen');
@@ -89,6 +90,9 @@ assert.equal(
 );
 
 assert.match(stylesCss, /\.vd-laptop-wrap\s*{[\s\S]*width: min\(52vw, 720px\)/, 'desktop laptop container should stay within the layout column');
+assert.match(stylesCss, /@media \(max-width: 560px\) \{[\s\S]*#hero\s*{[\s\S]*min-height: auto;[\s\S]*padding-top: 7rem;[\s\S]*padding-bottom: 4rem;/, 'mobile hero should be content-sized instead of leaving a 100vh blank gap');
+assert.match(stylesCss, /@media \(max-width: 560px\) \{[\s\S]*\.hero-scroll-hint\s*{[\s\S]*display: none;/, 'mobile hero should hide the scroll hint to reduce vertical gap');
+assert.match(stylesCss, /\.nav-mobile\s*{[\s\S]*position: absolute;[\s\S]*top: 100%;[\s\S]*margin-top: 0;/, 'closed mobile nav menu should not reserve vertical space in the fixed header');
 
 assert.match(appPy, /app\.mount\("\/video", StaticFiles\(directory="video"\), name="video"\)/, 'FastAPI should serve video and GLB assets');
 assert.match(appPy, /@app\.get\("\/health"\)/, 'FastAPI should expose a Coolify health endpoint');
