@@ -16,6 +16,7 @@
 __MACOSX/
 images/__MACOSX/
 *.pem
+__pycache__/
 
 # debug logs
 npm-debug.log*

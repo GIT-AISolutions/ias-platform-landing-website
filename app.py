@@ -27,6 +27,11 @@ app.add_middleware(
 )
 
 
+@app.get("/health")
+async def health() -> dict[str, str]:
+    return {"status": "ok"}
+
+
 @app.post("/api/chat")
 async def chat(request: ChatRequest) -> dict[str, Any]:
     token = os.getenv("STACKAI_API_KEY")

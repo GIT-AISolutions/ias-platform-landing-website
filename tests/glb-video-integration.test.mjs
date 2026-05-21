@@ -5,6 +5,8 @@ const indexHtml = fs.readFileSync('index.html', 'utf8');
 const mainJs = fs.readFileSync('js/main.js', 'utf8');
 const appPy = fs.readFileSync('app.py', 'utf8');
 const stylesCss = fs.readFileSync('css/styles.css', 'utf8');
+const dockerfile = fs.readFileSync('Dockerfile', 'utf8');
+const dockerignore = fs.readFileSync('.dockerignore', 'utf8');
 
 assert.match(indexHtml, /id="vd-model-stage"/, 'index.html should expose a GLB model stage');
 assert.match(indexHtml, /data-model-src="video\/laptop_website_no_camera\.glb"/, 'model stage should point at the GLB asset');
@@ -89,3 +91,12 @@ assert.equal(
 assert.match(stylesCss, /\.vd-laptop-wrap\s*{[\s\S]*width: min\(52vw, 720px\)/, 'desktop laptop container should stay within the layout column');
 
 assert.match(appPy, /app\.mount\("\/video", StaticFiles\(directory="video"\), name="video"\)/, 'FastAPI should serve video and GLB assets');
+assert.match(appPy, /@app\.get\("\/health"\)/, 'FastAPI should expose a Coolify health endpoint');
+assert.match(dockerfile, /FROM python:3\.12-slim/, 'Dockerfile should use a slim Python runtime');
+assert.match(dockerfile, /pip install --no-cache-dir -r requirements\.txt/, 'Dockerfile should install Python requirements');
+assert.match(dockerfile, /EXPOSE 8000/, 'Dockerfile should expose the default app port');
+assert.match(dockerfile, /uvicorn app:app --host 0\.0\.0\.0 --port \$\{PORT:-8000\}/, 'Dockerfile should run uvicorn on Coolify-provided PORT');
+assert.match(dockerfile, /HEALTHCHECK[\s\S]*\/health/, 'Dockerfile should include a healthcheck against /health');
+assert.match(dockerignore, /^backups\/$/m, 'Docker image should not include local backup snapshots');
+assert.match(dockerignore, /^tests\/$/m, 'Docker image should not include test files');
+assert.match(dockerignore, /^output\/$/m, 'Docker image should not include Playwright screenshots');
