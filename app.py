@@ -1,4 +1,6 @@
 import os
+import smtplib
+from email.message import EmailMessage
 from typing import Any
 
 import httpx
@@ -6,6 +8,7 @@ from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import FileResponse
 from fastapi.staticfiles import StaticFiles
+from starlette.concurrency import run_in_threadpool
 from pydantic import BaseModel, Field
 
 
@@ -15,6 +18,13 @@ STACKAI_API_URL = "https://api.stackai.com/inference/v0/run/b3d86049-9974-41b0-a
 class ChatRequest(BaseModel):
     message: str = Field(..., min_length=1, max_length=4000)
     user_id: str = ""
+
+
+class ContactRequest(BaseModel):
+    name: str = Field(..., min_length=1, max_length=120)
+    email: str = Field(..., min_length=3, max_length=254)
+    subject: str = Field(..., min_length=1, max_length=160)
+    message: str = Field(..., min_length=1, max_length=4000)
 
 
 app = FastAPI(title="OpenCodie website")
@@ -64,6 +74,56 @@ async def chat(request: ChatRequest) -> dict[str, Any]:
         "answer": extract_answer(data),
         "raw": data,
     }
+
+
+@app.post("/api/contact")
+async def contact(request: ContactRequest) -> dict[str, str]:
+    if "@" not in request.email:
+        raise HTTPException(status_code=422, detail="Please provide a valid email address")
+
+    try:
+        await run_in_threadpool(send_contact_email, request)
+    except RuntimeError as exc:
+        raise HTTPException(status_code=500, detail=str(exc)) from exc
+    except (OSError, smtplib.SMTPException) as exc:
+        raise HTTPException(status_code=502, detail="Could not send contact email") from exc
+
+    return {"status": "sent"}
+
+
+def send_contact_email(request: ContactRequest) -> None:
+    username = os.getenv("GMAIL_SMTP_USERNAME")
+    password = os.getenv("GMAIL_APP_PASSWORD")
+    recipient = os.getenv("CONTACT_RECIPIENT_EMAIL", "contact.innovative.ai@gmail.com")
+    from_email = os.getenv("CONTACT_FROM_EMAIL", username or "")
+    host = os.getenv("GMAIL_SMTP_HOST", "smtp.gmail.com")
+    port = int(os.getenv("GMAIL_SMTP_PORT", "465"))
+
+    if not username or not password:
+        raise RuntimeError("GMAIL_SMTP_USERNAME and GMAIL_APP_PASSWORD are not configured")
+
+    msg = EmailMessage()
+    msg["Subject"] = f"[OpenCodie contact] {request.subject}"
+    msg["From"] = from_email
+    msg["To"] = recipient
+    msg["Reply-To"] = request.email
+    msg.set_content(
+        "\n".join(
+            [
+                "New OpenCodie contact form message",
+                "",
+                f"Name: {request.name}",
+                f"Email: {request.email}",
+                f"Subject: {request.subject}",
+                "",
+                request.message,
+            ]
+        )
+    )
+
+    with smtplib.SMTP_SSL(host, port, timeout=20) as smtp:
+        smtp.login(username, password)
+        smtp.send_message(msg)
 
 
 def extract_answer(data: Any) -> str:

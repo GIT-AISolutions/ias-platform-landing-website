@@ -955,20 +955,46 @@ document.querySelectorAll('.faq-q').forEach(btn => {
 ══════════════════════════════════════════ */
 const contactForm = document.getElementById('contact-form');
 if (contactForm) {
-  contactForm.addEventListener('submit', e => {
+  contactForm.addEventListener('submit', async e => {
     e.preventDefault();
     const fields = contactForm.querySelectorAll('input, textarea');
+    const submitButton = contactForm.querySelector('button[type="submit"]');
+    const success = document.getElementById('form-success');
+    const error = document.getElementById('form-error');
     let valid = true;
     fields.forEach(f => {
       f.classList.remove('error');
-      if (!f.value.trim()) { f.classList.add('error'); valid = false; }
+      if (!f.value.trim() || (f.type === 'email' && !f.validity.valid)) {
+        f.classList.add('error');
+        valid = false;
+      }
     });
     if (!valid) return;
-    contactForm.querySelector('.form-footer').style.display = 'none';
-    const success = document.getElementById('form-success');
-    success.classList.add('visible');
-    lucide.createIcons();
-    contactForm.reset();
+    const payload = Object.fromEntries(new FormData(contactForm).entries());
+
+    success.classList.remove('visible');
+    error.classList.remove('visible');
+    submitButton.disabled = true;
+    submitButton.textContent = 'Sending...';
+
+    try {
+      const response = await fetch('/api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload)
+      });
+      if (!response.ok) throw new Error('Contact form failed to send');
+
+      contactForm.querySelector('.form-footer').style.display = 'none';
+      success.classList.add('visible');
+      lucide.createIcons();
+      contactForm.reset();
+    } catch {
+      error.classList.add('visible');
+    } finally {
+      submitButton.disabled = false;
+      submitButton.textContent = 'Send message →';
+    }
   });
 }
 

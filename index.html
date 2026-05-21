@@ -61,7 +61,7 @@
   <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png?v=4" />
   <link rel="shortcut icon" href="favicon.ico?v=4" />
   <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png?v=4" />
-  <link rel="stylesheet" href="css/styles.css?v=38" />
+  <link rel="stylesheet" href="css/styles.css?v=41" />
   <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/marked@12.0.0/marked.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/dompurify@3.1.6/dist/purify.min.js"></script>
@@ -718,6 +718,9 @@
       <div class="form-footer">
         <button type="submit" class="btn btn-primary">Send message &rarr;</button>
         <p class="form-note">We typically reply within 1 business day.</p>
+      </div>
+      <div class="form-error" id="form-error" role="alert">
+        <span>Could not send your message. Please try again.</span>
       </div>
       <div class="form-success" id="form-success">
         <i data-lucide="check-circle"></i>

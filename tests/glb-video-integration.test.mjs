@@ -2,15 +2,19 @@ import assert from 'node:assert/strict';
 import fs from 'node:fs';
 
 const indexHtml = fs.readFileSync('index.html', 'utf8');
+const docsHtml = fs.readFileSync('docs.html', 'utf8');
+const legalHtml = fs.readFileSync('legal.html', 'utf8');
 const mainJs = fs.readFileSync('js/main.js', 'utf8');
+const docsJs = fs.readFileSync('js/docs.js', 'utf8');
 const appPy = fs.readFileSync('app.py', 'utf8');
 const stylesCss = fs.readFileSync('css/styles.css', 'utf8');
+const docsCss = fs.readFileSync('css/docs.css', 'utf8');
 const dockerfile = fs.readFileSync('Dockerfile', 'utf8');
 const dockerignore = fs.readFileSync('.dockerignore', 'utf8');
 
 assert.match(indexHtml, /id="vd-model-stage"/, 'index.html should expose a GLB model stage');
 assert.match(indexHtml, /data-model-src="video\/laptop_website_no_camera\.glb"/, 'model stage should point at the GLB asset');
-assert.match(indexHtml, /data-video-src="video\/Video_opencodie\.mp4"/, 'model stage should point at the demo video asset');
+assert.match(indexHtml, /data-video-src="video\/Video_opencodie_web\.mp4"/, 'model stage should point at the web-optimized demo video asset');
 assert.match(indexHtml, /<script type="importmap">/, 'index.html should define an import map for Three.js modules');
 assert.match(indexHtml, /"three": "https:\/\/unpkg\.com\/three@0\.160\.0\/build\/three\.module\.js"/, 'import map should resolve the Three.js module');
 
@@ -70,9 +74,9 @@ assert.match(mainJs, /const endStraightenT = closedOverride \? Math\.max\(0, Mat
 assert.match(mainJs, /camera\.position\.lerp\(camStartPos, endStraightenT\);/, 'closed end state should return to the top-down starting camera');
 assert.match(mainJs, /camera\.quaternion\.slerp\(camStartQuat, endStraightenT\);/, 'closed end state should match the first-frame camera angle');
 assert.match(mainJs, /model\.rotation\.x = 0\.28 \* tiltEase \* \(1 - endStraightenT\);/, 'laptop should stand straight on the final closed frame');
-assert.match(mainJs, /const displayProgress = Math\.min\(scrollProgress, OPEN_SCROLL_PROGRESS\);/, 'normal scroll should stay on the open part of the GLB timeline');
+assert.match(mainJs, /const displayProgress = Math\.min\(getVisualProgress\(scrollProgress\), OPEN_SCROLL_PROGRESS\);/, 'normal scroll should stay on the open part of the GLB timeline while mobile avoids the closed black tile');
 assert.match(mainJs, /const dp = closedOverride \? overrideProgress : displayProgress;/, 'only the close override should use the GLB final closed frames');
-assert.match(mainJs, /const videoProgress = Math\.min\(scrollProgress, OPEN_SCROLL_PROGRESS\);[\s\S]*const lidT = Math\.max\(0, Math\.min\(1, \(videoProgress - CAM_TRANSITION\) \/ \(OPEN_SCROLL_PROGRESS - CAM_TRANSITION\)\)\);/, 'video seeking should follow the clamped open scroll progress');
+assert.match(mainJs, /const videoProgress = Math\.min\(getVisualProgress\(scrollProgress\), OPEN_SCROLL_PROGRESS\);[\s\S]*const lidT = Math\.max\(0, Math\.min\(1, \(videoProgress - CAM_TRANSITION\) \/ \(OPEN_SCROLL_PROGRESS - CAM_TRANSITION\)\)\);/, 'video seeking should follow the clamped open scroll progress while mobile avoids the closed black tile');
 assert.match(mainJs, /onEnterBack\(self\) \{[\s\S]*laptopScene\.releaseOverride\(\); laptopScene\.setProgress\(self\.progress\);/, 'scrolling back into the section should explicitly restore scroll control at the current progress');
 assert.match(mainJs, /onLeaveBack\(\) \{[\s\S]*laptopScene\.releaseOverride\(\); laptopScene\.setProgress\(0\);/, 'leaving upward should explicitly reset the laptop to the start state');
 assert.match(mainJs, /screenPlaneWidthScale: 1\.015,/, 'video plane should fill the laptop screen width while avoiding side gaps');
@@ -93,16 +97,38 @@ assert.equal(
 );
 
 assert.match(stylesCss, /\.vd-laptop-wrap\s*{[\s\S]*width: min\(52vw, 720px\)/, 'desktop laptop container should stay within the layout column');
+assert.doesNotMatch(stylesCss, /\.vd-step-body::before\s*{[\s\S]*background-image:\s*url\("data:image\/svg\+xml/, 'video demo step accent should be a straight line, not repeated chevrons');
+assert.match(stylesCss, /\.plat-connector::before\s*{[\s\S]*border-right: 2px solid var\(--accent\);[\s\S]*border-bottom: 2px solid var\(--accent\);[\s\S]*transform: rotate\(45deg\) scale\(0\.72\);/, 'platform connectors should render as downward arrows instead of vertical lines');
 assert.match(stylesCss, /\.comp-wrap\s*{[\s\S]*overflow-x: auto;[\s\S]*-webkit-overflow-scrolling: touch;/, 'pricing comparison table should not widen the mobile page');
-assert.match(stylesCss, /@media \(max-width: 560px\) \{[\s\S]*#hero\s*{[\s\S]*min-height: auto;[\s\S]*padding-top: 7rem;[\s\S]*padding-bottom: 4rem;/, 'mobile hero should be content-sized instead of leaving a 100vh blank gap');
+assert.match(stylesCss, /@media \(max-width: 560px\) \{[\s\S]*#hero\s*{[\s\S]*min-height: 100svh;[\s\S]*padding-top: 7rem;[\s\S]*padding-bottom: 4rem;/, 'mobile hero should own the first viewport instead of showing a clipped next-section title');
 assert.match(stylesCss, /@media \(max-width: 560px\) \{[\s\S]*\.hero-scroll-hint\s*{[\s\S]*display: none;/, 'mobile hero should hide the scroll hint to reduce vertical gap');
 assert.match(stylesCss, /@media \(max-width: 560px\) \{[\s\S]*\.logo-marquee\s*{[\s\S]*display: none;/, 'mobile should hide decorative logo marquee to avoid page-wide horizontal overflow');
 assert.match(stylesCss, /\.nav-mobile\s*{[\s\S]*position: absolute;[\s\S]*top: 100%;[\s\S]*margin-top: 0;/, 'closed mobile nav menu should not reserve vertical space in the fixed header');
 assert.match(stylesCss, /\.logo-marquee\s*{[\s\S]*position: relative;[\s\S]*overflow: clip;[\s\S]*contain: paint;[\s\S]*height: 5rem;/, 'mobile page should prevent animated logo marquee from creating horizontal overflow');
 assert.match(stylesCss, /\.logo-track\s*{[\s\S]*position: absolute;[\s\S]*top: 0\.75rem;[\s\S]*left: 0;/, 'animated logo track should be removed from normal flow to avoid document overflow');
-assert.match(stylesCss, /@media \(max-width: 560px\) \{[\s\S]*\.vd-sticky\s*{[\s\S]*padding: calc\(76px \+ 1rem\) 1rem 2\.25rem;/, 'mobile video demo should keep its title below the fixed nav');
-assert.match(stylesCss, /@media \(max-width: 560px\) \{[\s\S]*\.vd-laptop-wrap\s*{[\s\S]*width: min\(100%, 22\.5rem\);[\s\S]*max-width: calc\(100vw - 2rem\);/, 'mobile laptop should have explicit responsive sizing without overflowing');
+assert.match(stylesCss, /@media \(max-width: 560px\) \{[\s\S]*\.vd-sticky\s*{[\s\S]*padding: calc\(76px \+ 0\.5rem\) 1rem 4rem;[\s\S]*justify-content: center;/, 'mobile video demo should center the demo group below the fixed nav');
+assert.match(stylesCss, /@media \(max-width: 560px\) \{[\s\S]*\.vd-layout\s*{[\s\S]*flex: 0 1 auto;/, 'mobile video demo layout should not stretch to the top of the viewport');
+assert.match(stylesCss, /@media \(max-width: 560px\) \{[\s\S]*\.vd-laptop-wrap\s*{[\s\S]*width: min\(100%, 21\.5rem\);[\s\S]*max-width: calc\(100vw - 2rem\);/, 'mobile laptop should have explicit responsive sizing without overflowing');
 assert.match(stylesCss, /@media \(max-width: 560px\) \{[\s\S]*\.site-chat-toggle\s*{[\s\S]*width: 40px;[\s\S]*height: 40px;/, 'mobile chat button should be compact enough to avoid demo content');
+assert.doesNotMatch(stylesCss, /@media \(max-width: 960px\) \{[\s\S]*section\s*{[\s\S]*min-height: 100svh;/, 'mobile should not force every section to a viewport height');
+assert.match(stylesCss, /@media \(max-width: 560px\) \{[\s\S]*\.cookie-inner\s*{[\s\S]*flex-direction: column;[\s\S]*align-items: stretch;/, 'mobile cookie banner should stack content and actions inside the viewport');
+assert.match(stylesCss, /@media \(max-width: 560px\) \{[\s\S]*\.footer-bottom\s*{[\s\S]*flex-direction: column;[\s\S]*align-items: flex-start;/, 'mobile footer bottom should stack instead of squeezing content');
+
+for (const [name, html] of [['docs', docsHtml], ['legal', legalHtml]]) {
+  assert.match(html, /class="nav-burger"[\s\S]*aria-expanded="false"/, `${name}: mobile nav should expose a burger button`);
+  assert.match(html, /class="nav-mobile"[\s\S]*aria-hidden="true"/, `${name}: mobile nav should include an accessible dropdown`);
+  assert.match(html, /class="docs-mobile-toggle"[\s\S]*aria-expanded="false"/, `${name}: docs sidebar toggle should expose expanded state`);
+}
+
+assert.match(docsCss, /@media \(max-width: 900px\) \{[\s\S]*\.docs-sidebar\s*{[\s\S]*width: min\(82vw, 300px\);[\s\S]*height: calc\(100dvh - 72px\);/, 'docs mobile sidebar should fit the viewport below the fixed nav');
+assert.match(docsCss, /@media \(max-width: 900px\) \{[\s\S]*\.docs-mobile-toggle\s*{[\s\S]*left: 1rem;[\s\S]*right: auto;/, 'docs mobile sidebar toggle should avoid the chat toggle on the right');
+assert.match(docsCss, /\.doc-section \.table-wrap\s*{[\s\S]*overflow-x: auto;[\s\S]*-webkit-overflow-scrolling: touch;/, 'docs tables should scroll horizontally on small screens');
+assert.match(docsCss, /@media \(max-width: 560px\) \{[\s\S]*\.doc-section h2\s*{[\s\S]*overflow-wrap: anywhere;/, 'docs headings should wrap long legal/documentation labels on phones');
+assert.match(docsJs, /function setSidebarOpen\(open\)/, 'docs sidebar state should be centralized for aria and close behavior');
+assert.match(docsJs, /keydown[\s\S]*Escape[\s\S]*setSidebarOpen\(false\)/, 'docs sidebar and mobile nav should close on Escape');
+assert.match(mainJs, /mobileStartProgress: 0\.40,/, 'mobile video demo should start with the laptop already open enough to avoid a black closed tile');
+assert.match(mainJs, /function getVisualProgress\(progress\) \{[\s\S]*return isMobile \? Math\.max\(progress, VIDEO_DEMO_CONFIG\.mobileStartProgress\) : progress;[\s\S]*\}/, 'mobile laptop rendering should use a visual progress floor while preserving scroll progress');
+assert.match(mainJs, /const displayProgress = Math\.min\(getVisualProgress\(scrollProgress\), OPEN_SCROLL_PROGRESS\);/, 'normal mobile render should avoid the closed black laptop at the top of the demo');
 
 assert.match(appPy, /app\.mount\("\/video", StaticFiles\(directory="video"\), name="video"\)/, 'FastAPI should serve video and GLB assets');
 assert.match(appPy, /@app\.get\("\/health"\)/, 'FastAPI should expose a Coolify health endpoint');
