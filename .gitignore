@@ -10,6 +10,9 @@
 /build
 /output/
 /.playwright-cli/
+/backups/
+/opencodie-homepage-claude/
+/opencodie-homepage-claude-minimal/
 
 # misc
 .DS_Store
