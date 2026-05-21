@@ -15,6 +15,9 @@ assert.match(indexHtml, /<script type="importmap">/, 'index.html should define a
 assert.match(indexHtml, /"three": "https:\/\/unpkg\.com\/three@0\.160\.0\/build\/three\.module\.js"/, 'import map should resolve the Three.js module');
 
 assert.match(mainJs, /if \(!window\.matchMedia\('\(max-width: 560px\)'\)\.matches\) \{[\s\S]*ScrollTrigger\.create\(\{[\s\S]*trigger: '#hero'/, 'mobile hero should not fade into an empty panel while scrolling');
+assert.match(mainJs, /const useCompactScrollReveals = window\.matchMedia\('\(max-width: 560px\)'\)\.matches;/, 'mobile reveal animations should use compact offsets to avoid horizontal overflow');
+assert.match(mainJs, /\{ x: useCompactScrollReveals \? 0 : -40, opacity: 0 \}/, 'mobile problem card reveal should not start offscreen');
+assert.match(mainJs, /\{ x: useCompactScrollReveals \? 0 : 40, opacity: 0 \}/, 'mobile solution card reveal should not start offscreen');
 assert.match(mainJs, /GLTFLoader/, 'main.js should load GLTFLoader');
 assert.match(mainJs, /import\('three'\)/, 'main.js should load Three.js through the import map');
 assert.match(mainJs, /VideoTexture/, 'main.js should create a video texture for the laptop screen');
@@ -90,9 +93,16 @@ assert.equal(
 );
 
 assert.match(stylesCss, /\.vd-laptop-wrap\s*{[\s\S]*width: min\(52vw, 720px\)/, 'desktop laptop container should stay within the layout column');
+assert.match(stylesCss, /\.comp-wrap\s*{[\s\S]*overflow-x: auto;[\s\S]*-webkit-overflow-scrolling: touch;/, 'pricing comparison table should not widen the mobile page');
 assert.match(stylesCss, /@media \(max-width: 560px\) \{[\s\S]*#hero\s*{[\s\S]*min-height: auto;[\s\S]*padding-top: 7rem;[\s\S]*padding-bottom: 4rem;/, 'mobile hero should be content-sized instead of leaving a 100vh blank gap');
 assert.match(stylesCss, /@media \(max-width: 560px\) \{[\s\S]*\.hero-scroll-hint\s*{[\s\S]*display: none;/, 'mobile hero should hide the scroll hint to reduce vertical gap');
+assert.match(stylesCss, /@media \(max-width: 560px\) \{[\s\S]*\.logo-marquee\s*{[\s\S]*display: none;/, 'mobile should hide decorative logo marquee to avoid page-wide horizontal overflow');
 assert.match(stylesCss, /\.nav-mobile\s*{[\s\S]*position: absolute;[\s\S]*top: 100%;[\s\S]*margin-top: 0;/, 'closed mobile nav menu should not reserve vertical space in the fixed header');
+assert.match(stylesCss, /\.logo-marquee\s*{[\s\S]*position: relative;[\s\S]*overflow: clip;[\s\S]*contain: paint;[\s\S]*height: 5rem;/, 'mobile page should prevent animated logo marquee from creating horizontal overflow');
+assert.match(stylesCss, /\.logo-track\s*{[\s\S]*position: absolute;[\s\S]*top: 0\.75rem;[\s\S]*left: 0;/, 'animated logo track should be removed from normal flow to avoid document overflow');
+assert.match(stylesCss, /@media \(max-width: 560px\) \{[\s\S]*\.vd-sticky\s*{[\s\S]*padding: calc\(76px \+ 1rem\) 1rem 2\.25rem;/, 'mobile video demo should keep its title below the fixed nav');
+assert.match(stylesCss, /@media \(max-width: 560px\) \{[\s\S]*\.vd-laptop-wrap\s*{[\s\S]*width: min\(100%, 22\.5rem\);[\s\S]*max-width: calc\(100vw - 2rem\);/, 'mobile laptop should have explicit responsive sizing without overflowing');
+assert.match(stylesCss, /@media \(max-width: 560px\) \{[\s\S]*\.site-chat-toggle\s*{[\s\S]*width: 40px;[\s\S]*height: 40px;/, 'mobile chat button should be compact enough to avoid demo content');
 
 assert.match(appPy, /app\.mount\("\/video", StaticFiles\(directory="video"\), name="video"\)/, 'FastAPI should serve video and GLB assets');
 assert.match(appPy, /@app\.get\("\/health"\)/, 'FastAPI should expose a Coolify health endpoint');

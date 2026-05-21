@@ -690,13 +690,23 @@ nav.is-open .nav-mobile {
 ══════════════════════════════════════════ */
 /* ── Infinite marquee ── */
 .logo-marquee {
-  overflow: hidden;
+  position: relative;
+  overflow: clip;
+  contain: paint;
+  max-width: 100%;
+  height: 5rem;
   padding: 0.75rem 0;
   margin: -0.75rem 0 3.25rem;
   -webkit-mask-image: linear-gradient(90deg, transparent 0%, black 12%, black 88%, transparent 100%);
   mask-image: linear-gradient(90deg, transparent 0%, black 12%, black 88%, transparent 100%);
 }
+@supports not (overflow: clip) {
+  .logo-marquee { overflow: hidden; }
+}
 .logo-track {
+  position: absolute;
+  top: 0.75rem;
+  left: 0;
   display: flex;
   gap: 1rem;
   width: max-content;
@@ -785,7 +795,12 @@ nav.is-open .nav-mobile {
 }
 .fair-box p { font-size: 0.875rem; line-height: 1.7; }
 
-.comp-wrap { max-width: 800px; margin: 0 auto; }
+.comp-wrap {
+  max-width: 800px;
+  margin: 0 auto;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
 .comp-wrap h3 { text-align: center; font-size: 1.25rem; margin-bottom: 2rem; }
 table { width: 100%; border-collapse: collapse; border-radius: var(--radius); overflow: hidden; }
 thead th {
@@ -2030,7 +2045,70 @@ footer {
   .hero-scroll-hint {
     display: none;
   }
-  .vd-sticky { padding: 4rem 1.25rem 3rem; }
-  .vd-title  { font-size: 2rem; }
-  .vd-laptop-wrap { width: 96vw; }
+  .logo-marquee {
+    display: none;
+  }
+  .vd-sticky {
+    padding: calc(76px + 1rem) 1rem 2.25rem;
+    gap: 0.35rem;
+    justify-content: flex-start;
+  }
+  .vd-header {
+    width: 100%;
+    max-width: 22rem;
+    padding: 0;
+    margin: 0 auto 0.25rem;
+    gap: 0.45rem;
+  }
+  .vd-title  {
+    font-size: clamp(1.65rem, 8vw, 2rem);
+    line-height: 1.05;
+    margin: 0 0 0.45rem;
+  }
+  .vd-sub {
+    font-size: 0.95rem;
+    line-height: 1.55;
+  }
+  .vd-layout {
+    gap: 0.25rem;
+    align-content: start;
+  }
+  .vd-laptop-col {
+    min-height: 14.25rem;
+    align-items: center;
+  }
+  .vd-laptop-wrap {
+    width: min(100%, 22.5rem);
+    max-width: calc(100vw - 2rem);
+  }
+  .vd-text-col {
+    width: 100%;
+    max-width: 21rem;
+    margin: 0 auto;
+    min-height: 7.5rem;
+  }
+  .vd-step {
+    padding: 0.25rem 0 0;
+  }
+  .vd-step-body {
+    gap: 0.45rem;
+    padding-left: 0.85rem;
+  }
+  .vd-step-desc {
+    font-size: 0.88rem;
+    line-height: 1.55;
+  }
+  .site-chat {
+    right: 0.65rem;
+    bottom: 0.65rem;
+  }
+  .site-chat-toggle {
+    width: 40px;
+    height: 40px;
+  }
+  .site-chat-toggle img,
+  .site-chat-toggle svg {
+    width: 23px;
+    height: 23px;
+  }
 }

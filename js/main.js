@@ -643,16 +643,17 @@ gsap.utils.toArray('.section-header p, .section-header .eyebrow').forEach(el => 
 ══════════════════════════════════════════ */
 const psLeft = document.querySelector('#ps .ps-card.problem');
 const psRight = document.querySelector('#ps .ps-card.solution');
+const useCompactScrollReveals = window.matchMedia('(max-width: 560px)').matches;
 if (psLeft) {
   gsap.fromTo(psLeft,
-    { x: -40, opacity: 0 },
+    { x: useCompactScrollReveals ? 0 : -40, opacity: 0 },
     { x: 0, opacity: 1, duration: 1.1, ease: 'expo.out',
       scrollTrigger: { trigger: '#ps', start: 'top 84%', toggleActions: 'play none none none' } }
   );
 }
 if (psRight) {
   gsap.fromTo(psRight,
-    { x: 40, opacity: 0 },
+    { x: useCompactScrollReveals ? 0 : 40, opacity: 0 },
     { x: 0, opacity: 1, duration: 1.1, ease: 'expo.out', delay: 0.12,
       scrollTrigger: { trigger: '#ps', start: 'top 84%', toggleActions: 'play none none none' } }
   );
@@ -830,7 +831,7 @@ planCards.forEach((card, i) => {
    CONTROL PILLARS — fan-in
 ══════════════════════════════════════════ */
 gsap.utils.toArray('#control .pillar').forEach((pillar, i) => {
-  const xFrom = i === 0 ? -30 : i === 2 ? 30 : 0;
+  const xFrom = useCompactScrollReveals ? 0 : i === 0 ? -30 : i === 2 ? 30 : 0;
   gsap.fromTo(pillar,
     { x: xFrom, y: 22, opacity: 0 },
     {

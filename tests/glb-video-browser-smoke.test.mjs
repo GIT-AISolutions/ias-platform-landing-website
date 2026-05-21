@@ -69,6 +69,58 @@ try {
     await page.waitForSelector('#vd-model-canvas', { timeout: 15000 });
     await page.waitForTimeout(4500);
 
+    if (viewport.name === 'mobile') {
+      const initialMobile = await page.evaluate(() => {
+        const nav = document.querySelector('nav');
+        const heroContent = document.querySelector('.hero-intro-content');
+        const doc = document.documentElement;
+        return {
+          navHeight: nav.getBoundingClientRect().height,
+          heroOpacity: Number(getComputedStyle(heroContent).opacity),
+          horizontalOverflow: doc.scrollWidth - doc.clientWidth,
+        };
+      });
+
+      await page.evaluate(() => {
+        const section = document.querySelector('#video-demo');
+        const top = section.getBoundingClientRect().top + window.scrollY;
+        window.scrollTo(0, top);
+      });
+      await page.waitForTimeout(700);
+
+      const mobileDemoStart = await page.evaluate(() => {
+        const nav = document.querySelector('nav');
+        const title = document.querySelector('.vd-title');
+        const canvas = document.querySelector('#vd-model-canvas');
+        const activeStep = document.querySelector('.vd-step.is-active');
+        const chat = document.querySelector('.site-chat-toggle');
+        const navRect = nav.getBoundingClientRect();
+        const titleRect = title.getBoundingClientRect();
+        const canvasRect = canvas.getBoundingClientRect();
+        const stepRect = activeStep.getBoundingClientRect();
+        const chatRect = chat.getBoundingClientRect();
+        return {
+          navBottom: navRect.bottom,
+          titleTop: titleRect.top,
+          titleBottom: titleRect.bottom,
+          canvasTop: canvasRect.top,
+          canvasWidth: canvasRect.width,
+          canvasHeight: canvasRect.height,
+          stepBottom: stepRect.bottom,
+          chatTop: chatRect.top,
+        };
+      });
+
+      assert.ok(initialMobile.navHeight <= 90, `mobile: closed nav should stay compact; height=${initialMobile.navHeight}`);
+      assert.ok(initialMobile.heroOpacity >= 0.95, `mobile: hero content should not fade out into a blank panel; opacity=${initialMobile.heroOpacity}`);
+      assert.ok(initialMobile.horizontalOverflow <= 2, `mobile: page should not create horizontal overflow; overflow=${initialMobile.horizontalOverflow}`);
+      assert.ok(mobileDemoStart.titleTop >= mobileDemoStart.navBottom + 8, `mobile: video title should sit below fixed nav; titleTop=${mobileDemoStart.titleTop}, navBottom=${mobileDemoStart.navBottom}`);
+      assert.ok(mobileDemoStart.titleBottom <= viewport.height * 0.32, `mobile: video title should stay in the upper safe area; bottom=${mobileDemoStart.titleBottom}`);
+      assert.ok(mobileDemoStart.canvasWidth >= 330, `mobile: laptop canvas should be large enough; width=${mobileDemoStart.canvasWidth}`);
+      assert.ok(mobileDemoStart.canvasTop <= viewport.height * 0.58, `mobile: laptop should appear before the lower half gets empty; top=${mobileDemoStart.canvasTop}`);
+      assert.ok(mobileDemoStart.stepBottom <= mobileDemoStart.chatTop - 16, `mobile: active step should not collide with chat button; stepBottom=${mobileDemoStart.stepBottom}, chatTop=${mobileDemoStart.chatTop}`);
+    }
+
     await page.evaluate(() => {
       const section = document.querySelector('#video-demo');
       const top = section.getBoundingClientRect().top + window.scrollY;
