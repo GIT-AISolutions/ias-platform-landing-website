@@ -81,7 +81,10 @@
     root.classList.toggle('open', open);
     toggle.setAttribute('aria-label', open ? 'Close Codie' : 'Open Codie');
     toggle.setAttribute('aria-expanded', String(open));
-    if (open) input.focus();
+    if (open) {
+      input.focus();
+      log.scrollTop = log.scrollHeight;
+    }
   }
 
   function renderMarkdown(text) {
@@ -117,6 +120,7 @@
       const p = body.querySelector('p') || body;
       p.textContent = text;
     }
+    log.scrollTop = log.scrollHeight;
   }
 
   function setSending(nextSending) {
