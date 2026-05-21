@@ -3,13 +3,44 @@
    ═══════════════════════════════════════════════════════ */
 
 /* ── Init Lucide icons ── */
-lucide.createIcons();
+if (window.lucide) lucide.createIcons();
 
 /* ── Nav scroll effect ── */
 const nav = document.getElementById('nav');
+const navBurger = document.getElementById('nav-burger');
+const navMobile = document.getElementById('nav-mobile');
+const sidebar = document.getElementById('docs-sidebar');
+const toggleBtn = document.getElementById('docs-toggle');
+
 window.addEventListener('scroll', () => {
-  nav.classList.toggle('scrolled', window.scrollY > 10);
+  nav?.classList.toggle('scrolled', window.scrollY > 10);
 }, { passive: true });
+
+function setMobileNavOpen(open) {
+  if (!nav || !navBurger || !navMobile) return;
+  nav.classList.toggle('is-open', open);
+  navBurger.setAttribute('aria-expanded', open ? 'true' : 'false');
+  navMobile.setAttribute('aria-hidden', open ? 'false' : 'true');
+}
+
+function setSidebarOpen(open) {
+  if (!sidebar || !toggleBtn) return;
+  sidebar.classList.toggle('open', open);
+  toggleBtn.setAttribute('aria-expanded', open ? 'true' : 'false');
+  sidebar.setAttribute('aria-hidden', open ? 'false' : 'true');
+}
+
+navBurger?.addEventListener('click', () => {
+  const open = !nav?.classList.contains('is-open');
+  setMobileNavOpen(open);
+  if (open) setSidebarOpen(false);
+});
+
+navMobile?.querySelectorAll('a').forEach((link) => {
+  link.addEventListener('click', () => setMobileNavOpen(false));
+});
+
+if (window.innerWidth <= 900) setSidebarOpen(false);
 
 /* ── Active section highlight in sidebar ── */
 const sections  = document.querySelectorAll('.doc-section[id]');
@@ -36,14 +67,37 @@ sideLinks.forEach(a => {
     e.preventDefault();
     const target = document.querySelector(a.getAttribute('href'));
     if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-    if (window.innerWidth <= 900) sidebar.classList.remove('open');
+    if (window.innerWidth <= 900) setSidebarOpen(false);
   });
 });
 
 /* ── Mobile sidebar toggle ── */
-const sidebar = document.getElementById('docs-sidebar');
-const toggleBtn = document.getElementById('docs-toggle');
-toggleBtn?.addEventListener('click', () => sidebar.classList.toggle('open'));
+toggleBtn?.addEventListener('click', () => {
+  const open = !sidebar?.classList.contains('open');
+  setSidebarOpen(open);
+  if (open) setMobileNavOpen(false);
+});
+
+document.addEventListener('click', (event) => {
+  const target = event.target;
+  if (nav && !nav.contains(target)) setMobileNavOpen(false);
+  if (
+    sidebar &&
+    toggleBtn &&
+    window.innerWidth <= 900 &&
+    !sidebar.contains(target) &&
+    !toggleBtn.contains(target)
+  ) {
+    setSidebarOpen(false);
+  }
+});
+
+document.addEventListener('keydown', (event) => {
+  if (event.key === 'Escape') {
+    setMobileNavOpen(false);
+    setSidebarOpen(false);
+  }
+});
 
 /* ── Sidebar search filter ── */
 const searchInput = document.getElementById('sidebar-search');

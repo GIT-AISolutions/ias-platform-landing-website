@@ -179,6 +179,11 @@ async def sitemap() -> FileResponse:
     return FileResponse("sitemap.xml")
 
 
+@app.get("/llms.txt")
+async def llms() -> FileResponse:
+    return FileResponse("llms.txt", media_type="text/plain")
+
+
 @app.get("/favicon.ico")
 async def favicon() -> FileResponse:
     return FileResponse("favicon.ico")

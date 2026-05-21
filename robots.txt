@@ -2,3 +2,4 @@ User-agent: *
 Allow: /
 
 Sitemap: https://opencodie.com/sitemap.xml
+LLMs: https://opencodie.com/llms.txt

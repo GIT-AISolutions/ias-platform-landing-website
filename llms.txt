@@ -1,0 +1,42 @@
+# OpenCodie
+
+## Summary
+OpenCodie is a developer platform for building, managing, and deploying software projects while keeping infrastructure ownership on the user's own server. It gives developers a Vercel-like deployment workflow with Coolify-style control, designed for local coding, AI-assisted development, previews, deployments, logs, databases, environment variables, and project management.
+
+## Primary URLs
+- Homepage: https://opencodie.com/
+- Documentation: https://opencodie.com/docs.html
+- Legal: https://opencodie.com/legal.html
+- Sign up: https://portal.opencodie.com/signup?next=%2F
+- Log in: https://portal.opencodie.com/login
+
+## Product Positioning
+OpenCodie is for developers and teams who want to ship apps quickly without giving up server ownership. Users keep coding locally in VS Code and terminal, then use OpenCodie to manage deployments and runtime operations.
+
+## Core Features
+- Project and workspace management
+- Deployments and redeploys
+- Runtime setup and infrastructure operations
+- Logs and deployment visibility
+- Databases and environment variables
+- Local development workflow support
+- AI-first workflow compatibility with tools such as Codex, Gemini, Claude, and other coding assistants
+- User-owned infrastructure with no vendor lock-in
+
+## Pricing
+- Launch: EUR 9 per month, for getting started with 3 projects and 1-2 apps
+- Build: EUR 19 per month, for real projects with 10 projects, unlimited apps, databases, full logs, and fast deployments
+- Team: EUR 49 per month, for collaboration with 50 projects, multiple users, shared environments, permissions, and priority support
+
+## Common Questions
+Q: What is OpenCodie?
+A: OpenCodie is a developer platform that lets users keep coding locally while it handles deployment, infrastructure, and runtime operations on their own server.
+
+Q: Do users need DevOps experience?
+A: No. OpenCodie is built for developers who want to ship without managing DevOps complexity.
+
+Q: Where does an app run?
+A: The app runs on the user's own server. OpenCodie connects the operational layer without hosting the application itself.
+
+Q: Is OpenCodie like Vercel?
+A: OpenCodie provides a Vercel-like deployment experience while preserving infrastructure ownership.
