@@ -1,0 +1,91 @@
+import assert from 'node:assert/strict';
+import fs from 'node:fs';
+
+const indexHtml = fs.readFileSync('index.html', 'utf8');
+const mainJs = fs.readFileSync('js/main.js', 'utf8');
+const appPy = fs.readFileSync('app.py', 'utf8');
+const stylesCss = fs.readFileSync('css/styles.css', 'utf8');
+
+assert.match(indexHtml, /id="vd-model-stage"/, 'index.html should expose a GLB model stage');
+assert.match(indexHtml, /data-model-src="video\/laptop_website_no_camera\.glb"/, 'model stage should point at the GLB asset');
+assert.match(indexHtml, /data-video-src="video\/Video_opencodie\.mp4"/, 'model stage should point at the demo video asset');
+assert.match(indexHtml, /<script type="importmap">/, 'index.html should define an import map for Three.js modules');
+assert.match(indexHtml, /"three": "https:\/\/unpkg\.com\/three@0\.160\.0\/build\/three\.module\.js"/, 'import map should resolve the Three.js module');
+
+assert.match(mainJs, /GLTFLoader/, 'main.js should load GLTFLoader');
+assert.match(mainJs, /import\('three'\)/, 'main.js should load Three.js through the import map');
+assert.match(mainJs, /VideoTexture/, 'main.js should create a video texture for the laptop screen');
+assert.doesNotMatch(mainJs, /videoTexture\.flipY\s*=\s*false/, 'custom video plane should not invert the video texture');
+assert.doesNotMatch(mainJs, /new THREE\.DirectionalLight\(0x34d1bf, 1\.4\)/, 'teal rim light should not create a bright glare on the laptop edge');
+assert.match(mainJs, /ScreenCinematic/, 'main.js should target the laptop screen material');
+assert.match(mainJs, /normalizeLaptopMaterial/, 'main.js should normalize GLB materials for the website lighting setup');
+assert.match(mainJs, /material\.name === 'KeyPBR'/, 'keyboard material should be explicitly preserved as dark keys');
+assert.match(mainJs, /material\.name === 'AluPBR'/, 'aluminum material should be explicitly darkened to match the Blender render');
+assert.match(mainJs, /mixer\.update\(0\)/, 'main.js should drive GLB animation from scroll progress');
+assert.match(mainJs, /function fitVideoTextureToScreen\(\)/, 'video texture should be cover-fitted instead of manually offset');
+assert.match(mainJs, /const screenAspect = screenPlaneWidth \/ screenPlaneHeight;/, 'video fit should use the actual laptop screen aspect');
+assert.match(mainJs, /const VIDEO_DEMO_CONFIG = Object\.freeze\(\{/, 'video demo tuning values should be centralized in a config object');
+assert.match(mainJs, /videoTextureOverscan: 1\.16,/, 'video texture should center-crop source black borders without stretching');
+assert.match(mainJs, /chapterStart: 0\.14,/, 'chapter UI should start early enough to reach deployment while the laptop video is prominent');
+assert.match(mainJs, /chapterSpan: 0\.62,/, 'chapter UI should reach deployment while the laptop video is already prominent');
+assert.match(mainJs, /const VIDEO_TEXTURE_OVERSCAN = VIDEO_DEMO_CONFIG\.videoTextureOverscan;/, 'video texture overscan should read from the central config');
+assert.match(mainJs, /videoTexture\.repeat\.set\(screenAspect \/ videoAspect, 1\);/, 'wide video should crop horizontally without stretching');
+assert.match(mainJs, /videoTexture\.offset\.set\(\(1 - videoTexture\.repeat\.x\) \/ 2, 0\);/, 'horizontal crop should stay centered in the laptop screen');
+assert.match(mainJs, /videoTexture\.offset\.set\(0, \(1 - videoTexture\.repeat\.y\) \/ 2\);/, 'vertical crop should stay centered in the laptop screen');
+assert.match(mainJs, /videoTexture\.repeat\.set\(videoTexture\.repeat\.x \/ VIDEO_TEXTURE_OVERSCAN, videoTexture\.repeat\.y \/ VIDEO_TEXTURE_OVERSCAN\);/, 'video texture overscan should crop both axes evenly');
+assert.match(mainJs, /videoTexture\.offset\.set\(\(1 - videoTexture\.repeat\.x\) \/ 2, \(1 - videoTexture\.repeat\.y\) \/ 2\);/, 'video texture overscan should remain centered');
+assert.doesNotMatch(mainJs, /videoTexture\.repeat\.set\(0\.78, 0\.78\)/, 'video texture should not use hard-coded zoom crop');
+assert.doesNotMatch(mainJs, /videoTexture\.offset\.set\(0\.09, 0\.20\)/, 'video texture should not use hard-coded off-center crop');
+assert.match(mainJs, /function updateVideoPlayback\(lidT\)/, 'video playback should be controlled by laptop screen visibility');
+assert.match(mainJs, /video\.play\(\)\.catch\(\(\) => \{\}\);/, 'visible laptop screen should try to play the muted demo video');
+assert.match(mainJs, /video\.pause\(\);/, 'hidden or closed laptop screen should pause the demo video');
+assert.match(mainJs, /action\.loop = THREE\.LoopOnce/, 'GLB animation clips should not loop back open at the end');
+assert.match(mainJs, /action\.clampWhenFinished = true/, 'GLB animation clips should hold their final frame');
+assert.match(mainJs, /function releaseOverride\(\)/, 'laptop scene should expose an explicit way to hand control back to scroll');
+assert.match(mainJs, /if \(closedOverride\) \{[\s\S]*scrollProgress = gsap\.utils\.clamp\(0, 1, progress\);[\s\S]*return;[\s\S]*\}/, 'setProgress should not clear the close override during late ScrollTrigger scrub updates');
+assert.match(mainJs, /let latestDriverProgress = 0;/, 'driver progress should be retained while the GLB scene loads asynchronously');
+assert.match(mainJs, /let shouldCloseAtEnd = false;/, 'end-close intent should be retained while the GLB scene loads asynchronously');
+assert.match(mainJs, /endCloseProgress: 0\.92,/, 'end-close should be driven by scroll progress rather than only onLeave timing');
+assert.match(mainJs, /openScrollProgress: 0\.80,/, 'scroll-driven playback should stop before the GLB final close segment');
+assert.match(mainJs, /const END_CLOSE_PROGRESS = VIDEO_DEMO_CONFIG\.endCloseProgress;/, 'end-close progress should read from the central config');
+assert.match(mainJs, /const OPEN_SCROLL_PROGRESS = VIDEO_DEMO_CONFIG\.openScrollProgress;/, 'open scroll progress should read from the central config');
+assert.match(mainJs, /if \(closedOverride\) return;/, 'close tween should be idempotent while already closing or closed');
+assert.match(mainJs, /if \(shouldCloseAtEnd\) laptopScene\.tweenToStart\(\);/, 'late-loaded GLB scene should still close if the driver already reached the end');
+assert.match(mainJs, /p: 1,[\s\S]*duration: 0\.9,/, 'end-close tween should skip the open middle frames by moving forward to the closed final frame');
+assert.match(mainJs, /onComplete\(\) \{ overrideProgress = 1; returnTween = null; \}/, 'end-close tween should leave the laptop on the closed final frame');
+assert.doesNotMatch(mainJs, /p: 0,[\s\S]*duration: 1\.4,[\s\S]*onUpdate\(\) \{ overrideProgress = proxy\.p;/, 'end-close tween should not scrub backward through the GLB timeline');
+assert.match(mainJs, /const p = gsap\.utils\.clamp\(0, 1, \(window\.scrollY - self\.start\) \/ \(self\.end - self\.start\)\);/, 'laptop progress should use raw scroll position so reverse scrolling is immediate');
+assert.match(mainJs, /const scrubbedP = self\.progress;/, 'chapter UI may still use scrubbed ScrollTrigger progress');
+assert.match(mainJs, /const contentP = Math\.max\(0, Math\.min\(1, \(scrubbedP - VIDEO_DEMO_CONFIG\.chapterStart\) \/ VIDEO_DEMO_CONFIG\.chapterSpan\)\);/, 'chapter UI should read its timing from the central config');
+assert.match(mainJs, /shouldCloseAtEnd = p >= END_CLOSE_PROGRESS;/, 'laptop end-close state should use raw scroll progress');
+assert.match(mainJs, /const scrollingBack = self\.direction < 0;/, 'ScrollTrigger should distinguish reverse scrolling at the end');
+assert.match(mainJs, /if \(p >= END_CLOSE_PROGRESS && !scrollingBack\) \{[\s\S]*laptopScene\.tweenToStart\(\);[\s\S]*\} else \{[\s\S]*if \(laptopScene\.isOverrideActive\(\)\) laptopScene\.releaseOverride\(\);[\s\S]*laptopScene\.setProgress\(p\);/, 'reverse scrolling should immediately restore scroll-driven laptop animation');
+assert.match(mainJs, /const endStraightenT = closedOverride \? Math\.max\(0, Math\.min\(1, \(overrideProgress - OPEN_SCROLL_PROGRESS\) \/ \(1 - OPEN_SCROLL_PROGRESS\)\)\) : 0;/, 'closed end state should fade out the extra website tilt');
+assert.match(mainJs, /camera\.position\.lerp\(camStartPos, endStraightenT\);/, 'closed end state should return to the top-down starting camera');
+assert.match(mainJs, /camera\.quaternion\.slerp\(camStartQuat, endStraightenT\);/, 'closed end state should match the first-frame camera angle');
+assert.match(mainJs, /model\.rotation\.x = 0\.28 \* tiltEase \* \(1 - endStraightenT\);/, 'laptop should stand straight on the final closed frame');
+assert.match(mainJs, /const displayProgress = Math\.min\(scrollProgress, OPEN_SCROLL_PROGRESS\);/, 'normal scroll should stay on the open part of the GLB timeline');
+assert.match(mainJs, /const dp = closedOverride \? overrideProgress : displayProgress;/, 'only the close override should use the GLB final closed frames');
+assert.match(mainJs, /const videoProgress = Math\.min\(scrollProgress, OPEN_SCROLL_PROGRESS\);[\s\S]*const lidT = Math\.max\(0, Math\.min\(1, \(videoProgress - CAM_TRANSITION\) \/ \(OPEN_SCROLL_PROGRESS - CAM_TRANSITION\)\)\);/, 'video seeking should follow the clamped open scroll progress');
+assert.match(mainJs, /onEnterBack\(self\) \{[\s\S]*laptopScene\.releaseOverride\(\); laptopScene\.setProgress\(self\.progress\);/, 'scrolling back into the section should explicitly restore scroll control at the current progress');
+assert.match(mainJs, /onLeaveBack\(\) \{[\s\S]*laptopScene\.releaseOverride\(\); laptopScene\.setProgress\(0\);/, 'leaving upward should explicitly reset the laptop to the start state');
+assert.match(mainJs, /screenPlaneWidthScale: 1\.015,/, 'video plane should fill the laptop screen width while avoiding side gaps');
+assert.match(mainJs, /const screenPlaneWidth = screenSize\.x \* VIDEO_DEMO_CONFIG\.screenPlaneWidthScale;/, 'video plane width should read from the central config');
+assert.match(mainJs, /const screenPlaneHeight = screenPlaneWidth \/ videoAspect;/, 'video plane should preserve the video aspect ratio without stretching');
+assert.match(mainJs, /new THREE\.PlaneGeometry\(screenPlaneWidth, screenPlaneHeight\)/, 'video plane should use aspect-preserving dimensions');
+assert.match(mainJs, /videoPlane\.position\.set\(screenCenter\.x, screenBox\.max\.y \+ 0\.12, screenCenter\.z\);/, 'video plane should be centered on the laptop screen');
+assert.match(mainJs, /cameraEndY: 0\.78,/, 'camera should show more keyboard while keeping the canvas size stable');
+assert.match(mainJs, /cameraEndZ: 3\.95,/, 'camera should keep the canvas framing stable');
+assert.match(mainJs, /modelScaleTarget: 4\.6,/, '3D laptop should stay large without touching the canvas edges');
+assert.match(mainJs, /const scale = VIDEO_DEMO_CONFIG\.modelScaleTarget \/ Math\.max\(size\.x, size\.y, size\.z\)/, 'model scale should read from the central config');
+assert.match(mainJs, /const modelBasePosition = new THREE\.Vector3/, 'model centering should be preserved while scroll offsets are applied');
+assert.doesNotMatch(mainJs, /model\.position\.y = -0\.05 \+ scrollProgress \* 0\.1/, 'scroll animation should not overwrite the centered model position');
+assert.equal(
+  (mainJs.match(/scrollTrigger: \{ trigger: outer, start: 'top 80%', end: 'top 15%', scrub: 1 \}/g) || []).length,
+  1,
+  'entrance tween should have a single scrollTrigger configuration'
+);
+
+assert.match(stylesCss, /\.vd-laptop-wrap\s*{[\s\S]*width: min\(52vw, 720px\)/, 'desktop laptop container should stay within the layout column');
+
+assert.match(appPy, /app\.mount\("\/video", StaticFiles\(directory="video"\), name="video"\)/, 'FastAPI should serve video and GLB assets');

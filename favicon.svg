@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 180 180">
+  <rect width="180" height="180" rx="40" fill="#060d15"/>
+  <!-- White hex ring (evenodd cuts out inner diamond) -->
+  <path fill-rule="evenodd" clip-rule="evenodd" fill="#ffffff"
+    d="M36 55 90 24l54 31v62l-54 39-54-39V55Zm22 13v37l32 23 32-23V68L90 50 58 68Z"/>
+  <!-- Orange bottom accent -->
+  <path fill="#f97316"
+    d="M58 105l32 23 32-23V68L90 86 58 68z"
+    opacity="0.95"/>
+</svg>

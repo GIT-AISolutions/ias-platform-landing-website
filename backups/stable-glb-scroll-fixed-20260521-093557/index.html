@@ -1,0 +1,888 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="robots" content="index, follow" />
+
+  <title>OpenCodie | Ship code faster. Own everything.</title>
+  <meta name="description" content="Deploy apps like Vercel. Own everything like Coolify. Keep coding locally while OpenCodie handles deployment and infrastructure on your own server." />
+  <meta name="keywords" content="OpenCodie, developer platform, self-hosted deployment, Vercel alternative, Coolify alternative, CI/CD, infrastructure, BYOA" />
+  <meta name="author" content="OpenCodie" />
+
+  <!-- Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-SMSRCN2DK8"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-SMSRCN2DK8');
+  </script>
+
+  <link rel="canonical" href="https://opencodie.com/" />
+
+  <!-- Open Graph -->
+  <meta property="og:type"        content="website" />
+  <meta property="og:url"         content="https://opencodie.com/" />
+  <meta property="og:title"       content="OpenCodie | Ship code faster. Own everything." />
+  <meta property="og:description" content="Deploy apps like Vercel. Own everything like Coolify. Keep coding locally while OpenCodie handles deployment and infrastructure on your own server." />
+  <meta property="og:image"       content="https://opencodie.com/images/opencodie-logo.png" />
+  <meta property="og:site_name"   content="OpenCodie" />
+  <meta property="og:locale"      content="en_US" />
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card"        content="summary_large_image" />
+  <meta name="twitter:title"       content="OpenCodie | Ship code faster. Own everything." />
+  <meta name="twitter:description" content="Deploy apps like Vercel. Own everything like Coolify. Keep coding locally while OpenCodie handles deployment and infrastructure on your own server." />
+  <meta name="twitter:image"       content="https://opencodie.com/images/opencodie-logo.png" />
+
+  <!-- Structured Data -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "name": "OpenCodie",
+    "url": "https://opencodie.com",
+    "logo": "https://opencodie.com/images/opencodie-logo.png",
+    "description": "Deploy apps like Vercel. Own everything like Coolify. Self-hosted developer platform with full infrastructure control.",
+    "sameAs": []
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "name": "OpenCodie",
+    "url": "https://opencodie.com"
+  }
+  </script>
+
+  <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png?v=4" />
+  <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png?v=4" />
+  <link rel="shortcut icon" href="favicon.ico?v=4" />
+  <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png?v=4" />
+  <link rel="stylesheet" href="css/styles.css?v=27" />
+  <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/marked@12.0.0/marked.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/dompurify@3.1.6/dist/purify.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
+  <script type="importmap">
+  {
+    "imports": {
+      "three": "https://unpkg.com/three@0.160.0/build/three.module.js",
+      "three/addons/": "https://unpkg.com/three@0.160.0/examples/jsm/"
+    }
+  }
+  </script>
+  <script>history.scrollRestoration = 'manual';</script>
+</head>
+<body>
+
+<!-- ═══════════════════════════════════════════════════════
+     NAVIGATION
+════════════════════════════════════════════════════════ -->
+<nav id="nav">
+  <div class="container">
+    <div class="inner">
+      <a href="/" class="logo" aria-label="OpenCodie home">
+        <img src="images/opencodie-logo.png" alt="OpenCodie" />
+        <span class="logo-name">OpenCodie</span>
+      </a>
+      <ul class="links">
+        <li><a href="#hero">Home</a></li>
+        <li><a href="#platform">Product</a></li>
+        <li><a href="#pricing">Pricing</a></li>
+        <li><a href="#contact">Contact</a></li>
+        <li><a href="#faq">FAQ</a></li>
+      </ul>
+      <div class="cta">
+        <a href="https://portal.opencodie.com/login"  class="btn btn-ghost btn-sm">Log in</a>
+        <a href="https://portal.opencodie.com/signup?next=%2F" class="btn btn-primary btn-sm">Start free trial</a>
+      </div>
+      <button class="nav-burger" id="nav-burger" aria-label="Toggle menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+  <div class="nav-mobile" id="nav-mobile" aria-hidden="true">
+    <ul class="nav-mobile-links">
+      <li><a href="#hero">Home</a></li>
+      <li><a href="#platform">Product</a></li>
+      <li><a href="#pricing">Pricing</a></li>
+      <li><a href="#contact">Contact</a></li>
+      <li><a href="#faq">FAQ</a></li>
+    </ul>
+    <div class="nav-mobile-cta">
+      <a href="https://portal.opencodie.com/login" class="btn btn-ghost">Log in</a>
+      <a href="https://portal.opencodie.com/signup?next=%2F" class="btn btn-primary">Start free trial</a>
+    </div>
+  </div>
+</nav>
+
+<!-- ═══════════════════════════════════════════════════════
+     HERO , PART 1: Static intro (100vh)
+════════════════════════════════════════════════════════ -->
+<section id="hero">
+  <div class="hero-bg-grid" aria-hidden="true"></div>
+
+  <div class="container hero-intro-container">
+    <div class="hero-intro-content">
+      <div class="eyebrow hero-eyebrow" id="hero-eyebrow">AI-native workspace</div>
+
+      <h1 id="hero-h1">
+        Build, ship and scale apps
+        <span class="h1-gradient">from one AI workspace</span>
+      </h1>
+
+      <p class="hero-subtext" id="hero-subtext">
+        OpenCodie brings AI coding, live previews, deployments and project
+        infrastructure into one unified development platform.
+      </p>
+
+      <div class="hero-actions" id="hero-actions">
+        <a href="https://portal.opencodie.com/signup?next=%2F" class="btn btn-primary btn-lg hero-cta-primary">Start Building &rarr;</a>
+        <a href="#video-demo" class="btn btn-outline btn-lg">Watch Demo</a>
+      </div>
+
+      <div class="hero-scroll-hint" id="hero-scroll-hint" aria-hidden="true">
+        <div class="scroll-chevron"></div>
+        <span>Scroll to explore</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════
+     HERO , PART 2: Video demo section
+════════════════════════════════════════════════════════ -->
+<section id="video-demo" class="vd-outer">
+  <div class="vd-sticky">
+
+    <!-- Ambient atmosphere orbs -->
+    <div class="vd-atm" aria-hidden="true">
+      <div class="vd-orb vd-orb-teal"></div>
+      <div class="vd-orb vd-orb-orange"></div>
+    </div>
+
+    <!-- Top scroll progress bar -->
+    <div class="vd-topbar" aria-hidden="true">
+      <div class="vd-topbar-fill" id="vd-topbar-fill"></div>
+    </div>
+
+    <!-- Centered section header -->
+    <div class="vd-header">
+      <h2 class="vd-title">See OpenCodie in action</h2>
+      <p class="vd-sub">Watch your project go from code to live production , step by step.</p>
+    </div>
+
+    <div class="vd-layout">
+
+      <!-- LEFT: Sticky laptop visual -->
+      <div class="vd-laptop-col">
+        <div class="vd-laptop-wrap" id="vd-laptop-wrap">
+          <div
+            class="vd-model-stage"
+            id="vd-model-stage"
+            data-model-src="video/laptop_website_no_camera.glb"
+            data-video-src="video/Video_opencodie.mp4"
+            aria-label="OpenCodie platform demo playing inside a 3D laptop"
+          >
+            <video
+              id="demo-video"
+              class="vd-demo-video"
+              src="video/Video_opencodie.mp4"
+              muted
+              playsinline
+              preload="auto"
+              aria-hidden="true"
+            ></video>
+            <canvas id="vd-model-canvas" class="vd-model-canvas"></canvas>
+            <div class="vd-model-fallback" aria-hidden="true">
+              <img class="vd-fallback-video" src="images/macbook-animation/screen-1.webp" alt="">
+              <img class="vd-macbook-frame" src="images/macbook-animation/macbook-without-background.webp" alt="" draggable="false">
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- RIGHT: Step content + badges -->
+      <div class="vd-text-col">
+
+        <div class="vd-steps-wrap">
+          <ol class="vd-steps-list" id="vd-steps-list">
+
+            <li class="vd-step is-active" data-step="0">
+              <div class="vd-step-body">
+                <span class="vd-step-num">01</span>
+                <h3 class="vd-step-title">Connect your repo</h3>
+                <p class="vd-step-desc">Link your project to OpenCodie in seconds. No complex config, no DevOps knowledge required.</p>
+              </div>
+            </li>
+
+            <li class="vd-step" data-step="1">
+              <div class="vd-step-body">
+                <span class="vd-step-num">02</span>
+                <h3 class="vd-step-title">AI builds your deployment</h3>
+                <p class="vd-step-desc">OpenCodie analyzes your project, detects the stack and prepares the correct deployment setup automatically.</p>
+              </div>
+            </li>
+
+            <li class="vd-step" data-step="2">
+              <div class="vd-step-body">
+                <span class="vd-step-num">03</span>
+                <h3 class="vd-step-title">Preview before production</h3>
+                <p class="vd-step-desc">Instantly test your app on a live preview URL before pushing anything to production.</p>
+              </div>
+            </li>
+
+            <li class="vd-step" data-step="3">
+              <div class="vd-step-body">
+                <span class="vd-step-num">04</span>
+                <h3 class="vd-step-title">Deploy to production</h3>
+                <p class="vd-step-desc">Push your project live with one clean deploy flow. Build, test and ship in one seamless run.</p>
+              </div>
+            </li>
+
+          </ol>
+        </div>
+
+
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════
+     TRUST STRIP
+════════════════════════════════════════════════════════ -->
+<div id="trust">
+  <div class="container">
+    <div class="trust-row">
+      <div class="trust-item reveal">
+        <div class="trust-icon"><i data-lucide="zap"></i></div>
+        <div class="trust-text"><span>No DevOps required</span></div>
+      </div>
+      <div class="trust-item reveal d1">
+        <div class="trust-icon"><i data-lucide="server"></i></div>
+        <div class="trust-text"><span>Runs on your own server</span></div>
+      </div>
+      <div class="trust-item reveal d2">
+        <div class="trust-icon"><i data-lucide="code-2"></i></div>
+        <div class="trust-text"><span>Works with VS Code + AI</span></div>
+      </div>
+      <div class="trust-item reveal d3">
+        <div class="trust-icon"><i data-lucide="shield-check"></i></div>
+        <div class="trust-text"><span>No vendor lock-in</span></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════
+     PROBLEM / SOLUTION
+════════════════════════════════════════════════════════ -->
+<section id="ps">
+  <div class="container">
+    <div class="ps-grid">
+      <div class="ps-card problem reveal left">
+        <div class="ps-label problem"><i data-lucide="alert-triangle"></i> The Problem</div>
+        <h3>Deploying apps shouldn't be this hard</h3>
+        <p>Setting up infrastructure, configuring deployments, and managing environments slows teams down.</p>
+        <p class="ps-emphasis">You just want to build and ship.</p>
+      </div>
+      <div class="ps-card solution reveal right">
+        <div class="ps-label solution"><i data-lucide="sparkles"></i> The Solution</div>
+        <h3>OpenCodie removes the DevOps layer</h3>
+        <p>You keep your workflow. VS Code, terminal, and AI tools stay exactly the same while OpenCodie handles the operational layer , deployments, databases, secrets, and logs.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════
+     PLATFORM LAYER
+════════════════════════════════════════════════════════ -->
+<section id="platform">
+  <div class="container">
+    <div class="section-header reveal">
+      <div class="eyebrow">Product Layer</div>
+      <h2>OpenCodie handles the operational layer</h2>
+      <p>Keep coding locally with AI and ship instantly. OpenCodie manages deployment complexity while your app runs on infrastructure you own.</p>
+    </div>
+
+    <div class="platform-visual">
+      <div class="plat-layer reveal">
+        <div class="plat-icon"><i data-lucide="monitor"></i></div>
+        <div class="plat-info">
+          <div class="plat-label">Your tools</div>
+          <div class="plat-title">Local Development</div>
+          <div class="plat-desc">Code in VS Code and terminal with the AI models you already use.</div>
+          <div class="plat-tags">
+            <span class="plat-tag">VS Code</span>
+            <span class="plat-tag">Terminal</span>
+            <span class="plat-tag">Codex</span>
+            <span class="plat-tag">Gemini</span>
+            <span class="plat-tag">Claude</span>
+            <span class="plat-tag">Git</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="plat-connector"></div>
+
+      <div class="plat-layer center reveal d1">
+        <div class="plat-icon"><i data-lucide="zap"></i></div>
+        <div class="plat-info">
+          <div class="plat-label">OpenCodie operations</div>
+          <div class="plat-title">Deployment & Infrastructure</div>
+          <div class="plat-desc">Deployments, runtime setup, logs, database wiring , all handled for you.</div>
+          <div class="plat-tags">
+            <span class="plat-tag">Deployments</span>
+            <span class="plat-tag">Databases</span>
+            <span class="plat-tag">Env Vars</span>
+            <span class="plat-tag">Logs</span>
+            <span class="plat-tag">Redeploys</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="plat-connector"></div>
+
+      <div class="plat-layer reveal d2">
+        <div class="plat-icon"><i data-lucide="server"></i></div>
+        <div class="plat-info">
+          <div class="plat-label">Your server ownership</div>
+          <div class="plat-title">Your Infrastructure</div>
+          <div class="plat-desc">Apps run on infrastructure you control , no vendor lock-in, ever.</div>
+          <div class="plat-tags">
+            <span class="plat-tag">Your server</span>
+            <span class="plat-tag">Your data</span>
+            <span class="plat-tag">Full ownership</span>
+            <span class="plat-tag">No lock-in</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════
+     CONTROL
+════════════════════════════════════════════════════════ -->
+<section id="control">
+  <div class="container">
+    <div class="section-header reveal">
+      <div class="eyebrow">Control</div>
+      <h2>You stay in control</h2>
+      <p>OpenCodie gives you a Vercel-like deployment experience while your application runs on infrastructure you own.</p>
+    </div>
+
+    <div class="pillars">
+      <div class="pillar reveal">
+        <div class="pillar-icon"><i data-lucide="server"></i></div>
+        <h3>Your code runs on your server</h3>
+        <p>Infrastructure you own , not infrastructure you rent from a platform that can change pricing or shut down.</p>
+      </div>
+      <div class="pillar reveal d1">
+        <div class="pillar-icon"><i data-lucide="shield"></i></div>
+        <h3>Your data stays yours</h3>
+        <p>Data sovereignty from day one. No application data stored on third-party platforms you don't control.</p>
+      </div>
+      <div class="pillar reveal d2">
+        <div class="pillar-icon"><i data-lucide="log-out"></i></div>
+        <h3>Leave anytime without traps</h3>
+        <p>Export everything and leave without friction. No migration lock-in , your setup, your freedom.</p>
+      </div>
+    </div>
+
+    <p class="reveal" style="text-align:center;margin-top:3.5rem;font-size:1.1rem;color:var(--text-muted);font-style:italic;letter-spacing:-0.01em;">
+      "Deploy like a managed platform. Own everything like self-hosted."
+    </p>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════
+     FEATURES
+════════════════════════════════════════════════════════ -->
+<section id="features">
+  <div class="container">
+    <div class="section-header reveal">
+      <div class="eyebrow">Platform Features</div>
+      <h2>Everything you need to run apps without DevOps</h2>
+      <p>You keep coding locally in VS Code and terminal with AI. OpenCodie handles the rest.</p>
+    </div>
+
+    <div class="features-grid">
+      <div class="feature-card reveal">
+        <div class="f-icon"><i data-lucide="rocket"></i></div>
+        <h3>Fast Deployments</h3>
+        <p>Push your code and deploy in minutes. No CI/CD setup overhead , OpenCodie handles build and runtime steps.</p>
+        <div class="f-benefit">→ Ship faster without DevOps setup overhead.</div>
+      </div>
+      <div class="feature-card reveal d1">
+        <div class="f-icon"><i data-lucide="bot"></i></div>
+        <h3>AI Workflow</h3>
+        <p>Keep using Codex, Gemini, Claude, and your existing AI tools in VS Code. Bring your own API keys , no tool switching.</p>
+        <div class="f-benefit">→ Move faster with AI and full tooling freedom.</div>
+      </div>
+      <div class="feature-card reveal d2">
+        <div class="f-icon"><i data-lucide="lock"></i></div>
+        <h3>Secrets & Env Vars</h3>
+        <p>Manage environment variables safely per environment. Protect production settings without manual server edits.</p>
+        <div class="f-benefit">→ Protect sensitive config without slowing the team.</div>
+      </div>
+      <div class="feature-card reveal d1">
+        <div class="f-icon"><i data-lucide="database"></i></div>
+        <h3>Databases</h3>
+        <p>Provision databases quickly and keep backend services connected to each deploy. One workflow for app and data layer.</p>
+        <div class="f-benefit">→ Get backend-ready faster with less setup friction.</div>
+      </div>
+      <div class="feature-card reveal d2">
+        <div class="f-icon"><i data-lucide="activity"></i></div>
+        <h3>Logs & Debugging</h3>
+        <p>See deploy output and runtime logs in one place. Debug quickly and ship with confidence.</p>
+        <div class="f-benefit">→ Spend less time searching, more time resolving.</div>
+      </div>
+      <div class="feature-card reveal d3">
+        <div class="f-icon"><i data-lucide="refresh-cw"></i></div>
+        <h3>Updates & Redeploys</h3>
+        <p>Roll out changes safely across environments. Continuous delivery without pipeline maintenance.</p>
+        <div class="f-benefit">→ Ship often without unstable deployment operations.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════
+     HOW IT WORKS
+════════════════════════════════════════════════════════ -->
+<section id="how">
+  <div class="container">
+    <div class="section-header reveal">
+      <div class="eyebrow">How It Works</div>
+      <h2>From code to production in minutes</h2>
+      <p>Keep your local workflow and ship faster without operating deployment pipelines or infrastructure manually.</p>
+    </div>
+
+    <div class="steps-row">
+      <div class="step reveal">
+        <div class="step-n">01</div>
+        <div class="step-title">Code locally</div>
+        <div class="step-desc">Use VS Code, your terminal, and AI models like Codex, Gemini, and Claude.</div>
+      </div>
+      <div class="step reveal d1">
+        <div class="step-n">02</div>
+        <div class="step-title">Connect project</div>
+        <div class="step-desc">Link your project or repository to OpenCodie with minimal setup.</div>
+      </div>
+      <div class="step reveal d2">
+        <div class="step-n">03</div>
+        <div class="step-title">Configure runtime</div>
+        <div class="step-desc">Set environment variables and attach databases without manual DevOps work.</div>
+      </div>
+      <div class="step reveal d3">
+        <div class="step-n">04</div>
+        <div class="step-title">Deploy instantly</div>
+        <div class="step-desc">OpenCodie builds and runs your app on your own server infrastructure.</div>
+      </div>
+      <div class="step reveal d4">
+        <div class="step-n">05</div>
+        <div class="step-title">Monitor & update</div>
+        <div class="step-desc">Use logs and safe redeploys to keep production stable as you ship.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════
+     BRING YOUR OWN AI
+════════════════════════════════════════════════════════ -->
+<section id="byoa">
+  <div class="container">
+    <div class="section-header reveal">
+      <div class="eyebrow eyebrow-orange">Bring Your Own AI</div>
+      <h2>Use any AI you already have.<br/>No double payments.</h2>
+      <p>Already paying for OpenAI, Claude, Gemini, or another provider? Plug in your own API keys and keep using exactly what you want. OpenCodie handles the infrastructure , you keep control of your AI stack.</p>
+    </div>
+
+    <div class="logo-marquee reveal">
+      <div class="logo-track">
+        <div class="logo-pill"><img src="images/ai-logos/openai.png"     alt="OpenAI" /></div>
+        <div class="logo-pill"><img src="images/ai-logos/claude.png"     alt="Claude" /></div>
+        <div class="logo-pill"><img src="images/ai-logos/gemini.png"     alt="Gemini" /></div>
+        <div class="logo-pill"><img src="images/ai-logos/llama.png"      alt="Llama" /></div>
+        <div class="logo-pill"><img src="images/ai-logos/mistral.png"    alt="Mistral" /></div>
+        <div class="logo-pill"><img src="images/ai-logos/deepseek.png"   alt="DeepSeek" /></div>
+        <div class="logo-pill"><img src="images/ai-logos/xai.png"        alt="xAI" /></div>
+        <div class="logo-pill"><img src="images/ai-logos/github.png"     alt="GitHub" /></div>
+        <div class="logo-pill"><img src="images/ai-logos/docker.png"     alt="Docker" /></div>
+        <div class="logo-pill"><img src="images/ai-logos/postgresql.png" alt="PostgreSQL" /></div>
+        <div class="logo-pill"><img src="images/ai-logos/redis.png"      alt="Redis" /></div>
+        <!-- duplicate for seamless loop -->
+        <div class="logo-pill" aria-hidden="true"><img src="images/ai-logos/openai.png"     alt="" /></div>
+        <div class="logo-pill" aria-hidden="true"><img src="images/ai-logos/claude.png"     alt="" /></div>
+        <div class="logo-pill" aria-hidden="true"><img src="images/ai-logos/gemini.png"     alt="" /></div>
+        <div class="logo-pill" aria-hidden="true"><img src="images/ai-logos/llama.png"      alt="" /></div>
+        <div class="logo-pill" aria-hidden="true"><img src="images/ai-logos/mistral.png"    alt="" /></div>
+        <div class="logo-pill" aria-hidden="true"><img src="images/ai-logos/deepseek.png"   alt="" /></div>
+        <div class="logo-pill" aria-hidden="true"><img src="images/ai-logos/xai.png"        alt="" /></div>
+        <div class="logo-pill" aria-hidden="true"><img src="images/ai-logos/github.png"     alt="" /></div>
+        <div class="logo-pill" aria-hidden="true"><img src="images/ai-logos/docker.png"     alt="" /></div>
+        <div class="logo-pill" aria-hidden="true"><img src="images/ai-logos/postgresql.png" alt="" /></div>
+        <div class="logo-pill" aria-hidden="true"><img src="images/ai-logos/redis.png"      alt="" /></div>
+      </div>
+    </div>
+
+    <div class="byoa-cards">
+      <div class="byoa-card reveal">
+        <div class="byoa-badge">Flexible Setup</div>
+        <h3>Your AI, Your Rules</h3>
+        <ul>
+          <li>Plug in your own API keys</li>
+          <li>Use local AI models if you prefer</li>
+          <li>Keep using your favorite CLI tools</li>
+          <li>No duplicate AI subscription required</li>
+        </ul>
+      </div>
+      <div class="byoa-card reveal d1">
+        <div class="byoa-badge">Simple Pricing</div>
+        <h3>Start from €9/month</h3>
+        <ul>
+          <li>Launch plan includes servers, databases, and deployment infrastructure</li>
+          <li>You only pay once , for OpenCodie. Not for AI twice.</li>
+          <li>Scale without per-seat AI costs</li>
+        </ul>
+      </div>
+      <div class="byoa-card reveal d2" style="display:flex;flex-direction:column;">
+        <div class="byoa-badge">No Vendor Lock-In</div>
+        <h3>Stay Independent</h3>
+        <ul>
+          <li>Export your data anytime</li>
+          <li>Switch AI providers whenever you want</li>
+          <li>Your setup, your freedom</li>
+        </ul>
+        <a href="https://portal.opencodie.com/signup?next=%2F" class="btn btn-primary" style="margin-top:1.5rem;width:100%;justify-content:center;">
+          Get started &rarr;
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════
+     PRICING
+════════════════════════════════════════════════════════ -->
+<section id="pricing">
+  <div class="container">
+    <div class="section-header reveal">
+      <div class="eyebrow">Pricing</div>
+      <h2>Instant deploys.<br/>No DevOps complexity.</h2>
+      <p>Built for developers who ship fast. Simple, transparent pricing from first app to production.</p>
+    </div>
+
+    <div class="pricing-grid">
+      <!-- Launch -->
+      <div class="plan-card reveal">
+        <div class="plan-name">Launch</div>
+        <div class="plan-price">€9<sub>/month</sub></div>
+        <div class="plan-line">Perfect for getting started</div>
+        <ul class="plan-list">
+          <li><span class="ck">✓</span> 3 projects included</li>
+          <li><span class="ck">✓</span> 1–2 apps</li>
+          <li><span class="ck">✓</span> Deployments</li>
+          <li><span class="ck">✓</span> Logs</li>
+          <li><span class="ck">✓</span> Basic usage</li>
+        </ul>
+        <a href="https://portal.opencodie.com/signup?next=%2F" class="btn btn-outline" style="width:100%;">Start Launch</a>
+      </div>
+
+      <!-- Build , popular -->
+      <div class="plan-card popular reveal d1">
+        <div class="pop-badge">Popular</div>
+        <div class="plan-name">Build</div>
+        <div class="plan-price">€19<sub>/month</sub></div>
+        <div class="plan-line">Built for real projects</div>
+        <ul class="plan-list">
+          <li><span class="ck">✓</span> 10 projects included</li>
+          <li><span class="ck">✓</span> Unlimited apps</li>
+          <li><span class="ck">✓</span> Databases</li>
+          <li><span class="ck">✓</span> Full logs</li>
+          <li><span class="ck">✓</span> Fast deployments</li>
+          <li><span class="ck">✓</span> Priority handling</li>
+        </ul>
+        <a href="https://portal.opencodie.com/signup?next=%2F" class="btn btn-primary" style="width:100%;">Choose Build &rarr;</a>
+      </div>
+
+      <!-- Team -->
+      <div class="plan-card reveal d2">
+        <div class="plan-name">Team</div>
+        <div class="plan-price">€49<sub>/month</sub></div>
+        <div class="plan-line">Built for collaboration and control</div>
+        <ul class="plan-list">
+          <li><span class="ck">✓</span> 50 projects included</li>
+          <li><span class="ck">✓</span> Multiple users</li>
+          <li><span class="ck">✓</span> Shared environments</li>
+          <li><span class="ck">✓</span> Team access & permissions</li>
+          <li><span class="ck">✓</span> Deployment visibility</li>
+          <li><span class="ck">✓</span> Activity tracking</li>
+          <li><span class="ck">✓</span> Priority support</li>
+        </ul>
+        <a href="https://portal.opencodie.com/signup?next=%2F" class="btn btn-outline" style="width:100%;">Start Team</a>
+      </div>
+    </div>
+
+    <!-- Fair usage notice -->
+    <div class="fair-box reveal">
+      <p>
+        <strong style="color:var(--text);">Fair usage included.</strong>
+        Each plan includes everything you need for real projects. If your apps exceed normal usage, additional costs may apply ,
+        <strong style="color:var(--text);">we'll always notify you before any extra charges.</strong>
+      </p>
+    </div>
+
+    <!-- Comparison table -->
+    <div class="comp-wrap reveal">
+      <h3>OpenCodie vs Vercel vs Coolify</h3>
+      <table>
+        <thead>
+          <tr>
+            <th>Feature</th>
+            <th class="hi">OpenCodie</th>
+            <th>Vercel</th>
+            <th>Coolify</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Ease of use</td>
+            <td class="hi">Very simple</td>
+            <td>Simple</td>
+            <td>Setup-heavy</td>
+          </tr>
+          <tr>
+            <td>DevOps required</td>
+            <td class="hi">No</td>
+            <td>Sometimes</td>
+            <td>Yes</td>
+          </tr>
+          <tr>
+            <td>Simplicity</td>
+            <td class="hi">Built for speed</td>
+            <td>Good, can grow complex</td>
+            <td>Manual workflow</td>
+          </tr>
+          <tr>
+            <td>Pricing clarity</td>
+            <td class="hi">Clear plans</td>
+            <td>Can be less predictable</td>
+            <td>Self-managed</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════
+     CONTACT
+════════════════════════════════════════════════════════ -->
+<section id="contact">
+  <div class="container">
+    <div class="section-header reveal">
+      <div class="eyebrow">Contact</div>
+      <h2>Get in touch</h2>
+      <p>Have a question or want to know more? Send us a message and we'll get back to you shortly.</p>
+    </div>
+
+    <form class="contact-form reveal" id="contact-form" novalidate>
+      <div class="form-row">
+        <div class="form-group">
+          <label for="cf-name">Name</label>
+          <input type="text" id="cf-name" name="name" placeholder="Your name" required />
+        </div>
+        <div class="form-group">
+          <label for="cf-email">Email</label>
+          <input type="email" id="cf-email" name="email" placeholder="you@example.com" required />
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="cf-subject">Subject</label>
+        <input type="text" id="cf-subject" name="subject" placeholder="How can we help?" required />
+      </div>
+      <div class="form-group">
+        <label for="cf-message">Message</label>
+        <textarea id="cf-message" name="message" rows="5" placeholder="Tell us more…" required></textarea>
+      </div>
+      <div class="form-footer">
+        <button type="submit" class="btn btn-primary">Send message &rarr;</button>
+        <p class="form-note">We typically reply within 1 business day.</p>
+      </div>
+      <div class="form-success" id="form-success">
+        <i data-lucide="check-circle"></i>
+        <span>Message sent! We'll be in touch soon.</span>
+      </div>
+    </form>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════
+     FAQ
+════════════════════════════════════════════════════════ -->
+<section id="faq">
+  <div class="container">
+    <div class="section-header reveal">
+      <div class="eyebrow">FAQ</div>
+      <h2>Frequently asked questions</h2>
+      <p>Short answers to the most common questions before you start.</p>
+    </div>
+
+    <div class="faq-wrap">
+
+      <div class="faq-item reveal">
+        <button class="faq-q">What is OpenCodie?<div class="faq-icon">+</div></button>
+        <div class="faq-a"><p>OpenCodie is a developer platform that lets you keep coding locally while it handles deployment, infrastructure, and runtime operations on your own server.</p></div>
+      </div>
+
+      <div class="faq-item reveal d1">
+        <button class="faq-q">Do I need DevOps?<div class="faq-icon">+</div></button>
+        <div class="faq-a"><p>No. OpenCodie is built specifically for developers who want to ship without managing DevOps complexity. No pipeline setup, no server configuration.</p></div>
+      </div>
+
+      <div class="faq-item reveal d2">
+        <button class="faq-q">Where does my app run?<div class="faq-icon">+</div></button>
+        <div class="faq-a"><p>Your app runs on your own server. You keep full infrastructure ownership , OpenCodie connects the operational layer without hosting your application itself.</p></div>
+      </div>
+
+      <div class="faq-item reveal d3">
+        <button class="faq-q">Can I use AI tools like Codex, Gemini, or Claude?<div class="faq-icon">+</div></button>
+        <div class="faq-a"><p>Yes. OpenCodie fits AI-first workflows. Bring your own API keys and keep using Codex, Gemini, Claude, or any other tool , no duplicate subscriptions, no workflow reset.</p></div>
+      </div>
+
+      <div class="faq-item reveal d4">
+        <button class="faq-q">Do I code in the browser?<div class="faq-icon">+</div></button>
+        <div class="faq-a"><p>No. You work locally in VS Code and terminal exactly as you do today, then deploy through OpenCodie when you're ready to ship.</p></div>
+      </div>
+
+      <div class="faq-item reveal">
+        <button class="faq-q">Is this like Vercel?<div class="faq-icon">+</div></button>
+        <div class="faq-a"><p>OpenCodie gives a Vercel-like deployment experience but with the infrastructure ownership of Coolify , best of both worlds. Fast DX, full control.</p></div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════
+     CTA
+════════════════════════════════════════════════════════ -->
+<section id="cta">
+  <div class="orb cta-orb"></div>
+  <div class="container">
+    <div class="inner-z">
+      <div class="eyebrow reveal" style="justify-content:center;">Ready to ship?</div>
+      <h2 class="reveal d1">Start building without DevOps</h2>
+      <p class="sub reveal d2">Deploy your first app today with OpenCodie. From local code to production in minutes , on infrastructure you own.</p>
+      <div class="actions reveal d3">
+        <a href="https://portal.opencodie.com/signup?next=%2F"  class="btn btn-primary btn-lg">Get started &rarr;</a>
+        <a href="#pricing" class="btn btn-outline btn-lg">Choose Build plan</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════
+     FOOTER
+════════════════════════════════════════════════════════ -->
+<footer>
+  <div class="container">
+    <div class="footer-grid">
+      <div class="f-brand">
+        <div class="brand-wrap">
+          <img src="images/opencodie-logo.png" alt="OpenCodie" />
+          <span class="logo-name">OpenCodie</span>
+        </div>
+        <p>Deploy apps like Vercel. Own everything like Coolify. Keep coding locally while OpenCodie handles deployment and infrastructure on your own server.</p>
+      </div>
+      <div class="f-col">
+        <h4>Navigation</h4>
+        <ul>
+          <li><a href="/">Home</a></li>
+          <li><a href="#platform">Product</a></li>
+          <li><a href="#pricing">Pricing</a></li>
+          <li><a href="#faq">FAQ</a></li>
+        </ul>
+      </div>
+      <div class="f-col">
+        <h4>Resources</h4>
+        <ul>
+          <li><a href="docs.html">Docs</a></li>
+          <li><a href="#faq">FAQ</a></li>
+          <li><a href="https://portal.opencodie.com/login">Log in</a></li>
+          <li><a href="https://portal.opencodie.com/signup?next=%2F">Sign up</a></li>
+        </ul>
+      </div>
+      <div class="f-col">
+        <h4>Legal</h4>
+        <ul>
+          <li><a href="legal.html#terms">Terms</a></li>
+          <li><a href="legal.html#privacy">Privacy</a></li>
+          <li><a href="legal.html#cookies">Cookies</a></li>
+          <li><a href="legal.html#dpa">DPA</a></li>
+          <li><a href="legal.html#acceptable-use">Acceptable Use</a></li>
+          <li><a href="legal.html#subprocessors">Subprocessors</a></li>
+          <li><a href="legal.html#report-abuse">Report Abuse</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <span>&copy; 2026 OpenCodie. All rights reserved.</span>
+      <div class="status-pill">
+        <div class="live-dot"></div>
+        System Operational
+      </div>
+    </div>
+  </div>
+</footer>
+
+<div id="cookie-banner" class="cookie-banner" aria-live="polite">
+  <div class="cookie-inner">
+    <div class="cookie-text">
+      <strong>We use cookies</strong>
+      <p>OpenCodie uses functional and analytical cookies to keep the website running smoothly and to improve your experience. Read our <a href="legal.html#cookies">cookie policy</a> for more information.</p>
+    </div>
+    <div class="cookie-actions">
+      <button id="cookie-decline" class="btn btn-ghost btn-sm">Decline</button>
+      <button id="cookie-accept"  class="btn btn-primary btn-sm">Accept</button>
+    </div>
+  </div>
+</div>
+
+<script src="js/laptop-demo.js?v=1"></script>
+<script src="js/main.js?v=104"></script>
+<script src="js/chatbot.js"></script>
+<script>
+(function() {
+  const nav = document.getElementById('nav');
+  const burger = document.getElementById('nav-burger');
+  if (!burger || !nav) return;
+  function closeMenu() {
+    nav.classList.remove('is-open');
+    burger.setAttribute('aria-expanded', 'false');
+  }
+  burger.addEventListener('click', function() {
+    const open = nav.classList.toggle('is-open');
+    burger.setAttribute('aria-expanded', open ? 'true' : 'false');
+  });
+  document.querySelectorAll('.nav-mobile-links a').forEach(function(a) {
+    a.addEventListener('click', closeMenu);
+  });
+  document.addEventListener('click', function(e) {
+    if (!nav.contains(e.target)) closeMenu();
+  });
+})();
+</script>
+</body>
+</html>

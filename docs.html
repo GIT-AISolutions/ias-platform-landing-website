@@ -1,0 +1,904 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="robots" content="index, follow" />
+
+  <title>Documentation — OpenCodie User Guide</title>
+  <meta name="description" content="OpenCodie platform user guide. Everything you need to build, deploy, and manage projects without DevOps overhead." />
+  <meta name="keywords" content="OpenCodie docs, user guide, developer platform documentation, deployment, self-hosted" />
+  <meta name="author" content="OpenCodie" />
+
+  <!-- Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-SMSRCN2DK8"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-SMSRCN2DK8');
+  </script>
+
+  <link rel="canonical" href="https://opencodie.com/docs.html" />
+
+  <!-- Open Graph -->
+  <meta property="og:type"        content="article" />
+  <meta property="og:url"         content="https://opencodie.com/docs.html" />
+  <meta property="og:title"       content="Documentation — OpenCodie User Guide" />
+  <meta property="og:description" content="OpenCodie platform user guide. Everything you need to build, deploy, and manage projects without DevOps overhead." />
+  <meta property="og:image"       content="https://opencodie.com/images/opencodie-logo.png" />
+  <meta property="og:site_name"   content="OpenCodie" />
+  <meta property="og:locale"      content="en_US" />
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card"        content="summary_large_image" />
+  <meta name="twitter:title"       content="Documentation — OpenCodie User Guide" />
+  <meta name="twitter:description" content="OpenCodie platform user guide. Everything you need to build, deploy, and manage projects without DevOps overhead." />
+  <meta name="twitter:image"       content="https://opencodie.com/images/opencodie-logo.png" />
+
+  <!-- Structured Data -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "TechArticle",
+    "headline": "OpenCodie User Guide",
+    "description": "Complete documentation for the OpenCodie developer platform.",
+    "url": "https://opencodie.com/docs.html",
+    "publisher": {
+      "@type": "Organization",
+      "name": "OpenCodie",
+      "logo": "https://opencodie.com/images/opencodie-logo.png"
+    }
+  }
+  </script>
+
+  <link rel="shortcut icon" href="favicon.ico?v=2" />
+  <link rel="icon" href="favicon.ico?v=2" sizes="any" />
+  <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png?v=2" />
+  <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png?v=2" />
+  <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png?v=2" />
+  <link rel="mask-icon" href="safari-pinned-tab.svg?v=2" color="#ff6b00" />
+  <link rel="stylesheet" href="css/styles.css" />
+  <link rel="stylesheet" href="css/docs.css" />
+  <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
+</head>
+<body>
+
+<!-- ═══════════════════════════════════════════════════════
+     NAVIGATION
+════════════════════════════════════════════════════════ -->
+<nav id="nav" class="scrolled">
+  <div class="container">
+    <div class="inner">
+      <a href="/" class="logo" aria-label="OpenCodie home">
+        <img src="images/opencodie-logo.png" alt="OpenCodie" />
+        <span class="logo-name">OpenCodie</span>
+      </a>
+      <ul class="links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="index.html#platform">Product</a></li>
+        <li><a href="index.html#pricing">Pricing</a></li>
+        <li><a href="index.html#faq">FAQ</a></li>
+        <li><a href="index.html#contact">Contact</a></li>
+      </ul>
+      <div class="cta">
+        <a href="https://portal.opencodie.com/login" class="btn btn-ghost btn-sm">Log in</a>
+        <a href="https://portal.opencodie.com/signup?next=%2F" class="btn btn-primary btn-sm">Start free trial</a>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<!-- ═══════════════════════════════════════════════════════
+     DOCS LAYOUT
+════════════════════════════════════════════════════════ -->
+<div class="docs-layout">
+
+  <!-- ─── SIDEBAR ─── -->
+  <aside class="docs-sidebar" id="docs-sidebar">
+    <div class="sidebar-search">
+      <div class="search-wrap">
+        <i data-lucide="search" class="search-icon"></i>
+        <input type="text" id="sidebar-search" placeholder="Search docs…" autocomplete="off" />
+      </div>
+    </div>
+
+    <div class="sidebar-label">Getting started</div>
+    <ul class="sidebar-nav">
+      <li><a href="#intro"><span class="sidebar-num">—</span>Overview</a></li>
+      <li><a href="#s1"><span class="sidebar-num">01</span>What is OpenCodie?</a></li>
+      <li><a href="#s2"><span class="sidebar-num">02</span>Who is it for?</a></li>
+      <li><a href="#s3"><span class="sidebar-num">03</span>Getting started</a></li>
+      <li><a href="#s4"><span class="sidebar-num">04</span>How does it work?</a></li>
+    </ul>
+
+    <div class="sidebar-label">Platform</div>
+    <ul class="sidebar-nav">
+      <li><a href="#s5"><span class="sidebar-num">05</span>Projects</a></li>
+      <li><a href="#s6"><span class="sidebar-num">06</span>Workspaces</a></li>
+      <li><a href="#s7"><span class="sidebar-num">07</span>Editor, terminal & preview</a></li>
+      <li><a href="#s8"><span class="sidebar-num">08</span>AI Chat & code suggestions</a></li>
+    </ul>
+
+    <div class="sidebar-label">Infrastructure</div>
+    <ul class="sidebar-nav">
+      <li><a href="#s9"><span class="sidebar-num">09</span>Deployments</a></li>
+      <li><a href="#s10"><span class="sidebar-num">10</span>Databases</a></li>
+      <li><a href="#s11"><span class="sidebar-num">11</span>Secrets</a></li>
+      <li><a href="#s12"><span class="sidebar-num">12</span>Logs & status</a></li>
+    </ul>
+
+    <div class="sidebar-label">Teams & billing</div>
+    <ul class="sidebar-nav">
+      <li><a href="#s13"><span class="sidebar-num">13</span>Teams & organizations</a></li>
+      <li><a href="#s14"><span class="sidebar-num">14</span>Billing & usage</a></li>
+    </ul>
+
+    <div class="sidebar-label">Advanced</div>
+    <ul class="sidebar-nav">
+      <li><a href="#s15"><span class="sidebar-num">15</span>GitHub & repositories</a></li>
+      <li><a href="#s16"><span class="sidebar-num">16</span>Dev vs production</a></li>
+      <li><a href="#s17"><span class="sidebar-num">17</span>Troubleshooting</a></li>
+      <li><a href="#s18"><span class="sidebar-num">18</span>Permissions & safety</a></li>
+      <li><a href="#s19"><span class="sidebar-num">19</span>Support & help</a></li>
+    </ul>
+
+    <div class="sidebar-label">Reference</div>
+    <ul class="sidebar-nav">
+      <li><a href="#s20"><span class="sidebar-num">20</span>FAQ</a></li>
+      <li><a href="#s21"><span class="sidebar-num">21</span>Best practices</a></li>
+    </ul>
+  </aside>
+
+  <!-- ─── MAIN CONTENT ─── -->
+  <main class="docs-content">
+
+    <!-- BREADCRUMB -->
+
+
+    <!-- HERO -->
+    <div class="docs-hero" id="intro">
+      <div class="docs-tag">
+        <i data-lucide="book-open"></i>
+        User Guide
+      </div>
+      <h1>OpenCodie Platform Guide</h1>
+      <p class="lead">
+        OpenCodie is an online development platform that helps you build, manage, and deploy projects from one place — without constantly switching between separate tools.
+      </p>
+      <div class="meta">
+        <span><i data-lucide="calendar"></i> Updated May 5, 2026</span>
+        <span><i data-lucide="clock"></i> ~25 min read</span>
+        <span><i data-lucide="layers"></i> 21 sections</span>
+      </div>
+    </div>
+
+    <!-- ─── SECTION 1 ─── -->
+    <div class="doc-section" id="s1">
+      <h2>
+        <div class="section-icon"><i data-lucide="info"></i></div>
+        What is OpenCodie?
+      </h2>
+      <p>OpenCodie helps you build and manage websites, web apps, and software projects faster. Normally, you often need multiple tools: a code editor, terminal, hosting platform, database panel, AI chat, and deployment tool. OpenCodie brings these parts together in one platform.</p>
+
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Feature</th><th>What you can do</th></tr></thead>
+          <tbody>
+            <tr><td><strong>Projects</strong></td><td>Organize everything related to one website, app, or client</td></tr>
+            <tr><td><strong>Workspaces</strong></td><td>Code online in a safe development environment</td></tr>
+            <tr><td><strong>Editor</strong></td><td>Edit code directly in the browser</td></tr>
+            <tr><td><strong>Terminal</strong></td><td>Run commands without installing everything locally</td></tr>
+            <tr><td><strong>Preview</strong></td><td>View your website or app while building</td></tr>
+            <tr><td><strong>AI Chat</strong></td><td>Get help with code, bugs, explanations, and improvements</td></tr>
+            <tr><td><strong>Deployments</strong></td><td>Publish your project to production</td></tr>
+            <tr><td><strong>Databases</strong></td><td>View and manage data through a safe viewer</td></tr>
+            <tr><td><strong>Secrets</strong></td><td>Store API keys and passwords securely</td></tr>
+            <tr><td><strong>Teams</strong></td><td>Collaborate with multiple users</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- ─── SECTION 2 ─── -->
+    <div class="doc-section" id="s2">
+      <h2>
+        <div class="section-icon"><i data-lucide="users"></i></div>
+        Who is OpenCodie for?
+      </h2>
+      <p>OpenCodie is built for people and teams who want to build software faster without managing many separate tools.</p>
+      <ul>
+        <li>Developers who want to work on projects online</li>
+        <li>Agencies managing multiple client projects</li>
+        <li>Teams working together on websites or apps</li>
+        <li>Makers who want to quickly build and launch ideas</li>
+        <li>Companies that want development, hosting, and AI help in one place</li>
+      </ul>
+      <div class="callout callout-tip">
+        <div class="callout-icon"><i data-lucide="lightbulb"></i></div>
+        <p>You do not always need to install everything on your own computer. Most work can be done directly from the browser.</p>
+      </div>
+    </div>
+
+    <!-- ─── SECTION 3 ─── -->
+    <div class="doc-section" id="s3">
+      <h2>
+        <div class="section-icon"><i data-lucide="play"></i></div>
+        Getting started
+      </h2>
+
+      <h3>Create an account</h3>
+      <ol class="doc-steps">
+        <li>Go to the OpenCodie portal and click <strong>Sign up</strong>.</li>
+        <li>Enter your email address and password, or use a supported OAuth provider.</li>
+        <li>Confirm your email address through the verification email.</li>
+      </ol>
+
+      <h3>Choose or create an organization</h3>
+      <p>After logging in, you can select an existing organization or create a new one. An organization groups your projects, workspaces, team members, billing, and usage in one place.</p>
+
+      <h3>Create your first project</h3>
+      <ol class="doc-steps">
+        <li>Go to <strong>Projects</strong> in the navigation.</li>
+        <li>Click <strong>Create project</strong>.</li>
+        <li>Enter a clear project name.</li>
+        <li>Confirm the project creation.</li>
+        <li>The project will appear in your project overview.</li>
+      </ol>
+
+      <h3>Start your first workspace</h3>
+      <ol class="doc-steps">
+        <li>Open your project.</li>
+        <li>Click <strong>New workspace</strong> or <strong>+ Workspace</strong>.</li>
+        <li>Choose a name and configuration.</li>
+        <li>Click <strong>Create workspace</strong>.</li>
+        <li>Wait until the status changes to <strong>Running</strong>.</li>
+        <li>Click <strong>Open workspace</strong> to start working.</li>
+      </ol>
+
+      <div class="callout callout-tip">
+        <div class="callout-icon"><i data-lucide="lightbulb"></i></div>
+        <p>A workspace can take a short moment to start because OpenCodie prepares the development environment for your project.</p>
+      </div>
+    </div>
+
+    <!-- ─── SECTION 4 ─── -->
+    <div class="doc-section" id="s4">
+      <h2>
+        <div class="section-icon"><i data-lucide="git-branch"></i></div>
+        How does the platform work?
+      </h2>
+      <p>OpenCodie uses a simple hierarchical structure:</p>
+      <pre data-lang="text"><code>Organization
+└── Project
+    ├── Workspace
+    ├── Deployment
+    ├── Database
+    └── Secrets</code></pre>
+
+      <p>A <strong>project</strong> is the main container for everything related to a website, app, product, or client. Inside a project, you can have multiple parts.</p>
+      <pre data-lang="example"><code>Project: SaaS Platform
+├── Workspace: Frontend app
+├── Workspace: Backend API
+├── Deployment: Production frontend
+├── Deployment: Production backend
+├── Database: PostgreSQL
+└── Secrets: Stripe, OpenAI, and database keys</code></pre>
+    </div>
+
+    <!-- ─── SECTION 5 ─── -->
+    <div class="doc-section" id="s5">
+      <h2>
+        <div class="section-icon"><i data-lucide="folder"></i></div>
+        Projects
+      </h2>
+      <p>A project is where you organize everything. Use one project per client, website, app, or product.</p>
+
+      <h3>When should you create a new project?</h3>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Situation</th><th>Best choice</th></tr></thead>
+          <tbody>
+            <tr><td>New client website</td><td>New project</td></tr>
+            <tr><td>Extra landing page for the same client</td><td>New workspace inside the existing project</td></tr>
+            <tr><td>Separate SaaS app</td><td>New project</td></tr>
+            <tr><td>Backend and frontend of the same app</td><td>One project with multiple workspaces</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="callout callout-tip">
+        <div class="callout-icon"><i data-lucide="lightbulb"></i></div>
+        <p><strong>Naming tip:</strong> Use clear project names like <code>JT Fitness Website</code>, <code>OpenCodie Platform</code>, or <code>Client Name — New Website</code> to keep the platform organized when you have many projects.</p>
+      </div>
+    </div>
+
+    <!-- ─── SECTION 6 ─── -->
+    <div class="doc-section" id="s6">
+      <h2>
+        <div class="section-icon"><i data-lucide="monitor"></i></div>
+        Workspaces
+      </h2>
+      <p>A workspace is your online development environment — where you write code, run commands, and preview what you are building. You can think of a workspace as an online version of your local development environment.</p>
+
+      <h3>What is inside a workspace?</h3>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Part</th><th>Description</th></tr></thead>
+          <tbody>
+            <tr><td><strong>Editor</strong></td><td>Edit code in the browser</td></tr>
+            <tr><td><strong>Terminal</strong></td><td>Run commands like <code>npm install</code>, <code>npm run dev</code>, or <code>git status</code></td></tr>
+            <tr><td><strong>Preview</strong></td><td>View your website or app directly</td></tr>
+            <tr><td><strong>AI Chat</strong></td><td>Get help with code, bugs, and improvements</td></tr>
+            <tr><td><strong>Files</strong></td><td>Browse and edit your project files</td></tr>
+            <tr><td><strong>Uploads</strong></td><td>Upload files as context for the AI chat</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3>Workspace status flow</h3>
+      <pre data-lang="status"><code>Stopped → Starting → Active
+Active  → Stopping → Stopped
+Active  → Restarting → Active</code></pre>
+
+      <div class="callout callout-warn">
+        <div class="callout-icon"><i data-lucide="alert-triangle"></i></div>
+        <p>Stop a workspace when you are done, so you do not use unnecessary resources.</p>
+      </div>
+
+      <h3>Multiple workspaces</h3>
+      <pre data-lang="example"><code>Project: SaaS Platform
+├── Workspace: Frontend
+├── Workspace: Backend API
+└── Workspace: Marketing Website</code></pre>
+    </div>
+
+    <!-- ─── SECTION 7 ─── -->
+    <div class="doc-section" id="s7">
+      <h2>
+        <div class="section-icon"><i data-lucide="code-2"></i></div>
+        Editor, terminal, and preview
+      </h2>
+      <p>OpenCodie combines the editor, terminal, and preview in one screen.</p>
+
+      <h3>Editor</h3>
+      <p>The editor supports HTML, CSS, JavaScript, TypeScript, React, Next.js, Python, FastAPI, and configuration files.</p>
+
+      <h3>Terminal</h3>
+      <p>The terminal lets you run commands inside your workspace. Common commands:</p>
+      <pre data-lang="bash"><code>npm install
+npm run dev
+npm run build
+git status
+git add .
+git commit -m "Update project"
+git push</code></pre>
+
+      <h3>Practical workflow</h3>
+      <div class="workflow-box">
+        <div class="flow-step"><div class="flow-num">1</div><div class="flow-text">Open your workspace</div></div>
+        <div class="flow-step"><div class="flow-num">2</div><div class="flow-text">Edit code in the editor</div></div>
+        <div class="flow-step"><div class="flow-num">3</div><div class="flow-text">Start the app through the terminal</div></div>
+        <div class="flow-step"><div class="flow-num">4</div><div class="flow-text">Check the result in the preview</div></div>
+        <div class="flow-step"><div class="flow-num">5</div><div class="flow-text">Ask AI for help or improvements</div></div>
+        <div class="flow-step"><div class="flow-num">6</div><div class="flow-text">Commit and deploy when everything works</div></div>
+      </div>
+    </div>
+
+    <!-- ─── SECTION 8 ─── -->
+    <div class="doc-section" id="s8">
+      <h2>
+        <div class="section-icon"><i data-lucide="bot"></i></div>
+        AI Chat and code suggestions
+      </h2>
+      <p>Each workspace includes an AI assistant that can help with your project.</p>
+      <ul>
+        <li>Find bugs and explain code</li>
+        <li>Build new components</li>
+        <li>Analyze error messages</li>
+        <li>Create a step-by-step plan</li>
+        <li>Suggest a code patch</li>
+      </ul>
+
+      <h3>Example prompts</h3>
+      <pre data-lang="prompt"><code>Can you check why my build is failing?
+Make this homepage more mobile-friendly without changing the style.
+Explain what this API route does.
+Create a safe patch to fix this issue.</code></pre>
+
+      <h3>OpenCodie Chat vs AI through terminal</h3>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>OpenCodie Chat</th><th>AI through terminal</th></tr></thead>
+          <tbody>
+            <tr><td>Available directly in the interface</td><td>Runs through a CLI in the terminal</td></tr>
+            <tr><td>Useful for explanations, review, and smaller changes</td><td>Useful for larger or deeper actions</td></tr>
+            <tr><td>Works nicely next to the editor and preview</td><td>Can run commands directly in your workspace</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3>Using your own AI through the terminal</h3>
+      <pre data-lang="bash"><code>claude
+# or
+openai
+# or any other AI CLI you use</code></pre>
+
+      <div class="callout callout-warn">
+        <div class="callout-icon"><i data-lucide="alert-triangle"></i></div>
+        <p><strong>Important:</strong> Always check what is being executed. Use git before making large changes. Never place API keys or passwords directly in prompts.</p>
+      </div>
+    </div>
+
+    <!-- ─── SECTION 9 ─── -->
+    <div class="doc-section" id="s9">
+      <h2>
+        <div class="section-icon"><i data-lucide="rocket"></i></div>
+        Deployments
+      </h2>
+      <p>A deployment is the live version of your project. OpenCodie supports multiple stacks and in most cases auto-detects your project type.</p>
+
+      <h3>Supported stacks</h3>
+      <ul>
+        <li>Static HTML</li>
+        <li>Vite / React (Vite)</li>
+        <li>Next.js</li>
+        <li>Node + Express</li>
+        <li>Python FastAPI / Flask / Django</li>
+        <li>Astro, SvelteKit, Nuxt, Storybook</li>
+        <li>Custom (with your own build configuration)</li>
+      </ul>
+
+      <h3>Workspace vs deployment</h3>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Workspace</th><th>Deployment</th></tr></thead>
+          <tbody>
+            <tr><td>Used for development</td><td>Used for live production</td></tr>
+            <tr><td>Can temporarily be broken</td><td>Should be stable</td></tr>
+            <tr><td>For testing and building</td><td>For real users</td></tr>
+            <tr><td>Often started and stopped</td><td>Usually stays active</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3>Custom domain example</h3>
+      <pre data-lang="dns"><code>www.clientname.com
+app.yourdomain.com
+api.yourdomain.com</code></pre>
+    </div>
+
+    <!-- ─── SECTION 10 ─── -->
+    <div class="doc-section" id="s10">
+      <h2>
+        <div class="section-icon"><i data-lucide="database"></i></div>
+        Databases
+      </h2>
+      <p>Databases let you store data for your project — users, products, settings, orders, or other application data.</p>
+
+      <h3>Supported engines</h3>
+      <ul>
+        <li>PostgreSQL, MySQL, MariaDB</li>
+        <li>MongoDB</li>
+        <li>Redis, Valkey / KeyDB, Dragonfly</li>
+        <li>ClickHouse</li>
+      </ul>
+
+      <h3>Safe database viewer</h3>
+      <p>The database viewer is meant for safely viewing data with built-in restrictions:</p>
+      <ul>
+        <li>Read-only queries only</li>
+        <li>Row limits and query timeouts</li>
+        <li>Only allowed schemas are visible</li>
+        <li>Sensitive columns can be hidden or masked</li>
+      </ul>
+
+      <div class="callout callout-tip">
+        <div class="callout-icon"><i data-lucide="lightbulb"></i></div>
+        <p>Use the database viewer to quickly check whether data is being stored correctly. It is not meant to replace full database management tools for complex operations.</p>
+      </div>
+    </div>
+
+    <!-- ─── SECTION 11 ─── -->
+    <div class="doc-section" id="s11">
+      <h2>
+        <div class="section-icon"><i data-lucide="lock"></i></div>
+        Secrets
+      </h2>
+      <p>Secrets are sensitive values such as API keys, tokens, passwords, and database URLs.</p>
+      <pre data-lang="env"><code>OPENAI_API_KEY
+STRIPE_SECRET_KEY
+DATABASE_URL
+SMTP_PASSWORD
+GITHUB_TOKEN</code></pre>
+
+      <h3>Scope</h3>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Scope</th><th>Usage</th></tr></thead>
+          <tbody>
+            <tr><td><strong>Project</strong></td><td>Shared with all workspaces and deployments inside the project</td></tr>
+            <tr><td><strong>Workspace</strong></td><td>Only available in one workspace</td></tr>
+            <tr><td><strong>Deployment</strong></td><td>Only available in one live deployment</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="callout callout-danger">
+        <div class="callout-icon"><i data-lucide="shield-alert"></i></div>
+        <p><strong>Security:</strong> Never place real secrets in chat messages, screenshots, or public documentation. Use the OpenCodie secrets panel to store them securely.</p>
+      </div>
+    </div>
+
+    <!-- ─── SECTION 12 ─── -->
+    <div class="doc-section" id="s12">
+      <h2>
+        <div class="section-icon"><i data-lucide="activity"></i></div>
+        Logs and status messages
+      </h2>
+      <p>Logs help you understand what is happening in a workspace, job, or deployment. You can use logs to see whether an app starts correctly, why a build fails, which error a deployment gives, and whether commands ran successfully.</p>
+
+      <h3>What to look for</h3>
+      <ul>
+        <li>The <strong>first error</strong> is usually the most important one</li>
+        <li>Later errors are often caused by the first failure</li>
+        <li>OpenCodie streams logs live in real-time</li>
+        <li>Sensitive values are filtered from logs automatically</li>
+      </ul>
+    </div>
+
+    <!-- ─── SECTION 13 ─── -->
+    <div class="doc-section" id="s13">
+      <h2>
+        <div class="section-icon"><i data-lucide="users-2"></i></div>
+        Teams and organizations
+      </h2>
+      <p>Organizations let you collaborate with multiple users. An organization can contain multiple projects. Inside an organization, you can invite members and assign roles.</p>
+
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Role</th><th>What someone can do</th></tr></thead>
+          <tbody>
+            <tr><td><strong>Owner</strong></td><td>Full control, including billing and deleting the organization</td></tr>
+            <tr><td><strong>Admin</strong></td><td>Manage members and organization settings</td></tr>
+            <tr><td><strong>Member</strong></td><td>View and work on projects, depending on permissions</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="callout callout-tip">
+        <div class="callout-icon"><i data-lucide="lightbulb"></i></div>
+        <p>Only give admin access to people who actually need to manage organization settings or members.</p>
+      </div>
+    </div>
+
+    <!-- ─── SECTION 14 ─── -->
+    <div class="doc-section" id="s14">
+      <h2>
+        <div class="section-icon"><i data-lucide="credit-card"></i></div>
+        Billing, limits and usage
+      </h2>
+      <p>OpenCodie uses subscriptions and usage tracking. Depending on your plan, you get access to certain resources. Usage is measured based on workspace hours, deployments, databases, and extra resource usage.</p>
+
+      <h3>How to prevent unexpected costs</h3>
+      <ul>
+        <li>Stop workspaces you are not using</li>
+        <li>Check the billing and usage overview regularly</li>
+        <li>Keep an eye on active deployments and builds</li>
+        <li>Enable extra usage only when you understand the cost impact</li>
+      </ul>
+
+      <div class="callout callout-warn">
+        <div class="callout-icon"><i data-lucide="alert-triangle"></i></div>
+        <p>A running workspace keeps using resources while it is active. Stop workspaces when you are done working to keep usage and costs under control.</p>
+      </div>
+    </div>
+
+    <!-- ─── SECTION 15 ─── -->
+    <div class="doc-section" id="s15">
+      <h2>
+        <div class="section-icon"><i data-lucide="github"></i></div>
+        GitHub and repository workflow
+      </h2>
+
+      <h3>Connect a repository</h3>
+      <pre data-lang="bash"><code>git remote add origin &lt;your-repository-url&gt;</code></pre>
+
+      <h3>Pull and push workflow</h3>
+      <pre data-lang="bash"><code># Get latest changes
+git pull origin &lt;branch&gt;
+
+# Send commits back
+git push origin &lt;branch&gt;</code></pre>
+
+      <h3>Use branches</h3>
+      <pre data-lang="bash"><code>git checkout -b feature/billing-page
+# or
+git checkout -b fix/workspace-preview</code></pre>
+
+      <h3>Create commits</h3>
+      <pre data-lang="bash"><code>git add .
+git commit -m "Describe the change"
+git push origin &lt;your-branch&gt;</code></pre>
+
+      <div class="callout callout-tip">
+        <div class="callout-icon"><i data-lucide="lightbulb"></i></div>
+        <p>Before using AI to make larger changes, create a commit or branch first. This makes it much easier to review, revert, or compare changes later.</p>
+      </div>
+    </div>
+
+    <!-- ─── SECTION 16 ─── -->
+    <div class="doc-section" id="s16">
+      <h2>
+        <div class="section-icon"><i data-lucide="layers"></i></div>
+        Development vs production environments
+      </h2>
+
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th></th><th>Development workspace</th><th>Production deployment</th></tr></thead>
+          <tbody>
+            <tr><td><strong>Purpose</strong></td><td>Build and test</td><td>Serve real users</td></tr>
+            <tr><td><strong>Secrets</strong></td><td>Workspace secrets</td><td>Deployment secrets</td></tr>
+            <tr><td><strong>Logs</strong></td><td>Workspace and terminal logs</td><td>Deployment logs</td></tr>
+            <tr><td><strong>Risk level</strong></td><td>Safe for testing</td><td>Should stay stable</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3>Why something works in workspace but not live</h3>
+      <ul>
+        <li>A secret exists in the workspace but not in the deployment</li>
+        <li>An environment variable has a different name or value in production</li>
+        <li>A dependency is missing from <code>package.json</code></li>
+        <li>The build command differs from development</li>
+        <li>The app expects a local file or service that does not exist in production</li>
+      </ul>
+    </div>
+
+    <!-- ─── SECTION 17 ─── -->
+    <div class="doc-section" id="s17">
+      <h2>
+        <div class="section-icon"><i data-lucide="wrench"></i></div>
+        Troubleshooting
+      </h2>
+
+      <h3>Build fails</h3>
+      <ol class="doc-steps">
+        <li>Open the deployment logs.</li>
+        <li>Look for the <strong>first real error message</strong>.</li>
+        <li>Check for missing dependencies, syntax errors, or wrong environment variables.</li>
+        <li>Fix the issue in your workspace, commit, and deploy again.</li>
+      </ol>
+
+      <h3>Preview does not work</h3>
+      <ol class="doc-steps">
+        <li>Check whether the workspace status is <strong>Running</strong>.</li>
+        <li>Make sure your app is actually started in the terminal.</li>
+        <li>Confirm that the app is listening on the expected port.</li>
+        <li>Restart the preview if the app configuration changed.</li>
+      </ol>
+
+      <h3>Domain or DNS does not work</h3>
+      <ol class="doc-steps">
+        <li>Check whether the domain is correctly added to deployment settings.</li>
+        <li>Confirm that DNS records are configured at your domain provider.</li>
+        <li>Remember that DNS changes can take time to propagate.</li>
+        <li>Check whether the SSL certificate is active.</li>
+      </ol>
+
+      <div class="callout callout-tip">
+        <div class="callout-icon"><i data-lucide="lightbulb"></i></div>
+        <p>The first error in the logs is usually the most important one. Later errors are often caused by the first failure.</p>
+      </div>
+    </div>
+
+    <!-- ─── SECTION 18 ─── -->
+    <div class="doc-section" id="s18">
+      <h2>
+        <div class="section-icon"><i data-lucide="shield"></i></div>
+        Permissions and safety
+      </h2>
+
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Action</th><th>Member</th><th>Admin</th></tr></thead>
+          <tbody>
+            <tr><td>Create projects</td><td>Yes</td><td>Yes</td></tr>
+            <tr><td>Start and stop workspaces</td><td>Yes</td><td>Yes</td></tr>
+            <tr><td>Deploy projects</td><td>Usually yes</td><td>Yes</td></tr>
+            <tr><td>Manage project secrets</td><td>Depends</td><td>Yes</td></tr>
+            <tr><td>Invite members</td><td>No</td><td>Yes</td></tr>
+            <tr><td>Manage billing</td><td>No</td><td>Yes</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3>Why AI actions must be reviewed</h3>
+      <p>AI can help with code, commands, and file changes, but it should not replace human review. Always review AI-generated changes before applying them, especially when the action can delete files, change database logic, modify authentication, or deploy to production.</p>
+
+      <div class="callout callout-danger">
+        <div class="callout-icon"><i data-lucide="shield-alert"></i></div>
+        <p><strong>Never</strong> place real secrets in chat messages, screenshots, or public repositories.</p>
+      </div>
+    </div>
+
+    <!-- ─── SECTION 19 ─── -->
+    <div class="doc-section" id="s19">
+      <h2>
+        <div class="section-icon"><i data-lucide="life-buoy"></i></div>
+        Support and help
+      </h2>
+      <p>When you need help, include enough information so the issue can be solved faster.</p>
+
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Information</th><th>Where to find it</th></tr></thead>
+          <tbody>
+            <tr><td>Project name</td><td>Projects page</td></tr>
+            <tr><td>Workspace name</td><td>Workspace page</td></tr>
+            <tr><td>Exact error message</td><td>Logs, terminal, browser console</td></tr>
+            <tr><td>Steps to reproduce</td><td>Describe what you did before the issue</td></tr>
+            <tr><td>Time of the issue</td><td>Include date, time, and timezone</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- ─── SECTION 20 ─── -->
+    <div class="doc-section" id="s20">
+      <h2>
+        <div class="section-icon"><i data-lucide="help-circle"></i></div>
+        Frequently asked questions
+      </h2>
+
+      <h3>Do I need to install anything locally?</h3>
+      <p>Not always. You can do a lot from the browser: edit code, run commands, view previews, and use AI. For some advanced workflows, GitHub CLI or local tooling can still be useful.</p>
+
+      <h3>What is the difference between a project and a workspace?</h3>
+      <p>A project is the main place where everything is organized. A workspace is where you actually write code and test changes.</p>
+      <pre data-lang="example"><code>Project: Webshop
+Workspace: Frontend build
+Workspace: Backend build
+Deployment: Live webshop
+Database: Product data</code></pre>
+
+      <h3>Can AI directly edit my code?</h3>
+      <p>Yes, but usually through a suggested patch. You can review the diff first and approve it before it is applied. This helps you stay in control of your code.</p>
+
+      <h3>Can I use my own AI tools?</h3>
+      <p>Yes. You can use your own AI tools through the terminal when they provide a CLI — Claude, Gemini, Codex, OpenAI CLI, or other supported AI command-line tools.</p>
+
+      <h3>Can I connect my own domain?</h3>
+      <p>Yes. Deployments can be connected to a custom domain. You need to configure DNS records at your domain provider.</p>
+
+      <h3>When should I stop a workspace?</h3>
+      <p>Stop a workspace when you are done working or when you do not need it for a while. This prevents unnecessary resource usage.</p>
+    </div>
+
+    <!-- ─── SECTION 21 ─── -->
+    <div class="doc-section" id="s21">
+      <h2>
+        <div class="section-icon"><i data-lucide="star"></i></div>
+        Best practices
+      </h2>
+
+      <h3>Keep projects organized</h3>
+      <p>Use one project per client, product, or large app. Create multiple workspaces inside the same project when the parts belong together.</p>
+
+      <h3>Follow a fixed workflow</h3>
+      <div class="workflow-box">
+        <div class="flow-step"><div class="flow-num">1</div><div class="flow-text"><strong>Open project</strong> and start workspace</div></div>
+        <div class="flow-step"><div class="flow-num">2</div><div class="flow-text"><strong>Edit code</strong> in the editor</div></div>
+        <div class="flow-step"><div class="flow-num">3</div><div class="flow-text"><strong>Test</strong> in preview</div></div>
+        <div class="flow-step"><div class="flow-num">4</div><div class="flow-text"><strong>Ask AI</strong> for review or improvements</div></div>
+        <div class="flow-step"><div class="flow-num">5</div><div class="flow-text"><strong>Run build</strong> and tests</div></div>
+        <div class="flow-step"><div class="flow-num">6</div><div class="flow-text"><strong>Commit</strong> and deploy</div></div>
+        <div class="flow-step"><div class="flow-num">7</div><div class="flow-text"><strong>Check logs</strong> after deployment</div></div>
+      </div>
+
+      <h3>Use git before large changes</h3>
+      <p>Before making big changes, create a commit or a new branch. This makes it easier to compare, review, or roll back changes.</p>
+
+      <h3>Use AI as an assistant, not a replacement</h3>
+      <ul>
+        <li>Check whether the change makes sense</li>
+        <li>Verify the app still builds and the preview works</li>
+        <li>Ensure no secrets or sensitive data were added</li>
+        <li>Confirm the change matches the goal of the project</li>
+      </ul>
+
+      <div class="callout callout-tip">
+        <div class="callout-icon"><i data-lucide="lightbulb"></i></div>
+        <p><strong>Summary:</strong> Use projects to stay organized, workspaces to build, deployments to go live, databases to manage data, secrets for safe configuration, and AI Chat to work faster.</p>
+      </div>
+    </div>
+
+  </main>
+</div>
+
+<!-- Mobile toggle -->
+<button class="docs-mobile-toggle" id="docs-toggle" aria-label="Toggle navigation">
+  <i data-lucide="menu"></i>
+</button>
+
+<footer>
+  <div class="container">
+    <div class="footer-grid">
+      <div class="f-brand">
+        <div class="brand-wrap">
+          <img src="images/opencodie-logo.png" alt="OpenCodie" />
+          <span class="logo-name">OpenCodie</span>
+        </div>
+        <p>Deploy apps like Vercel. Own everything like Coolify. Keep coding locally while OpenCodie handles deployment and infrastructure on your own server.</p>
+      </div>
+      <div class="f-col">
+        <h4>Navigation</h4>
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="index.html#platform">Product</a></li>
+          <li><a href="index.html#pricing">Pricing</a></li>
+        </ul>
+      </div>
+      <div class="f-col">
+        <h4>Resources</h4>
+        <ul>
+          <li><a href="docs.html">Docs</a></li>
+          <li><a href="index.html#faq">FAQ</a></li>
+          <li><a href="https://portal.opencodie.com/login">Log in</a></li>
+          <li><a href="https://portal.opencodie.com/signup?next=%2F">Sign up</a></li>
+        </ul>
+      </div>
+      <div class="f-col">
+        <h4>Legal</h4>
+        <ul>
+          <li><a href="legal.html#terms">Terms</a></li>
+          <li><a href="legal.html#privacy">Privacy</a></li>
+          <li><a href="legal.html#cookies">Cookies</a></li>
+          <li><a href="legal.html#dpa">DPA</a></li>
+          <li><a href="legal.html#acceptable-use">Acceptable Use</a></li>
+          <li><a href="legal.html#subprocessors">Subprocessors</a></li>
+          <li><a href="legal.html#report-abuse">Report Abuse</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <span>&copy; 2026 OpenCodie. All rights reserved.</span>
+      <div class="status-pill">
+        <div class="live-dot"></div>
+        System Operational
+      </div>
+    </div>
+  </div>
+</footer>
+
+<div id="cookie-banner" class="cookie-banner hidden" aria-live="polite">
+  <div class="cookie-inner">
+    <div class="cookie-text">
+      <strong>We use cookies</strong>
+      <p>OpenCodie uses functional and analytical cookies to keep the website running smoothly and to improve your experience. Read our <a href="legal.html#cookies">cookie policy</a> for more information.</p>
+    </div>
+    <div class="cookie-actions">
+      <button id="cookie-decline" class="btn btn-ghost btn-sm">Decline</button>
+      <button id="cookie-accept"  class="btn btn-primary btn-sm">Accept</button>
+    </div>
+  </div>
+</div>
+
+<script src="js/docs.js"></script>
+<script>
+  const cookieBanner = document.getElementById('cookie-banner');
+  if (!localStorage.getItem('cookie-consent')) cookieBanner.classList.remove('hidden');
+  document.getElementById('cookie-accept').addEventListener('click', () => {
+    localStorage.setItem('cookie-consent', 'accepted');
+    cookieBanner.classList.add('hidden');
+  });
+  document.getElementById('cookie-decline').addEventListener('click', () => {
+    localStorage.setItem('cookie-consent', 'declined');
+    cookieBanner.classList.add('hidden');
+  });
+</script>
+<script src="js/chatbot.js"></script>
+</body>
+</html>
