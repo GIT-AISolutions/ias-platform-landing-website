@@ -23,11 +23,11 @@ assert.match(mainJs, /submitButton\.disabled = true/, 'contact form should preve
 
 assert.match(stylesCss, /\.site-chat-panel\s*{[\s\S]*width: min\(430px, calc\(100vw - 2rem\)\);/, 'chat panel should be wide enough for markdown answers without feeling cramped');
 assert.match(stylesCss, /\.site-chat\.open \.site-chat-panel\s*{[\s\S]*display: grid;[\s\S]*grid-template-rows: auto minmax\(0, 1fr\) auto auto auto;/, 'chat panel should keep header, log, prompts, error, and input in fixed grid rows');
-assert.match(stylesCss, /\.site-chat-log\s*{[\s\S]*gap: 0\.75rem;[\s\S]*overflow-y: auto;[\s\S]*overflow-x: hidden;[\s\S]*padding: 1rem 1rem 1\.125rem;/, 'chat log should scroll vertically without leaking content sideways');
+assert.match(stylesCss, /\.site-chat-log\s*{[\s\S]*gap: 0\.875rem;[\s\S]*overflow-y: auto;[\s\S]*overflow-x: hidden;[\s\S]*padding: 1rem 1\.375rem 1\.125rem 1rem;/, 'chat log should scroll vertically with breathing room before the scrollbar');
 assert.match(stylesCss, /\.site-chat-msg\s*{[\s\S]*width: 100%;[\s\S]*max-width: 100%;[\s\S]*padding: 0;[\s\S]*background: transparent;/, 'message wrappers should fill the log while the inner body owns bubble styling');
 assert.match(stylesCss, /\.site-chat-msg-body\s*{[\s\S]*min-width: 0;[\s\S]*overflow-wrap: anywhere;/, 'chat message body should wrap long markdown content inside the panel');
-assert.match(stylesCss, /\.site-chat-msg\.bot \.site-chat-msg-body\s*{[\s\S]*width: 100%;[\s\S]*border: 1px solid var\(--opencodie-border\);/, 'bot bubble body should contain long markdown answers inside its border');
-assert.match(stylesCss, /\.site-chat-msg\.user \.site-chat-msg-body\s*{[\s\S]*max-width: 84%;[\s\S]*background: #f97316;/, 'user bubble body should stay aligned inside the chat panel');
+assert.match(stylesCss, /\.site-chat-msg\.bot \.site-chat-msg-body\s*{[\s\S]*width: fit-content;[\s\S]*max-width: calc\(100% - 0\.5rem\);[\s\S]*border: 1px solid var\(--opencodie-border\);/, 'bot bubble body should grow only as wide as needed while containing long markdown answers');
+assert.match(stylesCss, /\.site-chat-msg\.user \.site-chat-msg-body\s*{[\s\S]*max-width: calc\(84% - 0\.5rem\);[\s\S]*margin: 0\.125rem 0\.25rem 0\.125rem 0;[\s\S]*background: #f97316;/, 'user bubble body should keep spacing above, below, and from the scrollbar');
 assert.match(stylesCss, /\.site-chat-form\s*{[\s\S]*flex-shrink: 0;[\s\S]*border-top: 1px solid var\(--opencodie-border\);/, 'chat input should remain fixed below the scrollable log');
 assert.match(fs.readFileSync('js/chatbot.js', 'utf8'), /function setMessage\(el, text\) \{[\s\S]*log\.scrollTop = log\.scrollHeight;[\s\S]*\}/, 'chat should scroll to the latest bot answer after markdown is rendered');
 
