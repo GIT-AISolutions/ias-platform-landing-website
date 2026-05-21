@@ -5,6 +5,9 @@ const appPy = fs.readFileSync('app.py', 'utf8');
 const mainJs = fs.readFileSync('js/main.js', 'utf8');
 const envExample = fs.readFileSync('.env.example', 'utf8');
 
+assert.match(appPy, /STACKAI_API_URL = os\.getenv\([\s\S]*"STACKAI_API_URL"/, 'StackAI URL should be configurable from Coolify env');
+assert.match(envExample, /STACKAI_API_URL=https:\/\/api\.stackai\.com\/inference\/v0\/run\//, 'env example should document StackAI API URL');
+
 assert.match(appPy, /class ContactRequest\(BaseModel\):[\s\S]*name: str[\s\S]*email: str[\s\S]*subject: str[\s\S]*message: str/, 'backend should define a typed contact request payload');
 assert.match(appPy, /@app\.post\("\/api\/contact"\)/, 'backend should expose a contact form endpoint');
 assert.match(appPy, /CONTACT_RECIPIENT_EMAIL", "contact\.innovative\.ai@gmail\.com"/, 'contact email should default to the requested Gmail recipient');

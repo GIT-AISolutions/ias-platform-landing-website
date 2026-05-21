@@ -12,7 +12,10 @@ from starlette.concurrency import run_in_threadpool
 from pydantic import BaseModel, Field
 
 
-STACKAI_API_URL = "https://api.stackai.com/inference/v0/run/b3d86049-9974-41b0-a978-c0d804ff94e2/69fdc11ecb2d71d9ca288d24"
+STACKAI_API_URL = os.getenv(
+    "STACKAI_API_URL",
+    "https://api.stackai.com/inference/v0/run/b3d86049-9974-41b0-a978-c0d804ff94e2/69fdc11ecb2d71d9ca288d24",
+)
 
 
 class ChatRequest(BaseModel):
