@@ -103,6 +103,7 @@ if (!window.matchMedia('(max-width: 560px)').matches) {
     zoomInEnd: 0.48,
     zoomOutStart: 0.74,
     zoomOutEnd: 0.80,
+    mobileStartProgress: 0.40,
   });
 
   const STEPS = [
@@ -351,7 +352,8 @@ if (!window.matchMedia('(max-width: 560px)').matches) {
       const CAM_TRANSITION = VIDEO_DEMO_CONFIG.cameraTransition;
       const camStartPos  = new THREE.Vector3(modelBasePosition.x, VIDEO_DEMO_CONFIG.cameraStartY, modelBasePosition.z);
       const camEndPos    = new THREE.Vector3(0, VIDEO_DEMO_CONFIG.cameraEndY, VIDEO_DEMO_CONFIG.cameraEndZ);
-      const camZoomPos   = new THREE.Vector3(0, VIDEO_DEMO_CONFIG.cameraZoomY, VIDEO_DEMO_CONFIG.cameraZoomZ);
+      const isMobile = window.matchMedia('(max-width: 960px)').matches;
+      const camZoomPos   = new THREE.Vector3(0, VIDEO_DEMO_CONFIG.cameraZoomY, isMobile ? VIDEO_DEMO_CONFIG.cameraEndZ : VIDEO_DEMO_CONFIG.cameraZoomZ);
       const camStartQuat = new THREE.Quaternion().setFromEuler(new THREE.Euler(-Math.PI / 2, 0, 0));
       const camEndQuat   = new THREE.Quaternion();
       const ZOOM_IN_S = VIDEO_DEMO_CONFIG.zoomInStart, ZOOM_IN_E = VIDEO_DEMO_CONFIG.zoomInEnd;
@@ -366,6 +368,10 @@ if (!window.matchMedia('(max-width: 560px)').matches) {
       let idleTime = animationDuration * 0.25;
       let lastVideoTarget = -1;
       let videoPlaybackWanted = false;
+
+      function getVisualProgress(progress) {
+        return isMobile ? Math.max(progress, VIDEO_DEMO_CONFIG.mobileStartProgress) : progress;
+      }
 
       function releaseOverride() {
         if (returnTween) {
@@ -402,7 +408,7 @@ if (!window.matchMedia('(max-width: 560px)').matches) {
         const delta = clock.getDelta();
         idleTime += delta;
 
-        const displayProgress = Math.min(scrollProgress, OPEN_SCROLL_PROGRESS);
+        const displayProgress = Math.min(getVisualProgress(scrollProgress), OPEN_SCROLL_PROGRESS);
         const dp = closedOverride ? overrideProgress : displayProgress;
         const camT = Math.min(1, dp / CAM_TRANSITION);
 
@@ -466,7 +472,7 @@ if (!window.matchMedia('(max-width: 560px)').matches) {
             return;
           }
           scrollProgress = gsap.utils.clamp(0, 1, progress);
-          const videoProgress = Math.min(scrollProgress, OPEN_SCROLL_PROGRESS);
+          const videoProgress = Math.min(getVisualProgress(scrollProgress), OPEN_SCROLL_PROGRESS);
           const lidT = Math.max(0, Math.min(1, (videoProgress - CAM_TRANSITION) / (OPEN_SCROLL_PROGRESS - CAM_TRANSITION)));
           if (video.duration && isFinite(video.duration) && !video.seeking) {
             const targetTime = Math.min(video.duration - 0.05, lidT * video.duration);
@@ -550,7 +556,7 @@ if (!window.matchMedia('(max-width: 560px)').matches) {
       trigger: outer,
       start: 'top top',
       end: 'bottom bottom',
-      scrub: 0.6,
+      scrub: 0.25,
       onUpdate(self) {
         const p = gsap.utils.clamp(0, 1, (window.scrollY - self.start) / (self.end - self.start));
         const scrubbedP = self.progress;

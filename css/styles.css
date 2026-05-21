@@ -57,14 +57,13 @@
 /* ─── RESET ─── */
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-html { scroll-behavior: smooth; }
+html { scroll-behavior: smooth; overflow-x: hidden; }
 
 body {
   font-family: var(--font-sans);
   background: var(--bg-base);
   color: var(--text);
   line-height: 1.6;
-  overflow-x: hidden;
 }
 
 /* ─── NOISE TEXTURE ─── */
@@ -88,6 +87,7 @@ a  { color: inherit; text-decoration: none; }
 /* ─── LAYOUT ─── */
 .container { max-width: 1160px; margin: 0 auto; padding: 0 1.5rem; }
 section    { padding: var(--section) 0; position: relative; z-index: 1; }
+img, video, canvas { max-width: 100%; }
 
 /* ══════════════════════════════════════════
    NAVIGATION
@@ -992,7 +992,10 @@ footer {
   .byoa-cards       { grid-template-columns: 1fr; }
   .pricing-grid     { grid-template-columns: 1fr; }
   .pillars          { grid-template-columns: 1fr; }
-  .footer-grid      { grid-template-columns: 1fr; gap: 2rem; }
+  .footer-grid      { grid-template-columns: 1fr; gap: 2rem; text-align: center; }
+  .f-brand .brand-wrap { justify-content: center; }
+  .f-brand p           { margin-left: auto; margin-right: auto; }
+  .footer-bottom       { justify-content: center; }
   nav .links        { display: none; }
   nav .cta          { display: none; }
   .nav-burger       { display: flex; }
@@ -1975,8 +1978,14 @@ footer {
    RESPONSIVE
 ══════════════════════════════════════════════════════════ */
 @media (max-width: 960px) {
+  /* Video demo section is already scroll-driven (360vh) — don't flex-center it */
+  #video-demo {
+    display: block;
+    min-height: 360vh;
+  }
+
   /* Scroll-driven animation on mobile — same as desktop */
-  .vd-outer  { height: 320vh; }
+  .vd-outer  { height: 360vh; }
   .vd-sticky {
     height: 100svh;
     flex-direction: column;
@@ -1986,14 +1995,16 @@ footer {
     padding-top: max(4rem, 6vh);
   }
   .vd-sticky::before { display: none; }
-  .vd-header { padding: 0 0.25rem; margin-bottom: 0.5rem; }
+  .vd-header { padding: 0 0.25rem; margin-bottom: 0.5rem; flex-shrink: 0; }
   .vd-layout {
     grid-template-columns: 1fr;
     gap: 0.75rem;
     padding: 0;
     width: 100%;
     max-width: 100%;
-    height: auto;
+    flex: 1;
+    min-height: 0;
+    overflow: hidden;
     margin: 0;
   }
   .vd-laptop-col { padding-right: 0; justify-content: center; height: auto; }
@@ -2019,7 +2030,7 @@ footer {
     height: 40px;
   }
   #hero {
-    min-height: auto;
+    min-height: 100svh;
     padding-top: 7rem;
     padding-bottom: 4rem;
   }
@@ -2049,9 +2060,9 @@ footer {
     display: none;
   }
   .vd-sticky {
-    padding: calc(76px + 1rem) 1rem 2.25rem;
-    gap: 0.35rem;
-    justify-content: flex-start;
+    padding: calc(76px + 0.5rem) 1rem 4rem;
+    gap: 0.75rem;
+    justify-content: center;
   }
   .vd-header {
     width: 100%;
@@ -2059,6 +2070,7 @@ footer {
     padding: 0;
     margin: 0 auto 0.25rem;
     gap: 0.45rem;
+    flex-shrink: 0;
   }
   .vd-title  {
     font-size: clamp(1.65rem, 8vw, 2rem);
@@ -2070,15 +2082,17 @@ footer {
     line-height: 1.55;
   }
   .vd-layout {
-    gap: 0.25rem;
+    gap: 0.5rem;
     align-content: start;
+    flex: 0 1 auto;
+    min-height: 0;
   }
   .vd-laptop-col {
-    min-height: 14.25rem;
+    min-height: 12.5rem;
     align-items: center;
   }
   .vd-laptop-wrap {
-    width: min(100%, 22.5rem);
+    width: min(100%, 21.5rem);
     max-width: calc(100vw - 2rem);
   }
   .vd-text-col {
@@ -2110,5 +2124,45 @@ footer {
   .site-chat-toggle svg {
     width: 23px;
     height: 23px;
+  }
+  .cookie-banner {
+    bottom: 0.75rem;
+    width: calc(100% - 1.5rem);
+    padding: 1rem;
+  }
+  .cookie-inner {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 1rem;
+  }
+  .cookie-text {
+    min-width: 0;
+  }
+  .cookie-actions {
+    width: 100%;
+    flex-direction: column;
+  }
+  .cookie-actions .btn {
+    width: 100%;
+  }
+  .footer-bottom {
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+    text-align: center;
+  }
+  .footer-grid {
+    gap: 1.5rem;
+  }
+  .section-header {
+    margin-bottom: 2.5rem;
+  }
+  .section-header p,
+  .hero-subtext,
+  .plan-list li,
+  .faq-q,
+  .footer-grid a,
+  .footer-grid p {
+    overflow-wrap: anywhere;
   }
 }
