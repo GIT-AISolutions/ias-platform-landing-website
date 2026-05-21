@@ -549,6 +549,9 @@ nav.is-open .nav-mobile {
 .trust-icon [data-lucide] { width: 18px; height: 18px; stroke: var(--accent); stroke-width: 1.75; }
 .trust-text span { color: var(--text); }
 
+/* Dots — hidden on desktop, shown on mobile */
+.trust-dots { display: none; }
+
 /* ══════════════════════════════════════════
    PROBLEM / SOLUTION
 ══════════════════════════════════════════ */
@@ -1002,7 +1005,31 @@ footer {
   .nav-mobile       { display: flex; }
   nav               { padding: 1.5rem 0 2rem; }
   nav .container    { padding: 0 1.5rem; }
-  .trust-row        { gap: 1.5rem; }
+  /* Trust strip → single-item slider on mobile */
+  .trust-row {
+    position: relative;
+    height: 56px;
+    overflow: hidden;
+    gap: 0;
+    flex-wrap: nowrap;
+  }
+  .trust-item {
+    position: absolute;
+    inset: 0;
+    justify-content: center;
+    opacity: 0;
+    pointer-events: none;
+    padding: 0 1.5rem;
+  }
+  .trust-item.is-active {
+    opacity: 1;
+    pointer-events: auto;
+    animation: trustSlideIn 0.4s ease forwards;
+  }
+  @keyframes trustSlideIn {
+    from { opacity: 0; transform: translateX(24px); }
+    to   { opacity: 1; transform: translateX(0); }
+  }
 }
 @media (max-width: 540px) {
   .features-grid    { grid-template-columns: 1fr; }

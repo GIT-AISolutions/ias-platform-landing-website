@@ -606,13 +606,32 @@ if (!window.matchMedia('(max-width: 560px)').matches) {
 })();
 
 const trustItems = gsap.utils.toArray('#trust .trust-item');
-if (trustItems.length) {
+if (trustItems.length && !window.matchMedia('(max-width: 960px)').matches) {
   gsap.fromTo(trustItems,
     { y: 18, opacity: 0 },
     { y: 0, opacity: 1, duration: 0.8, stagger: 0.1, ease: 'expo.out',
       scrollTrigger: { trigger: '#trust', start: 'top 85%', once: true } }
   );
 }
+
+/* Trust strip slider — mobile only */
+(function() {
+  if (!window.matchMedia('(max-width: 960px)').matches) return;
+  const row = document.getElementById('trust-row');
+  if (!row) return;
+
+  const items = Array.from(row.querySelectorAll('.trust-item'));
+  let current = 0;
+
+  function goTo(idx) {
+    items[current].classList.remove('is-active');
+    current = (idx + items.length) % items.length;
+    items[current].classList.add('is-active');
+  }
+
+  items[0].classList.add('is-active');
+  setInterval(() => goTo(current + 1), 3000);
+})();
 
 /* ══════════════════════════════════════════
    SHARED SCROLL-REVEAL HELPER
