@@ -353,7 +353,7 @@ if (!window.matchMedia('(max-width: 560px)').matches) {
       const camStartPos  = new THREE.Vector3(modelBasePosition.x, VIDEO_DEMO_CONFIG.cameraStartY, modelBasePosition.z);
       const camEndPos    = new THREE.Vector3(0, VIDEO_DEMO_CONFIG.cameraEndY, VIDEO_DEMO_CONFIG.cameraEndZ);
       const isMobile = window.matchMedia('(max-width: 960px)').matches;
-      const camZoomPos   = new THREE.Vector3(0, VIDEO_DEMO_CONFIG.cameraZoomY, isMobile ? VIDEO_DEMO_CONFIG.cameraEndZ : VIDEO_DEMO_CONFIG.cameraZoomZ);
+      const camZoomPos   = new THREE.Vector3(0, VIDEO_DEMO_CONFIG.cameraZoomY, VIDEO_DEMO_CONFIG.cameraZoomZ);
       const camStartQuat = new THREE.Quaternion().setFromEuler(new THREE.Euler(-Math.PI / 2, 0, 0));
       const camEndQuat   = new THREE.Quaternion();
       const ZOOM_IN_S = VIDEO_DEMO_CONFIG.zoomInStart, ZOOM_IN_E = VIDEO_DEMO_CONFIG.zoomInEnd;
