@@ -1895,9 +1895,21 @@ footer {
   gap: 0.6rem;
   min-width: 0;
   padding-left: 1.1rem;
-  border-left: 2px solid var(--accent);
   position: relative;
   z-index: 1;
+}
+
+.vd-step-body::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 8px;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='8' height='14' viewBox='0 0 8 14'%3E%3Cpolyline points='2,2 6,7 2,12' fill='none' stroke='%2334d1bf' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+  background-repeat: repeat-y;
+  background-size: 8px 14px;
+  background-position: center top;
 }
 
 .vd-step-num {
