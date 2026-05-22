@@ -5,8 +5,8 @@ OpenCodie is a developer platform for building, managing, and deploying software
 
 ## Primary URLs
 - Homepage: https://opencodie.com/
-- Documentation: https://opencodie.com/docs.html
-- Legal: https://opencodie.com/legal.html
+- Documentation: https://opencodie.com/docs
+- Legal: https://opencodie.com/legal
 - Sign up: https://portal.opencodie.com/signup?next=%2F
 - Log in: https://portal.opencodie.com/login
 

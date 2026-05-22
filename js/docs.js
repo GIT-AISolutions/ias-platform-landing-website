@@ -45,12 +45,42 @@ if (window.innerWidth <= 900) setSidebarOpen(false);
 /* ── Active section highlight in sidebar ── */
 const sections  = document.querySelectorAll('.doc-section[id]');
 const sideLinks = document.querySelectorAll('.sidebar-nav a');
+const LEGAL_SECTION_PATHS = {
+  '/terms': 'terms',
+  '/privacy': 'privacy',
+  '/cookies': 'cookies',
+  '/dpa': 'dpa',
+  '/acceptable-use': 'acceptable-use',
+  '/subprocessors': 'subprocessors',
+  '/report-abuse': 'report-abuse',
+};
+
+function getSectionIdFromLink(link) {
+  const href = link.getAttribute('href') || '';
+  if (href.startsWith('#')) return href.slice(1);
+  try {
+    return LEGAL_SECTION_PATHS[new URL(href, window.location.origin).pathname] || '';
+  } catch {
+    return '';
+  }
+}
+
+function getLinkForSection(id) {
+  return Array.from(sideLinks).find((link) => getSectionIdFromLink(link) === id);
+}
+
+function scrollToSection(id, behavior = 'smooth') {
+  const target = id ? document.getElementById(id) : null;
+  if (!target) return false;
+  target.scrollIntoView({ behavior, block: 'start' });
+  return true;
+}
 
 const io = new IntersectionObserver((entries) => {
   entries.forEach(entry => {
     if (entry.isIntersecting) {
       sideLinks.forEach(a => a.classList.remove('active'));
-      const active = document.querySelector(`.sidebar-nav a[href="#${entry.target.id}"]`);
+      const active = getLinkForSection(entry.target.id);
       if (active) {
         active.classList.add('active');
         active.scrollIntoView({ block: 'nearest' });
@@ -64,11 +94,18 @@ sections.forEach(s => io.observe(s));
 /* ── Smooth sidebar clicks ── */
 sideLinks.forEach(a => {
   a.addEventListener('click', e => {
-    e.preventDefault();
-    const target = document.querySelector(a.getAttribute('href'));
-    if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    const sectionId = getSectionIdFromLink(a);
+    if (scrollToSection(sectionId)) {
+      e.preventDefault();
+      const href = a.getAttribute('href') || '';
+      if (href.startsWith('/')) history.pushState(null, '', href);
+    }
     if (window.innerWidth <= 900) setSidebarOpen(false);
   });
+});
+
+window.addEventListener('load', () => {
+  scrollToSection(LEGAL_SECTION_PATHS[window.location.pathname], 'auto');
 });
 
 /* ── Mobile sidebar toggle ── */

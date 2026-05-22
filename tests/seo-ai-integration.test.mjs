@@ -8,6 +8,9 @@ const sitemapXml = fs.readFileSync('sitemap.xml', 'utf8');
 const llmsTxt = fs.readFileSync('llms.txt', 'utf8');
 
 assert.match(appPy, /@app\.get\("\/llms\.txt"\)[\s\S]*return FileResponse\("llms\.txt"/, 'backend should serve llms.txt for AI crawlers');
+assert.match(appPy, /@app\.get\("\/docs"\)[\s\S]*return FileResponse\("docs\.html"\)/, 'backend should serve the clean docs URL');
+assert.match(appPy, /@app\.get\("\/terms"\)[\s\S]*return FileResponse\("legal\.html"\)/, 'backend should serve clean legal section URLs');
+assert.match(appPy, /@app\.get\("\/pricing"\)[\s\S]*return FileResponse\("index\.html"\)/, 'backend should serve clean homepage section URLs');
 
 assert.match(robotsTxt, /Sitemap: https:\/\/opencodie\.com\/sitemap\.xml/, 'robots.txt should expose the sitemap');
 assert.match(robotsTxt, /LLMs: https:\/\/opencodie\.com\/llms\.txt/, 'robots.txt should expose the AI crawler summary');

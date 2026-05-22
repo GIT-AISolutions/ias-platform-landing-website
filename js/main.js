@@ -2,7 +2,16 @@
    OPENCODIE — MAIN JAVASCRIPT
    ═══════════════════════════════════════════════════════ */
 
-window.scrollTo(0, 0);
+const CLEAN_HOME_SECTIONS = {
+  '/platform': 'platform',
+  '/pricing': 'pricing',
+  '/faq': 'faq',
+  '/contact': 'contact',
+};
+
+if (!CLEAN_HOME_SECTIONS[window.location.pathname]) {
+  window.scrollTo(0, 0);
+}
 lucide.createIcons();
 gsap.registerPlugin(ScrollTrigger);
 
@@ -17,6 +26,16 @@ const nav = document.getElementById('nav');
 window.addEventListener('scroll', () => {
   nav.classList.toggle('scrolled', window.scrollY > 24);
 }, { passive: true });
+
+window.addEventListener('load', () => {
+  const sectionId = CLEAN_HOME_SECTIONS[window.location.pathname];
+  const target = sectionId ? document.getElementById(sectionId) : null;
+  if (!target) return;
+
+  const navHeight = nav?.getBoundingClientRect().height || 0;
+  const top = target.getBoundingClientRect().top + window.scrollY - navHeight - 12;
+  window.scrollTo({ top: Math.max(0, top), behavior: 'auto' });
+});
 
 /* ══════════════════════════════════════════
    HERO V2 — entrance animations

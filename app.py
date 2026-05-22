@@ -159,13 +159,34 @@ async def index_page() -> FileResponse:
     return FileResponse("index.html")
 
 
+@app.get("/platform")
+@app.get("/pricing")
+@app.get("/faq")
+@app.get("/contact")
+async def homepage_section() -> FileResponse:
+    return FileResponse("index.html")
+
+
+@app.get("/docs")
 @app.get("/docs.html")
 async def docs_page() -> FileResponse:
     return FileResponse("docs.html")
 
 
+@app.get("/legal")
 @app.get("/legal.html")
 async def legal_page() -> FileResponse:
+    return FileResponse("legal.html")
+
+
+@app.get("/terms")
+@app.get("/privacy")
+@app.get("/cookies")
+@app.get("/dpa")
+@app.get("/acceptable-use")
+@app.get("/subprocessors")
+@app.get("/report-abuse")
+async def legal_section() -> FileResponse:
     return FileResponse("legal.html")
 
 
