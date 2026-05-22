@@ -5,8 +5,8 @@ const mainJs = fs.readFileSync('js/main.js', 'utf8');
 
 assert.match(
   mainJs,
-  /function animateTrustItems\(\) \{[\s\S]*gsap\.killTweensOf\(trustItems\);[\s\S]*clearProps: 'transform,opacity'/,
-  'trust strip animation should clear temporary transform and opacity after reveal'
+  /gsap\.set\(trustItems, \{ y: 18, opacity: 0 \}\);[\s\S]*function animateTrustItems\(\) \{[\s\S]*gsap\.killTweensOf\(trustItems\);[\s\S]*clearProps: 'transform,opacity'/,
+  'trust strip animation should start hidden and clear temporary transform and opacity after reveal'
 );
 
 assert.match(

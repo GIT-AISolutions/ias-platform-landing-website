@@ -607,6 +607,8 @@ if (!window.matchMedia('(max-width: 560px)').matches) {
 
 const trustItems = gsap.utils.toArray('#trust .trust-item');
 if (trustItems.length && !window.matchMedia('(max-width: 960px)').matches) {
+  gsap.set(trustItems, { y: 18, opacity: 0 });
+
   function animateTrustItems() {
     gsap.killTweensOf(trustItems);
     gsap.fromTo(trustItems,
@@ -622,7 +624,6 @@ if (trustItems.length && !window.matchMedia('(max-width: 960px)').matches) {
     );
   }
 
-  gsap.set(trustItems, { y: 0, opacity: 1 });
   ScrollTrigger.create({
     trigger: '#trust',
     start: 'top 85%',
