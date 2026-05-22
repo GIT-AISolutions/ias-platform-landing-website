@@ -913,6 +913,30 @@ footer {
   padding-top: 2rem; border-top: 1px solid rgba(42,70,100,0.4);
   font-size: 0.8rem; color: var(--text-muted);
 }
+.footer-meta {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+}
+.footer-credit {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+}
+.footer-credit::before {
+  content: '';
+  width: 1px;
+  height: 0.85rem;
+  background: rgba(155,178,204,0.35);
+  margin-right: 0.5rem;
+}
+.footer-credit a {
+  color: var(--accent);
+  font-weight: 600;
+  text-underline-offset: 3px;
+}
+.footer-credit a:hover { text-decoration: underline; }
 .status-pill {
   display: inline-flex; align-items: center; gap: 0.5rem;
   padding: 0.275rem 0.75rem; border-radius: 2rem;
@@ -2242,6 +2266,12 @@ footer {
     align-items: center;
     gap: 1rem;
     text-align: center;
+  }
+  .footer-meta {
+    justify-content: center;
+  }
+  .footer-credit::before {
+    display: none;
   }
   .footer-grid {
     gap: 1.5rem;
