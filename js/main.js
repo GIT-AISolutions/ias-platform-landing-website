@@ -607,11 +607,30 @@ if (!window.matchMedia('(max-width: 560px)').matches) {
 
 const trustItems = gsap.utils.toArray('#trust .trust-item');
 if (trustItems.length && !window.matchMedia('(max-width: 960px)').matches) {
-  gsap.fromTo(trustItems,
-    { y: 18, opacity: 0 },
-    { y: 0, opacity: 1, duration: 0.8, stagger: 0.1, ease: 'expo.out',
-      scrollTrigger: { trigger: '#trust', start: 'top 85%', once: true } }
-  );
+  function animateTrustItems() {
+    gsap.killTweensOf(trustItems);
+    gsap.fromTo(trustItems,
+      { y: 18, opacity: 0 },
+      {
+        y: 0,
+        opacity: 1,
+        duration: 0.65,
+        stagger: 0.08,
+        ease: 'expo.out',
+        clearProps: 'transform,opacity'
+      }
+    );
+  }
+
+  gsap.set(trustItems, { y: 0, opacity: 1 });
+  ScrollTrigger.create({
+    trigger: '#trust',
+    start: 'top 85%',
+    once: true,
+    onEnter() {
+      animateTrustItems();
+    }
+  });
 }
 
 /* Trust strip slider — mobile only */
