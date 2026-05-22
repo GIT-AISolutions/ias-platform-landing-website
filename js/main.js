@@ -765,34 +765,55 @@ featureCards.forEach(card => {
 });
 
 /* ══════════════════════════════════════════
-   HOW IT WORKS — each step triggers itself
+   HOW IT WORKS — stable once-per-section reveal
 ══════════════════════════════════════════ */
 const steps = gsap.utils.toArray('#how .step');
-steps.forEach(step => {
+
+function animateHowStep(step, index) {
   const numEl = step.querySelector('.step-n');
   const target = numEl ? parseInt(numEl.textContent, 10) : 0;
 
+  step.classList.add('revealed');
+  gsap.killTweensOf(step);
   gsap.fromTo(step,
-    { y: 28, opacity: 0 },
+    { y: 24, opacity: 0 },
     {
-      y: 0, opacity: 1,
-      duration: 0.9, ease: 'expo.out',
-      scrollTrigger: {
-        trigger: step, start: 'top 88%', toggleActions: 'play none none none',
-        onEnter() {
-          step.classList.add('revealed');
-          if (!numEl) return;
-          const obj = { val: 0 };
-          gsap.to(obj, {
-            val: target, duration: 0.7, ease: 'power2.out',
-            onUpdate() { numEl.textContent = String(Math.round(obj.val)).padStart(2, '0'); },
-            onComplete() { step.classList.add('anim-done'); }
-          });
-        }
+      y: 0,
+      opacity: 1,
+      duration: 0.75,
+      delay: index * 0.08,
+      ease: 'expo.out',
+      clearProps: 'transform,opacity',
+      onComplete() {
+        step.classList.add('anim-done');
+        if (numEl) numEl.textContent = String(target).padStart(2, '0');
       }
     }
   );
-});
+
+  if (!numEl) return;
+  const obj = { val: 0 };
+  gsap.to(obj, {
+    val: target,
+    duration: 0.55,
+    delay: index * 0.08,
+    ease: 'power2.out',
+    onUpdate() { numEl.textContent = String(Math.round(obj.val)).padStart(2, '0'); },
+    onComplete() { numEl.textContent = String(target).padStart(2, '0'); }
+  });
+}
+
+if (steps.length) {
+  gsap.set(steps, { y: 0, opacity: 1 });
+  ScrollTrigger.create({
+    trigger: '#how',
+    start: 'top 82%',
+    once: true,
+    onEnter() {
+      steps.forEach((step, i) => animateHowStep(step, i));
+    }
+  });
+}
 
 /* ══════════════════════════════════════════
    BYOA CARDS — gentle spring
