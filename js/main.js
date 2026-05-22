@@ -3,13 +3,14 @@
    ═══════════════════════════════════════════════════════ */
 
 const CLEAN_HOME_SECTIONS = {
+  '/': 'hero',
   '/platform': 'platform',
   '/pricing': 'pricing',
   '/faq': 'faq',
   '/contact': 'contact',
 };
 
-if (!CLEAN_HOME_SECTIONS[window.location.pathname]) {
+if (window.location.pathname === '/') {
   window.scrollTo(0, 0);
 }
 lucide.createIcons();
@@ -27,14 +28,34 @@ window.addEventListener('scroll', () => {
   nav.classList.toggle('scrolled', window.scrollY > 24);
 }, { passive: true });
 
-window.addEventListener('load', () => {
-  const sectionId = CLEAN_HOME_SECTIONS[window.location.pathname];
+function scrollToHomeSection(sectionId, behavior = 'smooth') {
   const target = sectionId ? document.getElementById(sectionId) : null;
   if (!target) return;
 
   const navHeight = nav?.getBoundingClientRect().height || 0;
-  const top = target.getBoundingClientRect().top + window.scrollY - navHeight - 12;
-  window.scrollTo({ top: Math.max(0, top), behavior: 'auto' });
+  const offset = sectionId === 'hero' ? 0 : navHeight + 12;
+  const top = target.getBoundingClientRect().top + window.scrollY - offset;
+  window.scrollTo({ top: Math.max(0, top), behavior });
+}
+
+document.addEventListener('click', (event) => {
+  const link = event.target.closest('a[href]');
+  if (!link || link.origin !== window.location.origin) return;
+
+  const sectionId = CLEAN_HOME_SECTIONS[link.pathname];
+  if (!sectionId) return;
+
+  event.preventDefault();
+  history.pushState(null, '', link.pathname);
+  scrollToHomeSection(sectionId);
+});
+
+window.addEventListener('popstate', () => {
+  scrollToHomeSection(CLEAN_HOME_SECTIONS[window.location.pathname], 'auto');
+});
+
+window.addEventListener('load', () => {
+  scrollToHomeSection(CLEAN_HOME_SECTIONS[window.location.pathname], 'auto');
 });
 
 /* ══════════════════════════════════════════
