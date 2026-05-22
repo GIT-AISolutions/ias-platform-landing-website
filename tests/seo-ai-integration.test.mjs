@@ -24,6 +24,7 @@ assert.match(llmsTxt, /## Pricing[\s\S]*Launch[\s\S]*Build[\s\S]*Team/, 'llms.tx
 
 assert.match(indexHtml, /<meta name="theme-color" content="#060d15" \/>/, 'homepage should expose theme color metadata');
 assert.match(indexHtml, /<meta property="og:image:alt"\s+content="OpenCodie logo" \/>/, 'homepage should expose accessible Open Graph image alt text');
+assert.doesNotMatch(indexHtml, /href="#(?:hero|platform|pricing|contact|faq)"/, 'homepage navigation and footer should use clean URLs instead of hash links');
 assert.match(indexHtml, /"@type": "SoftwareApplication"[\s\S]*"applicationCategory": "DeveloperApplication"/, 'homepage should include SoftwareApplication structured data');
 assert.match(indexHtml, /"@type": "FAQPage"[\s\S]*"What is OpenCodie\?"[\s\S]*"Do I need DevOps\?"/, 'homepage should include FAQPage structured data');
 assert.match(indexHtml, /"@type": "Offer"[\s\S]*"price": "9"[\s\S]*"price": "19"[\s\S]*"price": "49"/, 'homepage should include pricing offers in structured data');
