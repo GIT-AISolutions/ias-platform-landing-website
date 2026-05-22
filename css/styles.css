@@ -107,6 +107,21 @@ nav .inner { display: flex; align-items: center; justify-content: space-between;
 nav .logo { display: flex; align-items: center; gap: 0.5rem; text-decoration: none; }
 nav .logo img { height: 45px; width: auto; display: block; }
 nav .logo-name { font-size: 1rem; font-weight: 700; color: var(--text); letter-spacing: -0.02em; }
+.logo-beta {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.2rem 0.55rem;
+  border-radius: 999px;
+  background: var(--primary);
+  color: #1a0b00;
+  font-size: 0.62rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  line-height: 1;
+  text-transform: uppercase;
+  transform: translateY(1px);
+}
 nav .links { display: flex; align-items: center; gap: 0.125rem; list-style: none; }
 nav .links a {
   padding: 0.4rem 0.8rem; font-size: 0.875rem; color: var(--text-muted);
