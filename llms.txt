@@ -11,7 +11,7 @@ OpenCodie is a developer platform for building, managing, and deploying software
 - Log in: https://portal.opencodie.com/login
 
 ## Product Positioning
-OpenCodie is for developers and teams who want to ship apps quickly without giving up server ownership. Users keep coding locally in VS Code and terminal, then use OpenCodie to manage deployments and runtime operations.
+OpenCodie is for developers and teams who want to ship webapps quickly without giving up server ownership. Users keep coding locally in VS Code and terminal, then use OpenCodie to manage deployments and runtime operations.
 
 ## Core Features
 - Project and workspace management
@@ -24,8 +24,8 @@ OpenCodie is for developers and teams who want to ship apps quickly without givi
 - User-owned infrastructure with no vendor lock-in
 
 ## Pricing
-- Launch: EUR 9 per month, for getting started with 3 projects and 1-2 apps
-- Build: EUR 19 per month, for real projects with 10 projects, unlimited apps, databases, full logs, and fast deployments
+- Launch: EUR 9 per month, for getting started with 3 projects and 1-2 webapps
+- Build: EUR 19 per month, for real projects with 10 projects, unlimited webapps, databases, full logs, and fast deployments
 - Team: EUR 49 per month, for collaboration with 50 projects, multiple users, shared environments, permissions, and priority support
 
 ## Common Questions

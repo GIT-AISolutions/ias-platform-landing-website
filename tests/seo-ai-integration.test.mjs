@@ -30,6 +30,8 @@ assert.doesNotMatch(indexHtml, /href="#(?:hero|platform|pricing|contact|faq)"/, 
 assert.match(mainJs, /preventDefault\(\)[\s\S]*history\.pushState\([\s\S]*scrollToHomeSection/, 'homepage clean URL clicks should keep one-page scrolling behavior');
 assert.match(docsCss, /\.docs-sidebar\s*{[\s\S]*position: sticky;[\s\S]*top: 61px;[\s\S]*height: calc\(100vh - 61px\);/, 'docs desktop sidebar should stay inside the docs layout instead of overlaying the footer');
 assert.match(docsCss, /@media \(max-width: 900px\) \{[\s\S]*\.docs-sidebar\s*{[\s\S]*position: fixed;[\s\S]*top: 72px;/, 'docs mobile sidebar should remain an overlay drawer');
+assert.match(indexHtml, /Build,\s*test,\s*ship and scale webapps/, 'homepage hero should include testing and use webapps wording');
+assert.doesNotMatch(indexHtml, /\b[Aa]pps\b/, 'homepage copy should use webapps instead of apps');
 assert.match(indexHtml, /"@type": "SoftwareApplication"[\s\S]*"applicationCategory": "DeveloperApplication"/, 'homepage should include SoftwareApplication structured data');
 assert.match(indexHtml, /"@type": "FAQPage"[\s\S]*"What is OpenCodie\?"[\s\S]*"Do I need DevOps\?"/, 'homepage should include FAQPage structured data');
 assert.match(indexHtml, /"@type": "Offer"[\s\S]*"price": "9"[\s\S]*"price": "19"[\s\S]*"price": "49"/, 'homepage should include pricing offers in structured data');

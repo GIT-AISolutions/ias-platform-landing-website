@@ -6,7 +6,7 @@ Dit document bundelt de zichtbare content uit de huidige websitepagina's en gede
 
 - Naam: OpenCodie
 - Logo: `/opencodie-logo.png`
-- Korte omschrijving: Deploy apps like Vercel. Own everything like Coolify. Keep coding locally while OpenCodie handles deployment and infrastructure on your own server.
+- Korte omschrijving: Deploy webapps like Vercel. Own everything like Coolify. Keep coding locally while OpenCodie handles deployment and infrastructure on your own server.
 - SEO footer tekst: OpenCodie is a developer platform for local development with AI, instant deployment, and full infrastructure ownership. Build in VS Code and terminal, then deploy to your own server without DevOps overhead.
 
 ## Navigatie
@@ -74,7 +74,7 @@ Extra visuele stijl:
 ### Hero
 
 - Badge: The Developer Platform
-- H1: Ship code faster. Own everything.
+- H1: Build, test, and ship webapps faster.
 - Intro: Deploy like Vercel. Run on your infrastructure. OpenCodie gives you a lightning-fast deployment experience while you maintain complete ownership and control.
 - CTA's:
   - Start free trial
@@ -100,7 +100,7 @@ Hero signal cards:
 ### The Problem
 
 - Eyebrow: The Problem
-- Titel: Deploying apps shouldn't be this hard
+- Titel: Deploying webapps shouldn't be this hard
 - Tekst: Setting up infrastructure, configuring deployments, and managing environments slows teams down.
 - Nadruk: You just want to build and ship.
 
@@ -139,7 +139,7 @@ Platform layers:
 
 - Your tools: Code locally in VS Code and terminal with AI tools you already use.
 - OpenCodie operations: Deployments, runtime setup, logs, and database wiring handled for you.
-- Your server ownership: Apps run on infrastructure you control, without vendor lock-in.
+- Your server ownership: Webapps run on infrastructure you control, without vendor lock-in.
 
 Stats:
 
@@ -351,13 +351,13 @@ Product flow:
 
 Metadata:
 
-- Title: OpenCodie Features | Everything You Need To Run Apps Without DevOps
+- Title: OpenCodie Features | Everything You Need To Run Webapps Without DevOps
 - Description: Explore OpenCodie features for local development with AI, instant deployment, logs, databases, secrets, and safe updates on your own server.
 
 ### Hero
 
 - Eyebrow: Features
-- H1: Everything you need to run apps without DevOps
+- H1: Everything you need to run webapps without DevOps
 - Intro: You keep coding locally in VS Code and terminal with AI. OpenCodie handles deployments, infrastructure, logs, databases, and updates.
 - CTA's:
   - Get started
@@ -491,7 +491,7 @@ Metadata:
 - H1: Instant deploys. No DevOps complexity.
 - Intro: Built for developers who ship fast in VS Code and terminal. OpenCodie keeps deployment simple from first app to production.
 - Panel tekst:
-  - Deploy apps instantly. Everything is managed for you.
+  - Deploy webapps instantly. Everything is managed for you.
   - No infrastructure complexity. Just build and ship.
 
 ### Plans
@@ -501,7 +501,7 @@ Metadata:
 - Prijs: €9/month
 - Tagline: Perfect for getting started
 - Punten:
-  - 1-2 apps
+  - 1-2 webapps
   - deployments
   - logs
   - basic usage
@@ -513,7 +513,7 @@ Metadata:
 - Tagline: Built for real projects
 - Label: Popular
 - Punten:
-  - unlimited apps
+  - unlimited webapps
   - databases
   - full logs
   - fast deployments
@@ -538,7 +538,7 @@ Metadata:
 - Eyebrow: Fair Usage
 - Fair usage included.
 - Each plan includes everything you need for real projects.
-- If your apps exceed normal usage, additional costs may apply.
+- If your webapps exceed normal usage, additional costs may apply.
 - We'll always notify you before any extra charges.
 
 ### Trust
@@ -631,7 +631,7 @@ OpenCodie gives a Vercel-like deployment experience, but with infrastructure own
 
 - Brand: OpenCodie
 - Footer text:
-  - Deploy apps like Vercel. Own everything like Coolify. Keep coding locally while OpenCodie handles deployment and infrastructure on your own server.
+  - Deploy webapps like Vercel. Own everything like Coolify. Keep coding locally while OpenCodie handles deployment and infrastructure on your own server.
   - OpenCodie is a developer platform for local development with AI, instant deployment, and full infrastructure ownership. Build in VS Code and terminal, then deploy to your own server without DevOps overhead.
 - Navigation:
   - Home
