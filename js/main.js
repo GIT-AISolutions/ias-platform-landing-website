@@ -225,6 +225,7 @@ if (!window.matchMedia('(max-width: 560px)').matches) {
     const modelSrc = modelStage.dataset.modelSrc;
     const videoSrc = modelStage.dataset.videoSrc;
     if (videoSrc && video.getAttribute('src') !== videoSrc) video.setAttribute('src', videoSrc);
+    video.load();
 
     try {
       const [THREE, { GLTFLoader }] = await Promise.all([
