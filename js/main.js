@@ -578,12 +578,38 @@ if (!window.matchMedia('(max-width: 560px)').matches) {
     }
   }
 
-  initLaptopScene().then((sceneController) => {
-    laptopScene = sceneController;
-    if (!laptopScene) return;
-    laptopScene.setProgress(latestDriverProgress);
-    if (shouldCloseAtEnd) laptopScene.tweenToStart();
-  });
+  /* On mobile, skip Three.js entirely and drive the 7 fallback frames via scroll.
+     iOS Safari blocks video-in-WebGL autoplay, leaving the screen blank. */
+  const isMobileInit = window.matchMedia('(max-width: 960px)').matches || /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+  if (isMobileInit && modelStage) {
+    modelStage.classList.add('is-fallback');
+    const fallbackFrame = document.getElementById('vd-fallback-frame');
+    const FRAME_COUNT = 7;
+    let lastFrame = -1;
+    ScrollTrigger.create({
+      trigger: outer,
+      start: 'top top',
+      end: 'bottom bottom',
+      scrub: 0.25,
+      onUpdate(self) {
+        const frameIdx = Math.min(FRAME_COUNT - 1, Math.floor(self.progress * FRAME_COUNT));
+        if (frameIdx !== lastFrame && fallbackFrame) {
+          lastFrame = frameIdx;
+          fallbackFrame.src = `images/macbook-animation/screen-${frameIdx + 1}.webp`;
+        }
+        const contentP = Math.max(0, Math.min(1, (self.progress - VIDEO_DEMO_CONFIG.chapterStart) / VIDEO_DEMO_CONFIG.chapterSpan));
+        setStep(Math.min(3, Math.floor(contentP * 4)));
+      },
+      onLeaveBack() { setStep(0); },
+    });
+  } else {
+    initLaptopScene().then((sceneController) => {
+      laptopScene = sceneController;
+      if (!laptopScene) return;
+      laptopScene.setProgress(latestDriverProgress);
+      if (shouldCloseAtEnd) laptopScene.tweenToStart();
+    });
+  }
 
   /* Entrance — laptop drifts in as section scrolls into view.
      y starts at 48 so the initial layout position is the baseline (y:0). */
