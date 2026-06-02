@@ -2139,8 +2139,8 @@ footer {
     overflow: hidden;
     margin: 0;
   }
-  .vd-laptop-col { padding-right: 0; justify-content: center; height: auto; }
-  .vd-laptop-wrap { width: 100%; max-width: 100%; }
+  .vd-laptop-col { padding-right: 0; justify-content: center; align-items: center; height: auto; }
+  .vd-laptop-wrap { width: 100%; max-width: 100%; margin: 0 auto; }
   .vd-text-col { padding-left: 0; min-height: 6rem; height: auto; gap: 0; }
   .vd-line-track { display: none; }
   .vd-step-title { font-size: 1rem !important; }
@@ -2226,6 +2226,7 @@ footer {
   .vd-laptop-wrap {
     width: min(100%, 21.5rem);
     max-width: calc(100vw - 2rem);
+    margin: 0 auto;
   }
   .vd-text-col {
     width: 100%;

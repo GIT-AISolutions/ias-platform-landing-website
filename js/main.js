@@ -393,7 +393,6 @@ if (!window.matchMedia('(max-width: 560px)').matches) {
       const CAM_TRANSITION = VIDEO_DEMO_CONFIG.cameraTransition;
       const camStartPos  = new THREE.Vector3(modelBasePosition.x, VIDEO_DEMO_CONFIG.cameraStartY, modelBasePosition.z);
       const camEndPos    = new THREE.Vector3(0, VIDEO_DEMO_CONFIG.cameraEndY, VIDEO_DEMO_CONFIG.cameraEndZ);
-      const isMobile = window.matchMedia('(max-width: 960px)').matches;
       const camZoomPos   = new THREE.Vector3(0, VIDEO_DEMO_CONFIG.cameraZoomY, VIDEO_DEMO_CONFIG.cameraZoomZ);
       const camStartQuat = new THREE.Quaternion().setFromEuler(new THREE.Euler(-Math.PI / 2, 0, 0));
       const camEndQuat   = new THREE.Quaternion();
@@ -411,7 +410,7 @@ if (!window.matchMedia('(max-width: 560px)').matches) {
       let videoPlaybackWanted = false;
 
       function getVisualProgress(progress) {
-        return isMobile ? Math.max(progress, VIDEO_DEMO_CONFIG.mobileStartProgress) : progress;
+        return progress;
       }
 
       function releaseOverride() {
