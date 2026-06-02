@@ -222,13 +222,6 @@ if (!window.matchMedia('(max-width: 560px)').matches) {
   async function initLaptopScene() {
     if (!modelStage || !modelCanvas) return null;
 
-    const probeCanvas = document.createElement('canvas');
-    const probeCtx = probeCanvas.getContext('webgl2') || probeCanvas.getContext('webgl') || probeCanvas.getContext('experimental-webgl');
-    if (!probeCtx) {
-      modelStage.classList.add('is-fallback');
-      return null;
-    }
-
     const modelSrc = modelStage.dataset.modelSrc;
     const videoSrc = modelStage.dataset.videoSrc;
     if (videoSrc && video.getAttribute('src') !== videoSrc) video.setAttribute('src', videoSrc);
@@ -239,28 +232,17 @@ if (!window.matchMedia('(max-width: 560px)').matches) {
         import('three/addons/loaders/GLTFLoader.js'),
       ]);
 
-      const isMobileDevice = window.matchMedia('(max-width: 960px)').matches || /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
       const renderer = new THREE.WebGLRenderer({
         canvas: modelCanvas,
-        alpha: !isMobileDevice,
-        antialias: !isMobileDevice,
-        powerPreference: isMobileDevice ? 'default' : 'high-performance',
+        alpha: true,
+        antialias: true,
+        preserveDrawingBuffer: true,
+        powerPreference: 'high-performance',
       });
-      renderer.setPixelRatio(isMobileDevice ? Math.min(window.devicePixelRatio || 1, 1.5) : Math.min(window.devicePixelRatio || 1, 2));
+      renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2));
       renderer.outputColorSpace = THREE.SRGBColorSpace;
-      renderer.toneMapping = isMobileDevice ? THREE.LinearToneMapping : THREE.ACESFilmicToneMapping;
-      renderer.toneMappingExposure = isMobileDevice ? 1.0 : 0.82;
-
-      modelCanvas.addEventListener('webglcontextlost', (e) => {
-        e.preventDefault();
-      }, false);
-      modelCanvas.addEventListener('webglcontextrestored', () => {
-        renderer.setPixelRatio(isMobileDevice ? Math.min(window.devicePixelRatio || 1, 1.5) : Math.min(window.devicePixelRatio || 1, 2));
-        renderer.outputColorSpace = THREE.SRGBColorSpace;
-        renderer.toneMapping = isMobileDevice ? THREE.LinearToneMapping : THREE.ACESFilmicToneMapping;
-        renderer.toneMappingExposure = isMobileDevice ? 1.0 : 0.82;
-        renderRequested = true;
-      }, false);
+      renderer.toneMapping = THREE.ACESFilmicToneMapping;
+      renderer.toneMappingExposure = 0.82;
 
       const scene = new THREE.Scene();
       const camera = new THREE.PerspectiveCamera(34, 1, 0.1, 100);
@@ -410,6 +392,7 @@ if (!window.matchMedia('(max-width: 560px)').matches) {
       const CAM_TRANSITION = VIDEO_DEMO_CONFIG.cameraTransition;
       const camStartPos  = new THREE.Vector3(modelBasePosition.x, VIDEO_DEMO_CONFIG.cameraStartY, modelBasePosition.z);
       const camEndPos    = new THREE.Vector3(0, VIDEO_DEMO_CONFIG.cameraEndY, VIDEO_DEMO_CONFIG.cameraEndZ);
+      const isMobile = window.matchMedia('(max-width: 960px)').matches;
       const camZoomPos   = new THREE.Vector3(0, VIDEO_DEMO_CONFIG.cameraZoomY, VIDEO_DEMO_CONFIG.cameraZoomZ);
       const camStartQuat = new THREE.Quaternion().setFromEuler(new THREE.Euler(-Math.PI / 2, 0, 0));
       const camEndQuat   = new THREE.Quaternion();
@@ -427,7 +410,7 @@ if (!window.matchMedia('(max-width: 560px)').matches) {
       let videoPlaybackWanted = false;
 
       function getVisualProgress(progress) {
-        return progress;
+        return isMobile ? Math.max(progress, VIDEO_DEMO_CONFIG.mobileStartProgress) : progress;
       }
 
       function releaseOverride() {
@@ -510,6 +493,7 @@ if (!window.matchMedia('(max-width: 560px)').matches) {
 
         videoPlane.visible = lidT > 0.18;
         updateVideoPlayback(lidT);
+        videoTexture.needsUpdate = true;
         renderer.render(scene, camera);
         requestAnimationFrame(render);
       }
@@ -530,7 +514,7 @@ if (!window.matchMedia('(max-width: 560px)').matches) {
           scrollProgress = gsap.utils.clamp(0, 1, progress);
           const videoProgress = Math.min(getVisualProgress(scrollProgress), OPEN_SCROLL_PROGRESS);
           const lidT = Math.max(0, Math.min(1, (videoProgress - CAM_TRANSITION) / (OPEN_SCROLL_PROGRESS - CAM_TRANSITION)));
-          if (!isMobileDevice && video.duration && isFinite(video.duration) && !video.seeking) {
+          if (video.duration && isFinite(video.duration) && !video.seeking) {
             const targetTime = Math.min(video.duration - 0.05, lidT * video.duration);
             const seekableEnd = video.seekable.length ? video.seekable.end(video.seekable.length - 1) : 0;
             if (seekableEnd >= targetTime && Math.abs(lastVideoTarget - targetTime) > 0.18) {
