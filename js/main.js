@@ -259,13 +259,14 @@ if (!window.matchMedia('(max-width: 560px)').matches) {
       fillLight.position.set(-3.4, 1.6, -2.2);
       scene.add(fillLight);
 
-      const videoTexture = new THREE.VideoTexture(video);
+      const videoCanvas = document.createElement('canvas');
+      videoCanvas.width = 1280;
+      videoCanvas.height = 720;
+      const videoCtx = videoCanvas.getContext('2d');
+      const videoTexture = new THREE.CanvasTexture(videoCanvas);
       videoTexture.colorSpace = THREE.SRGBColorSpace;
       videoTexture.minFilter = THREE.LinearFilter;
       videoTexture.magFilter = THREE.LinearFilter;
-      video.addEventListener('seeked', () => {
-        videoTexture.needsUpdate = true;
-      });
 
       const loader = new GLTFLoader();
       const gltf = await loader.loadAsync(modelSrc);
@@ -493,7 +494,10 @@ if (!window.matchMedia('(max-width: 560px)').matches) {
 
         videoPlane.visible = lidT > 0.18;
         updateVideoPlayback(lidT);
-        videoTexture.needsUpdate = true;
+        if (video.readyState >= video.HAVE_CURRENT_DATA) {
+          videoCtx.drawImage(video, 0, 0, videoCanvas.width, videoCanvas.height);
+          videoTexture.needsUpdate = true;
+        }
         renderer.render(scene, camera);
         requestAnimationFrame(render);
       }
@@ -587,11 +591,6 @@ if (!window.matchMedia('(max-width: 560px)').matches) {
   setStep(0);
 
   function attachDriver() {
-    const duration = video.duration;
-    if (!duration || !isFinite(duration)) {
-      video.addEventListener('loadedmetadata', attachDriver, { once: true });
-      return;
-    }
     ScrollTrigger.create({
       trigger: outer,
       start: 'top top',
@@ -638,11 +637,7 @@ if (!window.matchMedia('(max-width: 560px)').matches) {
     });
   }
 
-  if (video.readyState >= 1) {
-    attachDriver();
-  } else {
-    video.addEventListener('loadedmetadata', attachDriver, { once: true });
-  }
+  attachDriver();
 })();
 
 const trustItems = gsap.utils.toArray('#trust .trust-item');
