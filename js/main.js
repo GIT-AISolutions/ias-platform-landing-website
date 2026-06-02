@@ -222,6 +222,13 @@ if (!window.matchMedia('(max-width: 560px)').matches) {
   async function initLaptopScene() {
     if (!modelStage || !modelCanvas) return null;
 
+    const probeCanvas = document.createElement('canvas');
+    const probeCtx = probeCanvas.getContext('webgl2') || probeCanvas.getContext('webgl') || probeCanvas.getContext('experimental-webgl');
+    if (!probeCtx) {
+      modelStage.classList.add('is-fallback');
+      return null;
+    }
+
     const modelSrc = modelStage.dataset.modelSrc;
     const videoSrc = modelStage.dataset.videoSrc;
     if (videoSrc && video.getAttribute('src') !== videoSrc) video.setAttribute('src', videoSrc);
@@ -235,7 +242,7 @@ if (!window.matchMedia('(max-width: 560px)').matches) {
       const isMobileDevice = window.matchMedia('(max-width: 960px)').matches || /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
       const renderer = new THREE.WebGLRenderer({
         canvas: modelCanvas,
-        alpha: true,
+        alpha: !isMobileDevice,
         antialias: !isMobileDevice,
         powerPreference: isMobileDevice ? 'default' : 'high-performance',
       });
