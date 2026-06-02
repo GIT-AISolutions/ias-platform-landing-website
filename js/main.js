@@ -232,25 +232,26 @@ if (!window.matchMedia('(max-width: 560px)').matches) {
         import('three/addons/loaders/GLTFLoader.js'),
       ]);
 
+      const isMobileDevice = window.matchMedia('(max-width: 960px)').matches || /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
       const renderer = new THREE.WebGLRenderer({
         canvas: modelCanvas,
         alpha: true,
-        antialias: true,
-        powerPreference: 'high-performance',
+        antialias: !isMobileDevice,
+        powerPreference: isMobileDevice ? 'default' : 'high-performance',
       });
-      renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2));
+      renderer.setPixelRatio(isMobileDevice ? Math.min(window.devicePixelRatio || 1, 1.5) : Math.min(window.devicePixelRatio || 1, 2));
       renderer.outputColorSpace = THREE.SRGBColorSpace;
-      renderer.toneMapping = THREE.ACESFilmicToneMapping;
-      renderer.toneMappingExposure = 0.82;
+      renderer.toneMapping = isMobileDevice ? THREE.LinearToneMapping : THREE.ACESFilmicToneMapping;
+      renderer.toneMappingExposure = isMobileDevice ? 1.0 : 0.82;
 
       modelCanvas.addEventListener('webglcontextlost', (e) => {
         e.preventDefault();
       }, false);
       modelCanvas.addEventListener('webglcontextrestored', () => {
-        renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2));
+        renderer.setPixelRatio(isMobileDevice ? Math.min(window.devicePixelRatio || 1, 1.5) : Math.min(window.devicePixelRatio || 1, 2));
         renderer.outputColorSpace = THREE.SRGBColorSpace;
-        renderer.toneMapping = THREE.ACESFilmicToneMapping;
-        renderer.toneMappingExposure = 0.82;
+        renderer.toneMapping = isMobileDevice ? THREE.LinearToneMapping : THREE.ACESFilmicToneMapping;
+        renderer.toneMappingExposure = isMobileDevice ? 1.0 : 0.82;
         renderRequested = true;
       }, false);
 
