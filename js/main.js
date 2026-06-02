@@ -236,13 +236,23 @@ if (!window.matchMedia('(max-width: 560px)').matches) {
         canvas: modelCanvas,
         alpha: true,
         antialias: true,
-        preserveDrawingBuffer: true,
         powerPreference: 'high-performance',
       });
       renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2));
       renderer.outputColorSpace = THREE.SRGBColorSpace;
       renderer.toneMapping = THREE.ACESFilmicToneMapping;
       renderer.toneMappingExposure = 0.82;
+
+      modelCanvas.addEventListener('webglcontextlost', (e) => {
+        e.preventDefault();
+      }, false);
+      modelCanvas.addEventListener('webglcontextrestored', () => {
+        renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2));
+        renderer.outputColorSpace = THREE.SRGBColorSpace;
+        renderer.toneMapping = THREE.ACESFilmicToneMapping;
+        renderer.toneMappingExposure = 0.82;
+        renderRequested = true;
+      }, false);
 
       const scene = new THREE.Scene();
       const camera = new THREE.PerspectiveCamera(34, 1, 0.1, 100);
@@ -392,7 +402,6 @@ if (!window.matchMedia('(max-width: 560px)').matches) {
       const CAM_TRANSITION = VIDEO_DEMO_CONFIG.cameraTransition;
       const camStartPos  = new THREE.Vector3(modelBasePosition.x, VIDEO_DEMO_CONFIG.cameraStartY, modelBasePosition.z);
       const camEndPos    = new THREE.Vector3(0, VIDEO_DEMO_CONFIG.cameraEndY, VIDEO_DEMO_CONFIG.cameraEndZ);
-      const isMobile = window.matchMedia('(max-width: 960px)').matches;
       const camZoomPos   = new THREE.Vector3(0, VIDEO_DEMO_CONFIG.cameraZoomY, VIDEO_DEMO_CONFIG.cameraZoomZ);
       const camStartQuat = new THREE.Quaternion().setFromEuler(new THREE.Euler(-Math.PI / 2, 0, 0));
       const camEndQuat   = new THREE.Quaternion();
@@ -410,7 +419,7 @@ if (!window.matchMedia('(max-width: 560px)').matches) {
       let videoPlaybackWanted = false;
 
       function getVisualProgress(progress) {
-        return isMobile ? Math.max(progress, VIDEO_DEMO_CONFIG.mobileStartProgress) : progress;
+        return progress;
       }
 
       function releaseOverride() {
@@ -493,7 +502,6 @@ if (!window.matchMedia('(max-width: 560px)').matches) {
 
         videoPlane.visible = lidT > 0.18;
         updateVideoPlayback(lidT);
-        videoTexture.needsUpdate = true;
         renderer.render(scene, camera);
         requestAnimationFrame(render);
       }
