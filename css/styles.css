@@ -2121,16 +2121,15 @@ footer {
   .vd-sticky {
     height: 100svh;
     flex-direction: column;
-    padding: 2rem 1.25rem 1.25rem;
-    gap: 0.5rem;
+    padding: max(4rem, 6vh) 1.25rem max(2rem, 4vh);
+    gap: 0.75rem;
     justify-content: center;
-    padding-top: max(4rem, 6vh);
   }
   .vd-sticky::before { display: none; }
   .vd-header { padding: 0 0.25rem; margin-bottom: 0.5rem; flex-shrink: 0; }
   .vd-layout {
     grid-template-columns: 1fr;
-    gap: 0.75rem;
+    gap: 1.5rem;
     padding: 0;
     width: 100%;
     max-width: 100%;
@@ -2215,11 +2214,13 @@ footer {
   }
   .vd-layout {
     gap: 0.5rem;
-    align-content: start;
+    align-content: center;
+    justify-items: center;
     flex: 0 1 auto;
     min-height: 0;
   }
   .vd-laptop-col {
+    width: 100%;
     min-height: 12.5rem;
     align-items: center;
   }
@@ -2233,6 +2234,7 @@ footer {
     max-width: 21rem;
     margin: 0 auto;
     min-height: 7.5rem;
+    align-self: center;
   }
   .vd-step {
     padding: 0.25rem 0 0;

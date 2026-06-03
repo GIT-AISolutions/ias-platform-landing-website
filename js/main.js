@@ -157,6 +157,7 @@ if (!window.matchMedia('(max-width: 560px)').matches) {
   let laptopScene = null;
   let latestDriverProgress = 0;
   let shouldCloseAtEnd = false;
+  const isMobile = window.matchMedia('(max-width: 560px)').matches;
   const END_CLOSE_PROGRESS = VIDEO_DEMO_CONFIG.endCloseProgress;
   const OPEN_SCROLL_PROGRESS = VIDEO_DEMO_CONFIG.openScrollProgress;
 
@@ -411,7 +412,7 @@ if (!window.matchMedia('(max-width: 560px)').matches) {
       let videoPlaybackWanted = false;
 
       function getVisualProgress(progress) {
-        return progress;
+        return isMobile ? Math.max(progress, VIDEO_DEMO_CONFIG.mobileStartProgress) : progress;
       }
 
       function releaseOverride() {
@@ -494,9 +495,11 @@ if (!window.matchMedia('(max-width: 560px)').matches) {
 
         videoPlane.visible = lidT > 0.18;
         updateVideoPlayback(lidT);
-        if (video.readyState >= video.HAVE_CURRENT_DATA) {
-          videoCtx.drawImage(video, 0, 0, videoCanvas.width, videoCanvas.height);
-          videoTexture.needsUpdate = true;
+        if (video.videoWidth > 0) {
+          try {
+            videoCtx.drawImage(video, 0, 0, videoCanvas.width, videoCanvas.height);
+            videoTexture.needsUpdate = true;
+          } catch (_) {}
         }
         renderer.render(scene, camera);
         requestAnimationFrame(render);
@@ -507,6 +510,7 @@ if (!window.matchMedia('(max-width: 560px)').matches) {
       requestAnimationFrame(render);
 
       video.loop = true;
+      video.play().catch(() => {});
 
       return {
         setProgress(progress) {
