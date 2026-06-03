@@ -507,6 +507,7 @@ if (!window.matchMedia('(max-width: 560px)').matches) {
       requestAnimationFrame(render);
 
       video.loop = true;
+      video.play().catch(() => {});
 
       return {
         setProgress(progress) {
