@@ -11,6 +11,12 @@ assert.match(
 
 assert.match(
   mainJs,
+  /function updateVideoPlayback\(lidT\) \{[\s\S]*const shouldPlay = lidT > 0\.18 && !closedOverride;[\s\S]*video\.play\(\)\.catch\(\(\) => \{\}\);[\s\S]*video\.pause\(\);[\s\S]*\}/,
+  'video playback should be controlled by laptop screen visibility during the animation'
+);
+
+assert.doesNotMatch(
+  mainJs,
   /video\.loop = true;[\s\S]*video\.play\(\)\.catch\(\(\) => \{\}\);/,
-  'mobile video demo should proactively kick off muted playback once the scene is ready'
+  'video should not start free-running during scene initialization before the laptop screen is visible'
 );
