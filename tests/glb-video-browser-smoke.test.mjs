@@ -138,7 +138,7 @@ try {
         continue;
       }
 
-      await page.waitForSelector('#vd-model-canvas', { timeout: 15000 });
+      await page.waitForSelector('#vd-model-stage', { timeout: 15000 });
       await page.waitForTimeout(3300);
 
       if (viewport.name !== 'desktop') {
@@ -161,21 +161,21 @@ try {
         const mobileDemoStart = await page.evaluate(() => {
           const nav = document.querySelector('nav');
           const title = document.querySelector('.vd-title');
-          const canvas = document.querySelector('#vd-model-canvas');
+          const visual = document.querySelector('#vd-model-stage');
           const activeStep = document.querySelector('.vd-step.is-active');
           const chat = document.querySelector('.site-chat-toggle');
           const navRect = nav.getBoundingClientRect();
           const titleRect = title.getBoundingClientRect();
-          const canvasRect = canvas.getBoundingClientRect();
+          const visualRect = visual.getBoundingClientRect();
           const stepRect = activeStep.getBoundingClientRect();
           const chatRect = chat.getBoundingClientRect();
           return {
             navBottom: navRect.bottom,
             titleTop: titleRect.top,
             titleBottom: titleRect.bottom,
-            canvasTop: canvasRect.top,
-            canvasWidth: canvasRect.width,
-            canvasHeight: canvasRect.height,
+            visualTop: visualRect.top,
+            visualWidth: visualRect.width,
+            visualHeight: visualRect.height,
             stepBottom: stepRect.bottom,
             chatTop: chatRect.top,
             videoPaused: document.querySelector('#demo-video').paused,
@@ -189,8 +189,8 @@ try {
         assert.ok(initialMobile.heroHeight >= viewport.height * 0.96, `${viewport.name}: hero should own the first viewport so the next title is not clipped; height=${initialMobile.heroHeight}`);
         assert.ok(mobileDemoStart.titleTop >= mobileDemoStart.navBottom + 8, `${viewport.name}: video title should sit below fixed nav; titleTop=${mobileDemoStart.titleTop}, navBottom=${mobileDemoStart.navBottom}`);
         assert.ok(mobileDemoStart.titleBottom <= viewport.height * 0.38, `${viewport.name}: centered video title should stay clear of the lower content; bottom=${mobileDemoStart.titleBottom}`);
-        assert.ok(mobileDemoStart.canvasWidth >= Math.min(330, viewport.width - 32), `${viewport.name}: laptop canvas should be large enough; width=${mobileDemoStart.canvasWidth}`);
-        assert.ok(mobileDemoStart.canvasTop <= viewport.height * 0.58, `${viewport.name}: laptop should appear before the lower half gets empty; top=${mobileDemoStart.canvasTop}`);
+        assert.ok(mobileDemoStart.visualWidth >= Math.min(320, viewport.width - 40), `${viewport.name}: laptop visual should be large enough; width=${mobileDemoStart.visualWidth}`);
+        assert.ok(mobileDemoStart.visualTop <= viewport.height * 0.58, `${viewport.name}: laptop should appear before the lower half gets empty; top=${mobileDemoStart.visualTop}`);
         assert.ok(mobileDemoStart.groupCenter >= viewport.height * 0.43 && mobileDemoStart.groupCenter <= viewport.height * 0.66, `${viewport.name}: video demo group should sit near the vertical center; center=${mobileDemoStart.groupCenter}`);
         assert.ok(mobileDemoStart.stepBottom <= mobileDemoStart.chatTop - 16, `${viewport.name}: active step should not collide with chat button; stepBottom=${mobileDemoStart.stepBottom}, chatTop=${mobileDemoStart.chatTop}`);
         assert.equal(mobileDemoStart.videoPaused, false, `${viewport.name}: mobile demo start should show an open playing laptop, not a black closed tile`);
@@ -208,13 +208,14 @@ try {
       const first = await page.evaluate(() => {
         const video = document.querySelector('#demo-video');
         const activeStep = document.querySelector('.vd-step.is-active');
-        const canvas = document.querySelector('#vd-model-canvas');
+        const visual = document.querySelector('#vd-model-stage');
+        const visualRect = visual.getBoundingClientRect();
         return {
           activeText: activeStep?.innerText || '',
           time: video.currentTime,
           paused: video.paused,
-          canvasWidth: canvas.getBoundingClientRect().width,
-          canvasHeight: canvas.getBoundingClientRect().height,
+          visualWidth: visualRect.width,
+          visualHeight: visualRect.height,
         };
       });
 
@@ -235,7 +236,7 @@ try {
       assert.equal(first.paused, false, `${viewport.name}: demo video should be playing when the laptop screen is visible`);
       assert.equal(second.paused, false, `${viewport.name}: demo video should keep playing while the laptop screen remains visible`);
       assert.ok(second.time - first.time > 0.5, `${viewport.name}: demo video should advance while visible; advanced by ${second.time - first.time}s`);
-      assert.ok(first.canvasWidth > 0 && first.canvasHeight > 0, `${viewport.name}: canvas should have visible dimensions`);
+      assert.ok(first.visualWidth > 0 && first.visualHeight > 0, `${viewport.name}: laptop visual should have visible dimensions`);
       assert.deepEqual(errors, [], `${pageInfo.name}/${viewport.name}: browser console should not report errors`);
     }
   }

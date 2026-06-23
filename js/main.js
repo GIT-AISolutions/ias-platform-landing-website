@@ -161,6 +161,17 @@ if (!window.matchMedia('(max-width: 560px)').matches) {
   const OPEN_SCROLL_PROGRESS = VIDEO_DEMO_CONFIG.openScrollProgress;
   const isMobile = window.matchMedia('(max-width: 560px)').matches;
 
+  function setupMobileVideoFallback() {
+    modelStage.classList.add('is-mobile-fallback');
+    video.muted = true;
+    video.loop = true;
+    video.playsInline = true;
+    video.setAttribute('playsinline', '');
+    video.setAttribute('webkit-playsinline', '');
+    video.removeAttribute('aria-hidden');
+    video.play().catch(() => {});
+  }
+
   function setStep(idx) {
     if (idx === activeIdx) return;
     const prevIdx = activeIdx;
@@ -565,12 +576,16 @@ if (!window.matchMedia('(max-width: 560px)').matches) {
     }
   }
 
-  initLaptopScene().then((sceneController) => {
-    laptopScene = sceneController;
-    if (!laptopScene) return;
-    laptopScene.setProgress(latestDriverProgress);
-    if (shouldCloseAtEnd) laptopScene.tweenToStart();
-  });
+  if (isMobile) {
+    setupMobileVideoFallback();
+  } else {
+    initLaptopScene().then((sceneController) => {
+      laptopScene = sceneController;
+      if (!laptopScene) return;
+      laptopScene.setProgress(latestDriverProgress);
+      if (shouldCloseAtEnd) laptopScene.tweenToStart();
+    });
+  }
 
   /* Entrance — laptop drifts in as section scrolls into view.
      y starts at 48 so the initial layout position is the baseline (y:0). */
@@ -608,6 +623,8 @@ if (!window.matchMedia('(max-width: 560px)').matches) {
             if (laptopScene.isOverrideActive()) laptopScene.releaseOverride();
             laptopScene.setProgress(p);
           }
+        } else if (isMobile) {
+          video.play().catch(() => {});
         }
         if (topbarFill) topbarFill.style.width = (p * 100) + '%';
         if (lineFill) lineFill.style.height = (p * 100) + '%';

@@ -2228,6 +2228,31 @@ footer {
     max-width: calc(100vw - 2rem);
     margin: 0 auto;
   }
+  .vd-model-stage.is-mobile-fallback .vd-model-canvas {
+    display: none;
+  }
+  .vd-model-stage.is-mobile-fallback .vd-model-fallback {
+    display: block;
+  }
+  .vd-model-stage.is-mobile-fallback .vd-fallback-video {
+    display: none;
+  }
+  .vd-model-stage.is-mobile-fallback .vd-demo-video {
+    position: absolute;
+    left: 8.3%;
+    top: 8.6%;
+    width: 83.4%;
+    height: 78.1%;
+    object-fit: cover;
+    object-position: top center;
+    border-radius: 2px;
+    pointer-events: none;
+    z-index: 1;
+  }
+  .vd-model-stage.is-mobile-fallback .vd-macbook-frame {
+    position: relative;
+    z-index: 2;
+  }
   .vd-text-col {
     width: 100%;
     max-width: 21rem;
