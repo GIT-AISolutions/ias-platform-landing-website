@@ -2,6 +2,13 @@ import assert from 'node:assert/strict';
 import fs from 'node:fs';
 
 const mainJs = fs.readFileSync('js/main.js', 'utf8');
+const indexHtml = fs.readFileSync('index.html', 'utf8');
+
+assert.match(
+  indexHtml,
+  /<script type="module" src="js\/main\.js\?v=114"><\/script>/,
+  'homepage should request a fresh main.js URL after the mobile video playback fix'
+);
 
 assert.match(
   mainJs,
