@@ -16,7 +16,7 @@ assert.match(indexHtml, /id="vd-model-stage"/, 'index.html should expose a GLB m
 assert.match(indexHtml, /data-model-src="video\/laptop_website_no_camera\.glb"/, 'model stage should point at the GLB asset');
 assert.match(indexHtml, /data-video-src="video\/Video_opencodie_web\.mp4"/, 'model stage should point at the web-optimized demo video asset');
 assert.match(indexHtml, /<script type="importmap">/, 'index.html should define an import map for Three.js modules');
-assert.match(indexHtml, /"three": "https:\/\/unpkg\.com\/three@0\.160\.0\/build\/three\.module\.js"/, 'import map should resolve the Three.js module');
+assert.match(indexHtml, /"three": "https:\/\/cdn\.jsdelivr\.net\/npm\/three@0\.160\.0\/build\/three\.module\.js"/, 'import map should resolve the Three.js module');
 
 assert.match(mainJs, /if \(!window\.matchMedia\('\(max-width: 560px\)'\)\.matches\) \{[\s\S]*ScrollTrigger\.create\(\{[\s\S]*trigger: '#hero'/, 'mobile hero should not fade into an empty panel while scrolling');
 assert.match(mainJs, /const useCompactScrollReveals = window\.matchMedia\('\(max-width: 560px\)'\)\.matches;/, 'mobile reveal animations should use compact offsets to avoid horizontal overflow');

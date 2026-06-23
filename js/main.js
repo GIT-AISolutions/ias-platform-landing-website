@@ -159,6 +159,7 @@ if (!window.matchMedia('(max-width: 560px)').matches) {
   let shouldCloseAtEnd = false;
   const END_CLOSE_PROGRESS = VIDEO_DEMO_CONFIG.endCloseProgress;
   const OPEN_SCROLL_PROGRESS = VIDEO_DEMO_CONFIG.openScrollProgress;
+  const isMobile = window.matchMedia('(max-width: 560px)').matches;
 
   function setStep(idx) {
     if (idx === activeIdx) return;
@@ -259,14 +260,16 @@ if (!window.matchMedia('(max-width: 560px)').matches) {
       fillLight.position.set(-3.4, 1.6, -2.2);
       scene.add(fillLight);
 
-      const videoCanvas = document.createElement('canvas');
-      videoCanvas.width = 1280;
-      videoCanvas.height = 720;
-      const videoCtx = videoCanvas.getContext('2d');
-      const videoTexture = new THREE.CanvasTexture(videoCanvas);
+      video.muted = true;
+      video.playsInline = true;
+      video.setAttribute('playsinline', '');
+      video.setAttribute('webkit-playsinline', '');
+
+      const videoTexture = new THREE.VideoTexture(video);
       videoTexture.colorSpace = THREE.SRGBColorSpace;
       videoTexture.minFilter = THREE.LinearFilter;
       videoTexture.magFilter = THREE.LinearFilter;
+      videoTexture.generateMipmaps = false;
 
       const loader = new GLTFLoader();
       const gltf = await loader.loadAsync(modelSrc);
@@ -411,7 +414,7 @@ if (!window.matchMedia('(max-width: 560px)').matches) {
       let videoPlaybackWanted = false;
 
       function getVisualProgress(progress) {
-        return progress;
+        return isMobile ? Math.max(progress, VIDEO_DEMO_CONFIG.mobileStartProgress) : progress;
       }
 
       function releaseOverride() {
@@ -494,10 +497,6 @@ if (!window.matchMedia('(max-width: 560px)').matches) {
 
         videoPlane.visible = lidT > 0.18;
         updateVideoPlayback(lidT);
-        if (video.readyState >= video.HAVE_CURRENT_DATA) {
-          videoCtx.drawImage(video, 0, 0, videoCanvas.width, videoCanvas.height);
-          videoTexture.needsUpdate = true;
-        }
         renderer.render(scene, camera);
         requestAnimationFrame(render);
       }
