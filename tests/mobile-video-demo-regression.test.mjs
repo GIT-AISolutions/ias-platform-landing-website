@@ -6,8 +6,20 @@ const stylesCss = fs.readFileSync('css/styles.css', 'utf8');
 
 assert.match(
   mainJs,
-  /function setupMobileVideoFallback\(\) \{[\s\S]*modelStage\.classList\.add\('is-mobile-fallback'\);[\s\S]*video\.play\(\)\.catch\(\(\) => \{\}\);[\s\S]*\}/,
+  /function setupMobileVideoFallback\(\) \{[\s\S]*modelStage\.classList\.add\('is-mobile-fallback'\);[\s\S]*video\.defaultMuted = true;[\s\S]*video\.autoplay = true;[\s\S]*video\.setAttribute\('autoplay', ''\);[\s\S]*video\.play\(\)\.catch\(\(\) => \{\}\);[\s\S]*\}/,
   'mobile video demo should use the image MacBook fallback with a normal inline video'
+);
+
+assert.match(
+  mainJs,
+  /function retryMobileVideoPlayback\(\) \{[\s\S]*video\.play\(\)\.catch\(\(\) => \{\}\);[\s\S]*\}/,
+  'mobile fallback should retry playback from a user gesture when mobile Safari blocks initial autoplay'
+);
+
+assert.match(
+  mainJs,
+  /window\.addEventListener\('touchstart', retryMobileVideoPlayback, \{ passive: true, once: true \}\);[\s\S]*window\.addEventListener\('scroll', retryMobileVideoPlayback, \{ passive: true, once: true \}\);/,
+  'mobile fallback should retry playback on first touch and scroll'
 );
 
 assert.match(

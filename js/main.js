@@ -164,11 +164,22 @@ if (!window.matchMedia('(max-width: 560px)').matches) {
   function setupMobileVideoFallback() {
     modelStage.classList.add('is-mobile-fallback');
     video.muted = true;
+    video.defaultMuted = true;
     video.loop = true;
+    video.autoplay = true;
     video.playsInline = true;
+    video.setAttribute('muted', '');
+    video.setAttribute('autoplay', '');
     video.setAttribute('playsinline', '');
     video.setAttribute('webkit-playsinline', '');
     video.removeAttribute('aria-hidden');
+    if (!video.getAttribute('poster')) {
+      video.setAttribute('poster', 'images/macbook-animation/screen-1.webp');
+    }
+    video.play().catch(() => {});
+  }
+
+  function retryMobileVideoPlayback() {
     video.play().catch(() => {});
   }
 
@@ -578,6 +589,8 @@ if (!window.matchMedia('(max-width: 560px)').matches) {
 
   if (isMobile) {
     setupMobileVideoFallback();
+    window.addEventListener('touchstart', retryMobileVideoPlayback, { passive: true, once: true });
+    window.addEventListener('scroll', retryMobileVideoPlayback, { passive: true, once: true });
   } else {
     initLaptopScene().then((sceneController) => {
       laptopScene = sceneController;
