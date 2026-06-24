@@ -1,12 +1,12 @@
 import os
 import smtplib
 from email.message import EmailMessage
-from typing import Any
+from typing import Any, Iterator
 
 import httpx
-from fastapi import FastAPI, HTTPException
+from fastapi import FastAPI, Header, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
-from fastapi.responses import FileResponse
+from fastapi.responses import FileResponse, StreamingResponse
 from fastapi.staticfiles import StaticFiles
 from starlette.concurrency import run_in_threadpool
 from pydantic import BaseModel, Field
@@ -16,6 +16,8 @@ STACKAI_API_URL = os.getenv(
     "STACKAI_API_URL",
     "https://api.stackai.com/inference/v0/run/b3d86049-9974-41b0-a978-c0d804ff94e2/69fdc11ecb2d71d9ca288d24",
 )
+DEMO_VIDEO_PATH = "video/Video_opencodie_web.mp4"
+VIDEO_CHUNK_SIZE = 1024 * 1024
 
 
 class ChatRequest(BaseModel):
@@ -233,6 +235,80 @@ async def apple_touch_icon() -> FileResponse:
 @app.get("/safari-pinned-tab.svg")
 async def safari_pinned_tab() -> FileResponse:
     return FileResponse("safari-pinned-tab.svg")
+
+
+def iter_file_range(path: str, start: int, end: int) -> Iterator[bytes]:
+    with open(path, "rb") as file:
+        file.seek(start)
+        remaining = end - start + 1
+        while remaining > 0:
+            chunk = file.read(min(VIDEO_CHUNK_SIZE, remaining))
+            if not chunk:
+                break
+            remaining -= len(chunk)
+            yield chunk
+
+
+def parse_byte_range(range_header: str, file_size: int) -> tuple[int, int]:
+    if not range_header.startswith("bytes="):
+        raise HTTPException(status_code=416, headers={"Content-Range": f"bytes */{file_size}"})
+
+    range_value = range_header.removeprefix("bytes=").split(",", 1)[0].strip()
+    start_text, separator, end_text = range_value.partition("-")
+    if separator != "-":
+        raise HTTPException(status_code=416, headers={"Content-Range": f"bytes */{file_size}"})
+
+    if start_text == "":
+        try:
+            suffix_length = int(end_text)
+        except ValueError as exc:
+            raise HTTPException(status_code=416, headers={"Content-Range": f"bytes */{file_size}"}) from exc
+        if suffix_length <= 0:
+            raise HTTPException(status_code=416, headers={"Content-Range": f"bytes */{file_size}"})
+        start = max(file_size - suffix_length, 0)
+        end = file_size - 1
+    else:
+        try:
+            start = int(start_text)
+            end = int(end_text) if end_text else file_size - 1
+        except ValueError as exc:
+            raise HTTPException(status_code=416, headers={"Content-Range": f"bytes */{file_size}"}) from exc
+
+    if start < 0 or start >= file_size or end < start:
+        raise HTTPException(status_code=416, headers={"Content-Range": f"bytes */{file_size}"})
+
+    return start, min(end, file_size - 1)
+
+
+@app.get("/video/Video_opencodie_web.mp4")
+async def demo_video(range_header: str | None = Header(default=None, alias="Range")) -> StreamingResponse:
+    file_size = os.path.getsize(DEMO_VIDEO_PATH)
+    headers = {
+        "Accept-Ranges": "bytes",
+        "Cache-Control": "public, max-age=14400",
+    }
+
+    if range_header:
+        start, end = parse_byte_range(range_header, file_size)
+        headers.update(
+            {
+                "Content-Range": f"bytes {start}-{end}/{file_size}",
+                "Content-Length": str(end - start + 1),
+            }
+        )
+        return StreamingResponse(
+            iter_file_range(DEMO_VIDEO_PATH, start, end),
+            status_code=206,
+            media_type="video/mp4",
+            headers=headers,
+        )
+
+    headers["Content-Length"] = str(file_size)
+    return StreamingResponse(
+        iter_file_range(DEMO_VIDEO_PATH, 0, file_size - 1),
+        media_type="video/mp4",
+        headers=headers,
+    )
 
 
 app.mount("/css", StaticFiles(directory="css"), name="css")
