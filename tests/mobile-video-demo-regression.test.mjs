@@ -24,6 +24,18 @@ assert.match(
 
 assert.match(
   mainJs,
+  /new IntersectionObserver\(\(entries\) => \{[\s\S]*if \(entry\.isIntersecting\) retryMobileVideoPlayback\(\);[\s\S]*threshold: 0\.35[\s\S]*\}\);[\s\S]*mobileVideoObserver\.observe\(outer\);/,
+  'mobile fallback should retry playback when the video section becomes visible'
+);
+
+assert.match(
+  mainJs,
+  /modelStage\.addEventListener\('click', retryMobileVideoPlayback\);[\s\S]*modelStage\.addEventListener\('touchend', retryMobileVideoPlayback, \{ passive: true \}\);/,
+  'mobile fallback should allow tapping the MacBook to start playback'
+);
+
+assert.match(
+  mainJs,
   /if \(isMobile\) \{[\s\S]*setupMobileVideoFallback\(\);[\s\S]*\} else \{[\s\S]*initLaptopScene\(\)\.then/,
   'mobile video demo should skip the Three.js laptop scene'
 );

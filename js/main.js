@@ -591,6 +591,14 @@ if (!window.matchMedia('(max-width: 560px)').matches) {
     setupMobileVideoFallback();
     window.addEventListener('touchstart', retryMobileVideoPlayback, { passive: true, once: true });
     window.addEventListener('scroll', retryMobileVideoPlayback, { passive: true, once: true });
+    modelStage.addEventListener('click', retryMobileVideoPlayback);
+    modelStage.addEventListener('touchend', retryMobileVideoPlayback, { passive: true });
+    const mobileVideoObserver = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) retryMobileVideoPlayback();
+      });
+    }, { threshold: 0.35 });
+    mobileVideoObserver.observe(outer);
   } else {
     initLaptopScene().then((sceneController) => {
       laptopScene = sceneController;
