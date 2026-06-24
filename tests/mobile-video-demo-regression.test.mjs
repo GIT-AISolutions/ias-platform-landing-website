@@ -29,6 +29,12 @@ assert.match(
 );
 
 assert.match(
+  mainJs,
+  /if \(isMobile\) \{[\s\S]*gsap\.set\(laptopWrap, \{ clearProps: 'transform,opacity' \}\);[\s\S]*\} else \{[\s\S]*gsap\.fromTo\(laptopWrap,/,
+  'mobile MacBook fallback should not run the desktop entrance transform animation'
+);
+
+assert.match(
   stylesCss,
   /@media \(max-width: 560px\) \{[\s\S]*\.vd-model-stage\.is-mobile-fallback \.vd-model-canvas\s*{[\s\S]*display: none;[\s\S]*\}/,
   'mobile fallback should hide the WebGL canvas'

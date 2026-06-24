@@ -600,15 +600,18 @@ if (!window.matchMedia('(max-width: 560px)').matches) {
     });
   }
 
-  /* Entrance — laptop drifts in as section scrolls into view.
-     y starts at 48 so the initial layout position is the baseline (y:0). */
-  gsap.set(laptopWrap, { y: 0 });
-  gsap.fromTo(laptopWrap,
-    { opacity: 0, y: 48, scale: 0.94 },
-    { opacity: 1, y: 0,  scale: 1, ease: 'power2.out',
-      scrollTrigger: { trigger: outer, start: 'top 80%', end: 'top 15%', scrub: 1 }
-    }
-  );
+  /* Entrance — desktop 3D laptop drifts in; mobile fallback stays static. */
+  if (isMobile) {
+    gsap.set(laptopWrap, { clearProps: 'transform,opacity' });
+  } else {
+    gsap.set(laptopWrap, { y: 0 });
+    gsap.fromTo(laptopWrap,
+      { opacity: 0, y: 48, scale: 0.94 },
+      { opacity: 1, y: 0,  scale: 1, ease: 'power2.out',
+        scrollTrigger: { trigger: outer, start: 'top 80%', end: 'top 15%', scrub: 1 }
+      }
+    );
+  }
 
   /* Initialize pill on badge 0 */
   if (pill && badges[0]) {
