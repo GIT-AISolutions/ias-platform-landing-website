@@ -173,9 +173,34 @@ if (!window.matchMedia('(max-width: 560px)').matches) {
     video.setAttribute('playsinline', '');
     video.setAttribute('webkit-playsinline', '');
     video.removeAttribute('aria-hidden');
+
+    const dbg = document.createElement('div');
+    dbg.id = 'vd-debug';
+    dbg.style.cssText = 'position:fixed;top:60px;left:8px;z-index:99999;background:rgba(0,0,0,.85);color:#0f0;font:11px/1.4 monospace;padding:6px 8px;border-radius:6px;max-width:calc(100vw - 16px);pointer-events:none';
+    document.body.appendChild(dbg);
+
+    function updateDbg(label) {
+      dbg.textContent = [
+        label,
+        'rs=' + video.readyState,
+        'paused=' + video.paused,
+        'err=' + (video.error ? video.error.code : 'none'),
+        'net=' + video.networkState,
+      ].join(' | ');
+    }
+
+    ['loadstart','loadedmetadata','loadeddata','canplay','canplaythrough','play','playing','pause','error','stalled','waiting'].forEach(e => {
+      video.addEventListener(e, () => updateDbg(e));
+    });
+
+    updateDbg('setup');
     video.load();
-    video.play().catch(() => {});
-    video.addEventListener('canplaythrough', () => { video.play().catch(() => {}); }, { once: true });
+    updateDbg('after-load');
+
+    video.play().then(() => updateDbg('play-ok')).catch(err => updateDbg('play-ERR:' + (err && err.name)));
+    video.addEventListener('canplaythrough', () => {
+      video.play().then(() => updateDbg('cpt-play-ok')).catch(err => updateDbg('cpt-ERR:' + (err && err.name)));
+    }, { once: true });
   }
 
   function retryMobileVideoPlayback() {
