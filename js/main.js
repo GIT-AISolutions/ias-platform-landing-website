@@ -173,9 +173,6 @@ if (!window.matchMedia('(max-width: 560px)').matches) {
     video.setAttribute('playsinline', '');
     video.setAttribute('webkit-playsinline', '');
     video.removeAttribute('aria-hidden');
-    if (!video.getAttribute('poster')) {
-      video.setAttribute('poster', 'images/macbook-animation/screen-1.webp');
-    }
     video.play().catch(() => {});
   }
 
