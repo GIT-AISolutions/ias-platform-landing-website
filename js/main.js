@@ -173,7 +173,9 @@ if (!window.matchMedia('(max-width: 560px)').matches) {
     video.setAttribute('playsinline', '');
     video.setAttribute('webkit-playsinline', '');
     video.removeAttribute('aria-hidden');
+    video.load();
     video.play().catch(() => {});
+    video.addEventListener('canplaythrough', () => { video.play().catch(() => {}); }, { once: true });
   }
 
   function retryMobileVideoPlayback() {
@@ -594,7 +596,7 @@ if (!window.matchMedia('(max-width: 560px)').matches) {
       entries.forEach((entry) => {
         if (entry.isIntersecting) retryMobileVideoPlayback();
       });
-    }, { threshold: 0.35 });
+    }, { threshold: 0 });
     mobileVideoObserver.observe(outer);
   } else {
     initLaptopScene().then((sceneController) => {
