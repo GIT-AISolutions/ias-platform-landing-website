@@ -193,15 +193,17 @@ if (!window.matchMedia('(max-width: 560px)').matches) {
       video.addEventListener(e, () => updateDbg(e));
     });
 
-    updateDbg('setup');
+    const fetchLine = document.createElement('div');
+    fetchLine.textContent = 'fetch: pending…';
+    dbg.appendChild(fetchLine);
 
     fetch(video.src, { method: 'HEAD' })
       .then(r => {
         const ct = r.headers.get('content-type') || '?';
         const ar = r.headers.get('accept-ranges') || 'none';
-        dbg.textContent = 'HTTP ' + r.status + ' | ct=' + ct.split(';')[0] + ' | ar=' + ar;
+        fetchLine.textContent = 'HTTP ' + r.status + ' ct=' + ct.split(';')[0] + ' ar=' + ar;
       })
-      .catch(e => { dbg.textContent = 'fetch-err: ' + e.message; });
+      .catch(e => { fetchLine.textContent = 'fetch-ERR: ' + e.message; });
 
     video.load();
     updateDbg('after-load');
