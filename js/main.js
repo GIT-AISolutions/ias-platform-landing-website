@@ -194,6 +194,15 @@ if (!window.matchMedia('(max-width: 560px)').matches) {
     });
 
     updateDbg('setup');
+
+    fetch(video.src, { method: 'HEAD' })
+      .then(r => {
+        const ct = r.headers.get('content-type') || '?';
+        const ar = r.headers.get('accept-ranges') || 'none';
+        dbg.textContent = 'HTTP ' + r.status + ' | ct=' + ct.split(';')[0] + ' | ar=' + ar;
+      })
+      .catch(e => { dbg.textContent = 'fetch-err: ' + e.message; });
+
     video.load();
     updateDbg('after-load');
 
