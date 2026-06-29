@@ -235,6 +235,15 @@ async def safari_pinned_tab() -> FileResponse:
     return FileResponse("safari-pinned-tab.svg")
 
 
+@app.get("/video/Video_opencodie_web.mp4")
+async def demo_video() -> FileResponse:
+    return FileResponse(
+        "video/Video_opencodie_web.mp4",
+        media_type="video/mp4",
+        headers={"Cache-Control": "no-store"},
+    )
+
+
 app.mount("/css", StaticFiles(directory="css"), name="css")
 app.mount("/js", StaticFiles(directory="js"), name="js")
 app.mount("/images", StaticFiles(directory="images"), name="images")
