@@ -1079,6 +1079,8 @@ footer {
   .features-grid    { grid-template-columns: 1fr; }
   .steps-row        { grid-template-columns: 1fr; }
   .steps-row::before{ display: none; }
+  .feature-card     { text-align: center; }
+  .f-icon           { margin: 0 auto 1.25rem; }
 }
 
 /* ══════════════════════════════════════════
