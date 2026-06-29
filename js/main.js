@@ -161,27 +161,6 @@ if (!window.matchMedia('(max-width: 560px)').matches) {
   const OPEN_SCROLL_PROGRESS = VIDEO_DEMO_CONFIG.openScrollProgress;
   const isMobile = window.matchMedia('(max-width: 560px)').matches;
 
-  function setupMobileVideoFallback() {
-    modelStage.classList.add('is-mobile-fallback');
-    video.muted = true;
-    video.defaultMuted = true;
-    video.loop = true;
-    video.autoplay = true;
-    video.playsInline = true;
-    video.setAttribute('muted', '');
-    video.setAttribute('autoplay', '');
-    video.setAttribute('playsinline', '');
-    video.setAttribute('webkit-playsinline', '');
-    video.removeAttribute('aria-hidden');
-    video.load();
-    video.play().catch(() => {});
-    video.addEventListener('canplaythrough', () => { video.play().catch(() => {}); }, { once: true });
-  }
-
-  function retryMobileVideoPlayback() {
-    video.play().catch(() => {});
-  }
-
   function setStep(idx) {
     if (idx === activeIdx) return;
     const prevIdx = activeIdx;
@@ -586,39 +565,21 @@ if (!window.matchMedia('(max-width: 560px)').matches) {
     }
   }
 
-  if (isMobile) {
-    setupMobileVideoFallback();
-    window.addEventListener('touchstart', retryMobileVideoPlayback, { passive: true, once: true });
-    window.addEventListener('scroll', retryMobileVideoPlayback, { passive: true, once: true });
-    modelStage.addEventListener('click', retryMobileVideoPlayback);
-    modelStage.addEventListener('touchend', retryMobileVideoPlayback, { passive: true });
-    const mobileVideoObserver = new IntersectionObserver((entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) retryMobileVideoPlayback();
-      });
-    }, { threshold: 0 });
-    mobileVideoObserver.observe(outer);
-  } else {
-    initLaptopScene().then((sceneController) => {
-      laptopScene = sceneController;
-      if (!laptopScene) return;
-      laptopScene.setProgress(latestDriverProgress);
-      if (shouldCloseAtEnd) laptopScene.tweenToStart();
-    });
-  }
+  initLaptopScene().then((sceneController) => {
+    laptopScene = sceneController;
+    if (!laptopScene) return;
+    laptopScene.setProgress(latestDriverProgress);
+    if (shouldCloseAtEnd) laptopScene.tweenToStart();
+  });
 
-  /* Entrance — desktop 3D laptop drifts in; mobile fallback stays static. */
-  if (isMobile) {
-    gsap.set(laptopWrap, { clearProps: 'transform,opacity' });
-  } else {
-    gsap.set(laptopWrap, { y: 0 });
-    gsap.fromTo(laptopWrap,
-      { opacity: 0, y: 48, scale: 0.94 },
-      { opacity: 1, y: 0,  scale: 1, ease: 'power2.out',
-        scrollTrigger: { trigger: outer, start: 'top 80%', end: 'top 15%', scrub: 1 }
-      }
-    );
-  }
+  /* Entrance — 3D laptop drifts in on scroll */
+  gsap.set(laptopWrap, { y: 0 });
+  gsap.fromTo(laptopWrap,
+    { opacity: 0, y: 48, scale: 0.94 },
+    { opacity: 1, y: 0,  scale: 1, ease: 'power2.out',
+      scrollTrigger: { trigger: outer, start: 'top 80%', end: 'top 15%', scrub: 1 }
+    }
+  );
 
   /* Initialize pill on badge 0 */
   if (pill && badges[0]) {
