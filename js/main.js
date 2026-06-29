@@ -143,7 +143,7 @@ if (!window.matchMedia('(max-width: 560px)').matches) {
     zoomInEnd: 0.48,
     zoomOutStart: 0.74,
     zoomOutEnd: 0.80,
-    mobileStartProgress: 0.40,
+    mobileStartProgress: 0,
   });
 
   const STEPS = [
