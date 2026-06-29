@@ -2211,7 +2211,7 @@ footer {
   }
   #hero {
     min-height: 100svh;
-    padding-top: 7rem;
+    padding-top: calc(var(--bar-h, 5rem) + 5rem);
     padding-bottom: 4rem;
   }
   .hero-eyebrow {
