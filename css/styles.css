@@ -2154,6 +2154,7 @@ footer {
 }
 
 @media (max-width: 560px) {
+  .vd-sticky { gap: 1.75rem; }
   nav {
     padding: 1rem 0 1.25rem;
   }
