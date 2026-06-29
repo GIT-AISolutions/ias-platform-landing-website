@@ -164,7 +164,7 @@
   <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png?v=4" />
   <link rel="shortcut icon" href="favicon.ico?v=4" />
   <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png?v=4" />
-  <link rel="stylesheet" href="css/styles.css?v=47" />
+  <link rel="stylesheet" href="css/styles.css?v=48" />
   <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/marked@12.0.0/marked.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/dompurify@3.1.6/dist/purify.min.js"></script>
@@ -983,6 +983,25 @@
   </div>
 </div>
 
+<!-- Promo popup -->
+<div id="promo-overlay" class="promo-overlay" role="dialog" aria-modal="true" aria-label="Limited offer">
+  <div class="promo-modal">
+    <button class="promo-close" id="promo-close" aria-label="Close">&times;</button>
+    <div class="promo-badge">Limited offer</div>
+    <h2 class="promo-title">First 100 users get<br><span>1 month free</span></h2>
+    <p class="promo-sub">Create your account and use this code at signup:</p>
+    <div class="promo-code-wrap">
+      <span class="promo-code" id="promo-code-text">FIRST100</span>
+      <button class="promo-copy" id="promo-copy-btn" aria-label="Copy code">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+        <span id="promo-copy-label">Copy</span>
+      </button>
+    </div>
+    <a href="https://portal.opencodie.com" class="btn btn-primary promo-cta" target="_blank" rel="noopener">Claim your free month &rarr;</a>
+    <p class="promo-fine">No credit card required &middot; Cancel anytime</p>
+  </div>
+</div>
+
 <script type="module" src="js/main.js?v=119"></script>
 <script src="js/chatbot.js"></script>
 <script>
@@ -1004,6 +1023,35 @@
   document.addEventListener('click', function(e) {
     if (!nav.contains(e.target)) closeMenu();
   });
+})();
+</script>
+<script>
+(function() {
+  var STORAGE_KEY = 'oc_promo_dismissed';
+  if (localStorage.getItem(STORAGE_KEY)) return;
+  var overlay = document.getElementById('promo-overlay');
+  var closeBtn = document.getElementById('promo-close');
+  var copyBtn = document.getElementById('promo-copy-btn');
+  var copyLabel = document.getElementById('promo-copy-label');
+  if (!overlay) return;
+  function dismiss() {
+    overlay.classList.remove('is-visible');
+    overlay.addEventListener('transitionend', function() { overlay.style.display = 'none'; }, { once: true });
+    localStorage.setItem(STORAGE_KEY, '1');
+  }
+  closeBtn.addEventListener('click', dismiss);
+  overlay.addEventListener('click', function(e) { if (e.target === overlay) dismiss(); });
+  document.addEventListener('keydown', function(e) { if (e.key === 'Escape') dismiss(); });
+  copyBtn.addEventListener('click', function() {
+    navigator.clipboard.writeText('FIRST100').then(function() {
+      copyLabel.textContent = 'Copied!';
+      setTimeout(function() { copyLabel.textContent = 'Copy'; }, 2000);
+    });
+  });
+  setTimeout(function() {
+    overlay.style.display = 'flex';
+    requestAnimationFrame(function() { overlay.classList.add('is-visible'); });
+  }, 2500);
 })();
 </script>
 </body>
