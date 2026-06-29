@@ -173,45 +173,9 @@ if (!window.matchMedia('(max-width: 560px)').matches) {
     video.setAttribute('playsinline', '');
     video.setAttribute('webkit-playsinline', '');
     video.removeAttribute('aria-hidden');
-
-    const dbg = document.createElement('div');
-    dbg.id = 'vd-debug';
-    dbg.style.cssText = 'position:fixed;top:60px;left:8px;z-index:99999;background:rgba(0,0,0,.85);color:#0f0;font:11px/1.4 monospace;padding:6px 8px;border-radius:6px;max-width:calc(100vw - 16px);pointer-events:none';
-    document.body.appendChild(dbg);
-
-    function updateDbg(label) {
-      dbg.textContent = [
-        label,
-        'rs=' + video.readyState,
-        'paused=' + video.paused,
-        'err=' + (video.error ? video.error.code : 'none'),
-        'net=' + video.networkState,
-      ].join(' | ');
-    }
-
-    ['loadstart','loadedmetadata','loadeddata','canplay','canplaythrough','play','playing','pause','error','stalled','waiting'].forEach(e => {
-      video.addEventListener(e, () => updateDbg(e));
-    });
-
-    const fetchLine = document.createElement('div');
-    fetchLine.textContent = 'fetch: pending…';
-    dbg.appendChild(fetchLine);
-
-    fetch(video.src, { method: 'HEAD' })
-      .then(r => {
-        const ct = r.headers.get('content-type') || '?';
-        const ar = r.headers.get('accept-ranges') || 'none';
-        fetchLine.textContent = 'HTTP ' + r.status + ' ct=' + ct.split(';')[0] + ' ar=' + ar;
-      })
-      .catch(e => { fetchLine.textContent = 'fetch-ERR: ' + e.message; });
-
     video.load();
-    updateDbg('after-load');
-
-    video.play().then(() => updateDbg('play-ok')).catch(err => updateDbg('play-ERR:' + (err && err.name)));
-    video.addEventListener('canplaythrough', () => {
-      video.play().then(() => updateDbg('cpt-play-ok')).catch(err => updateDbg('cpt-ERR:' + (err && err.name)));
-    }, { once: true });
+    video.play().catch(() => {});
+    video.addEventListener('canplaythrough', () => { video.play().catch(() => {}); }, { once: true });
   }
 
   function retryMobileVideoPlayback() {
