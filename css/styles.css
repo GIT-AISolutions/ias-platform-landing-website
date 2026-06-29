@@ -138,7 +138,7 @@ img, video, canvas { max-width: 100%; }
 .announce-cta:hover { opacity: 0.8; }
 
 nav {
-  position: fixed; top: 2.4rem; left: 0; right: 0; z-index: 200;
+  position: fixed; top: var(--bar-h, 2.4rem); left: 0; right: 0; z-index: 200;
   padding: 1rem 0;
   transition: background 0.4s, border-color 0.4s, backdrop-filter 0.4s;
 }
@@ -303,7 +303,7 @@ nav.is-open .nav-mobile {
 ══════════════════════════════════════════ */
 #hero {
   min-height: 100vh; display: flex; align-items: center;
-  padding-top: 7.5rem; overflow: hidden;
+  padding-top: calc(var(--bar-h, 2.4rem) + 5rem); overflow: hidden;
 }
 
 /* ── Background orbs ── */
