@@ -2267,7 +2267,7 @@ footer {
     line-height: 1.55;
   }
   .vd-layout {
-    gap: 0.5rem;
+    gap: 1.5rem;
     align-content: start;
     flex: 0 1 auto;
     min-height: 0;
