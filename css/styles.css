@@ -2275,11 +2275,11 @@ footer {
     min-height: 0;
   }
   .vd-laptop-col {
-    min-height: 12.5rem;
+    min-height: 0;
     align-items: center;
   }
   .vd-laptop-wrap {
-    width: min(100%, 21.5rem);
+    width: min(76%, 16rem);
     max-width: calc(100vw - 2rem);
     margin: 0 auto;
   }
